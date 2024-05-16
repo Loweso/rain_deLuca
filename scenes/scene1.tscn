@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://du73yjpwprpk3"]
+
+[ext_resource type="Texture2D" uid="uid://c7tkyyfd06cts" path="res://assets/backgrounds/Courtlobby.png" id="1_seny3"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Scene1" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Scene1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.90798, 1.78378)
+texture = ExtResource("1_seny3")
