@@ -1,6 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://du73yjpwprpk3"]
+[gd_scene load_steps=7 format=3 uid="uid://du73yjpwprpk3"]
 
+[ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="1_f662p"]
+[ext_resource type="Script" path="res://scenes/Scene1.gd" id="1_qpuhb"]
 [ext_resource type="Texture2D" uid="uid://c7tkyyfd06cts" path="res://assets/backgrounds/Courtlobby.png" id="1_seny3"]
+[ext_resource type="Texture2D" uid="uid://dfc43eksf47gx" path="res://assets/sprites/sprites-maya.png" id="3_jkarv"]
+
+[sub_resource type="Animation" id="Animation_5qrea"]
+resource_name = "Talking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 0, 1, 2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1l11t"]
+_data = {
+"Talking": SubResource("Animation_5qrea")
+}
 
 [node name="Node2D" type="Node2D"]
 
@@ -9,10 +33,60 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_qpuhb")
+metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Scene1"]
+[node name="Background" type="TextureRect" parent="Scene1"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1024.0
+offset_bottom = 768.0
 scale = Vector2(1.90798, 1.78378)
 texture = ExtResource("1_seny3")
+metadata/_edit_use_anchors_ = true
+
+[node name="RainSprite" type="Sprite2D" parent="Scene1"]
+position = Vector2(938, 573)
+scale = Vector2(1.71515, 1.71515)
+texture = ExtResource("3_jkarv")
+hframes = 8
+vframes = 8
+frame = 2
+
+[node name="RainTalking" type="AnimationPlayer" parent="Scene1/RainSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_1l11t")
+}
+
+[node name="DialogueBox" type="Polygon2D" parent="Scene1"]
+position = Vector2(-9, 0)
+scale = Vector2(1.02753, 0.99655)
+color = Color(0.168627, 0.168627, 0.168627, 0.470588)
+polygon = PackedVector2Array(3, 803, 1951, 803, 1951, 1123, 3, 1123)
+
+[node name="PersonNameBox" type="Polygon2D" parent="Scene1"]
+position = Vector2(145, 763)
+scale = Vector2(0.807388, 0.375424)
+color = Color(0.48825, 0.315, 0.7, 0.917647)
+polygon = PackedVector2Array(-0.199969, 1.66217, 1.67047, -2.6637, 310.698, -2.6637, 365.822, 98.5553, 306.562, 188.651, 152.066, 188.651, -0.973211, 188.651, -60.1351, 90.5643)
+
+[node name="DialogueText" type="Label" parent="Scene1"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 858.0
+offset_right = 667.0
+offset_bottom = 924.0
+scale = Vector2(3.32776, 3.02778)
+theme_override_fonts/font = ExtResource("1_f662p")
+text = "What the hell?!"
+metadata/_edit_use_anchors_ = true
+
+[node name="PersonNameText" type="Label" parent="Scene1"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 780.0
+offset_right = 254.0
+offset_bottom = 801.0
+scale = Vector2(2.31653, 2.09949)
+theme_override_fonts/font = ExtResource("1_f662p")
+text = "Rain"
+metadata/_edit_use_anchors_ = true
