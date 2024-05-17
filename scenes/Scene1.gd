@@ -3,7 +3,7 @@ extends Control
 var dialogues = [
 	"Welcome to our game!",
 	"This is the second line of dialogue.",
-	"And here is the third line.",
+	"And here is the third line.\nThis is to test newlines.",
 	"Good luck on your journey!"
 ]
 
@@ -25,36 +25,54 @@ var text_styles = [
 	2
 ]
 
+# spriteToDisplay 0 = No sprite to display
+# spriteToDisplay 1 = Maya, looking forward
+# spriteToDisplay 2 = Maya, talking
+
+var spriteToDisplay = [
+	2,
+	1, 
+	2,
+	0
+]
+
 var current_index = 0
 
 @onready var dialogue_label = $DialogueText as Label
 @onready var name_label = $PersonNameText as Label
+@onready var personNameBox = $PersonNameBox as Polygon2D
+@onready var dialogueBox = $DialogueBox as Polygon2D
+@onready var dialogueBoxButton = $DialogueBoxButton as Button
+@onready var courtRecordBox = $CourtRecordBox as Polygon2D
 
 @onready var rain_sprite = $RainSprite as Sprite2D
 @onready var rain_sprite_animation = $RainSprite/RainTalking as AnimationPlayer
 
 func _ready():
 	name_label.horizontal_alignment = 1
+	personNameBox.visible = false
+	courtRecordBox.visible = false
+	
+	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed():
-		_on_Button_pressed()
+func dialogue_button_pressed():
+	dialogueBox.visible = true
+	personNameBox.visible = true
+	courtRecordBox.visible = true
+		
+	update_dialogue()
+	current_index += 1
+	if current_index >= dialogues.size():
+		current_index = 0
 
 func update_dialogue():
 	if current_index < dialogues.size():
 		dialogue_label.text = dialogues[current_index]
 		name_label.text = char_names[current_index]
 		apply_text_style(text_styles[current_index])
-		update_sprites(char_names[current_index])
+		update_sprites(spriteToDisplay[current_index])
 	else:
 		dialogue_label.text = "End of dialogues."
-
-func _on_Button_pressed():
-	update_dialogue()
-	update_sprites(name_label.text)
-	current_index += 1
-	if current_index >= dialogues.size():
-		current_index = 0
 		
 func apply_text_style(style_value: int):
 	var color := Color(1, 1, 1)
@@ -71,10 +89,13 @@ func apply_text_style(style_value: int):
 
 	dialogue_label.add_theme_color_override("font_color", color)
 	
-func update_sprites(character_name: String):
+func update_sprites(sprite: int):
 	rain_sprite.visible = false
 	
-	match character_name:
-		"Rain":
+	match sprite:
+		1:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Listening")
+		2:
 			rain_sprite.visible = true
 			rain_sprite_animation.play("Talking")
