@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://cfw8grbdgg3cv"]
+
+[ext_resource type="Script" path="res://inventory_item.gd" id="1_hqhgl"]
+[ext_resource type="Texture2D" uid="uid://bjm0jrxbqipyg" path="res://assets/inventory/items/attorneysbadge.png" id="2_gurg4"]
+
+[resource]
+script = ExtResource("1_hqhgl")
+name = "Attorney's Badge 2"
+description = "Second attorney's badge."
+texture = ExtResource("2_gurg4")

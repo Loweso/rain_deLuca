@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://164o6bux1dgm"]
+
+[ext_resource type="Texture2D" uid="uid://cn1flclo81cf7" path="res://assets/ui/courtRecordIcon.png" id="1_75c4x"]
+[ext_resource type="Script" path="res://scenes/inv_ui_slot.gd" id="1_lcrgo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6a3y7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i881r"]
+bg_color = Color(0.205117, 0.205117, 0.205117, 0.415686)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eyr0x"]
+bg_color = Color(0.203922, 0.203922, 0.203922, 0.701961)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sw0cp"]
+bg_color = Color(0.203922, 0.203922, 0.203922, 0.701961)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_24pto"]
+bg_color = Color(0.203922, 0.203922, 0.203922, 0.701961)
+
+[node name="inv_UI_slot" type="Panel"]
+offset_right = 27.0
+offset_bottom = 27.0
+script = ExtResource("1_lcrgo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_75c4x")
+centered = false
+
+[node name="item_display" type="Sprite2D" parent="."]
+position = Vector2(13, 13)
+scale = Vector2(0.638555, 0.639466)
+texture = ExtResource("1_75c4x")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(3.38292, 3.40084)
+theme_override_styles/normal = SubResource("StyleBoxFlat_6a3y7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i881r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eyr0x")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_sw0cp")
+theme_override_styles/focus = SubResource("StyleBoxFlat_24pto")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://vt6q6xg42w8s"]
+[gd_scene load_steps=6 format=3 uid="uid://vt6q6xg42w8s"]
 
 [ext_resource type="Theme" uid="uid://bqho23mc0bs15" path="res://default.tres" id="1_ykjaq"]
 [ext_resource type="Script" path="res://main_menu/Main_Menu.gd" id="2_v6wos"]
 [ext_resource type="FontFile" uid="uid://dswhbqg8cmy54" path="res://assets/FOT-ModeMinBLargeStd-R.otf" id="3_08flu"]
+[ext_resource type="Texture2D" uid="uid://cg43w4ch5rd7a" path="res://assets/ui/gameLogo.png" id="4_pwv3e"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u17kc"]
 load_path = "res://.godot/imported/mainMenuBG.jpg-135d451b5c60a2189d36d93c88359355.ctex"
@@ -82,3 +83,8 @@ theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_08flu")
 text = "Quit"
+
+[node name="GameLogo" type="Sprite2D" parent="Main_Menu"]
+position = Vector2(960, 323)
+scale = Vector2(0.777837, 0.777837)
+texture = ExtResource("4_pwv3e")

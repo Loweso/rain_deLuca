@@ -43,7 +43,10 @@ var current_index = 0
 @onready var personNameBox = $PersonNameBox as Polygon2D
 @onready var dialogueBox = $DialogueBox as Polygon2D
 @onready var dialogueBoxButton = $DialogueBoxButton as Button
-@onready var courtRecordBox = $CourtRecordBox as Polygon2D
+@onready var courtRecButton = $CourtRecordButton as Button
+
+@onready var inventory = $Inventory_UI
+@onready var inv: Inv
 
 @onready var rain_sprite = $RainSprite as Sprite2D
 @onready var rain_sprite_animation = $RainSprite/RainTalking as AnimationPlayer
@@ -51,14 +54,18 @@ var current_index = 0
 func _ready():
 	name_label.horizontal_alignment = 1
 	personNameBox.visible = false
-	courtRecordBox.visible = false
+	courtRecButton.visible = false
 	
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
+	courtRecButton.pressed.connect(courtRecButton_pressed)
+
+func courtRecButton_pressed():
+	inventory.toggle()
 
 func dialogue_button_pressed():
 	dialogueBox.visible = true
 	personNameBox.visible = true
-	courtRecordBox.visible = true
+	courtRecButton.visible = true
 		
 	update_dialogue()
 	current_index += 1

@@ -2,7 +2,7 @@ extends Control
 
 @onready var startButton = $StartGameButton as Button
 @onready var quitButton = $QuitButton as Button
-@onready var transition = $SceneTransitionRect as ColorRect
+@onready var transition = $SceneTransitionRect
 
 func _ready():
 	quitButton.pressed.connect(_on_exit_pressed)

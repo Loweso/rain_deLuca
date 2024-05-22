@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwo7hmrw6dsbj"]
+
+[ext_resource type="Script" path="res://inventory/Inventory_UI.gd" id="1_uroew"]
+[ext_resource type="Texture2D" uid="uid://pnkcckfosod5" path="res://assets/ui/courtRecord.png" id="2_0hfne"]
+[ext_resource type="PackedScene" uid="uid://164o6bux1dgm" path="res://scenes/inv_ui_slot.tscn" id="3_m6mdq"]
+[ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="3_ugwd6"]
+
+[node name="Inventory_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(13.9474, 8.59459)
+script = ExtResource("1_uroew")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(3.49662, 3.15184)
+color = Color(0, 0, 0, 0.52549)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Background"]
+layout_mode = 0
+offset_left = -2.4606
+offset_top = 4.72521
+offset_right = 37.5394
+offset_bottom = 44.7252
+scale = Vector2(1.14336, 0.602391)
+texture = ExtResource("2_0hfne")
+
+[node name="GridContainer" type="GridContainer" parent="Background/NinePatchRect"]
+layout_mode = 0
+offset_left = 7.51437
+offset_top = 25.6771
+offset_right = 303.514
+offset_bottom = 58.6771
+scale = Vector2(0.0722481, 0.265608)
+theme_override_constants/h_separation = 37
+columns = 9
+
+[node name="inv_UI_slot" parent="Background/NinePatchRect/GridContainer" instance=ExtResource("3_m6mdq")]
+layout_mode = 2
+
+[node name="inv_UI_slot2" parent="Background/NinePatchRect/GridContainer" instance=ExtResource("3_m6mdq")]
+layout_mode = 2
+
+[node name="inv_UI_slot3" parent="Background/NinePatchRect/GridContainer" instance=ExtResource("3_m6mdq")]
+layout_mode = 2
+
+[node name="inv_UI_slot4" parent="Background/NinePatchRect/GridContainer" instance=ExtResource("3_m6mdq")]
+layout_mode = 2
+
+[node name="inv_UI_slot5" parent="Background/NinePatchRect/GridContainer" instance=ExtResource("3_m6mdq")]
+layout_mode = 2
+
+[node name="inv_UI_slot6" parent="Background/NinePatchRect/GridContainer" instance=ExtResource("3_m6mdq")]
+layout_mode = 2
+
+[node name="inv_UI_slot7" parent="Background/NinePatchRect/GridContainer" instance=ExtResource("3_m6mdq")]
+layout_mode = 2
+
+[node name="inv_UI_slot8" parent="Background/NinePatchRect/GridContainer" instance=ExtResource("3_m6mdq")]
+layout_mode = 2
+
+[node name="inv_UI_slot9" parent="Background/NinePatchRect/GridContainer" instance=ExtResource("3_m6mdq")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Background"]
+layout_mode = 0
+offset_left = 16.568
+offset_top = 30.1232
+offset_right = 121.568
+offset_bottom = 61.1232
+scale = Vector2(0.0587424, 0.0995292)
+theme_override_fonts/font = ExtResource("3_ugwd6")
+text = "Hide"
