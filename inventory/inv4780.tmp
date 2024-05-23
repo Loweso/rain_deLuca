@@ -1,21 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwo7hmrw6dsbj"]
+[gd_scene load_steps=5 format=3 uid="uid://bwo7hmrw6dsbj"]
 
 [ext_resource type="Script" path="res://inventory/Inventory_UI.gd" id="1_uroew"]
 [ext_resource type="Texture2D" uid="uid://pnkcckfosod5" path="res://assets/ui/courtRecord.png" id="2_0hfne"]
 [ext_resource type="PackedScene" uid="uid://164o6bux1dgm" path="res://scenes/inv_ui_slot.tscn" id="3_m6mdq"]
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="3_ugwd6"]
-[ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="5_nka4e"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w00qi"]
-texture = ExtResource("5_nka4e")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8usov"]
-texture = ExtResource("5_nka4e")
-modulate_color = Color(0.861802, 0.621736, 0.602925, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ujcy8"]
-texture = ExtResource("5_nka4e")
-modulate_color = Color(0.56, 0.3752, 0.3752, 1)
 
 [node name="Inventory_UI" type="Control"]
 layout_mode = 3
@@ -26,7 +14,6 @@ scale = Vector2(13.9474, 8.59459)
 script = ExtResource("1_uroew")
 
 [node name="Background" type="ColorRect" parent="."]
-clip_contents = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -35,10 +22,10 @@ color = Color(0, 0, 0, 0.52549)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Background"]
 layout_mode = 0
-offset_left = -1.6609
-offset_top = 4.87287
-offset_right = 38.3391
-offset_bottom = 44.8729
+offset_left = -2.4606
+offset_top = 4.72521
+offset_right = 37.5394
+offset_bottom = 44.7252
 scale = Vector2(1.14336, 0.602391)
 texture = ExtResource("2_0hfne")
 
@@ -79,65 +66,15 @@ layout_mode = 2
 [node name="inv_UI_slot9" parent="Background/NinePatchRect/GridContainer" instance=ExtResource("3_m6mdq")]
 layout_mode = 2
 
-[node name="ButtonContainer" type="GridContainer" parent="Background/NinePatchRect"]
-modulate = Color(0.712129, 0.712129, 0.712129, 0.184314)
-layout_mode = 0
-offset_left = 7.67572
-offset_top = 26.2287
-offset_right = 103.676
-offset_bottom = 34.2287
-scale = Vector2(0.243043, 0.89589)
-theme_override_constants/h_separation = 3
-columns = 9
-
-[node name="slot1" type="Button" parent="Background/NinePatchRect/ButtonContainer"]
-layout_mode = 2
-
-[node name="slot2" type="Button" parent="Background/NinePatchRect/ButtonContainer"]
-layout_mode = 2
-
-[node name="slot3" type="Button" parent="Background/NinePatchRect/ButtonContainer"]
-layout_mode = 2
-
-[node name="slot4" type="Button" parent="Background/NinePatchRect/ButtonContainer"]
-layout_mode = 2
-
-[node name="slot5" type="Button" parent="Background/NinePatchRect/ButtonContainer"]
-layout_mode = 2
-
-[node name="slot6" type="Button" parent="Background/NinePatchRect/ButtonContainer"]
-layout_mode = 2
-
-[node name="slot7" type="Button" parent="Background/NinePatchRect/ButtonContainer"]
-layout_mode = 2
-
-[node name="slot8" type="Button" parent="Background/NinePatchRect/ButtonContainer"]
-layout_mode = 2
-
-[node name="slot9" type="Button" parent="Background/NinePatchRect/ButtonContainer"]
-layout_mode = 2
-
 [node name="Button" type="Button" parent="Background"]
 layout_mode = 0
-offset_left = 32.3158
-offset_top = 29.0895
-offset_right = 137.316
-offset_bottom = 60.0895
-scale = Vector2(0.0732037, 0.0995292)
+offset_left = 16.568
+offset_top = 30.1232
+offset_right = 121.568
+offset_bottom = 61.1232
+scale = Vector2(0.0587424, 0.0995292)
 theme_override_fonts/font = ExtResource("3_ugwd6")
-theme_override_styles/normal = SubResource("StyleBoxTexture_w00qi")
-theme_override_styles/hover = SubResource("StyleBoxTexture_8usov")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_ujcy8")
-
-[node name="Label" type="Label" parent="Background/Button"]
-layout_mode = 0
-offset_left = 39.2151
-offset_top = 4.82174
-offset_right = 79.2151
-offset_bottom = 27.8217
-scale = Vector2(0.833765, 1)
-theme_override_fonts/font = ExtResource("3_ugwd6")
-text = "Back"
+text = "Hide"
 
 [node name="Item_MainDisplay" type="Sprite2D" parent="Background"]
 position = Vector2(7.64834, 13.1051)
@@ -152,14 +89,3 @@ offset_bottom = 31.1953
 scale = Vector2(0.061575, 0.0957454)
 theme_override_fonts/font = ExtResource("3_ugwd6")
 text = "Item Name"
-
-[node name="Item_Description" type="Label" parent="Background"]
-layout_mode = 0
-offset_left = 11.0
-offset_top = 12.0
-offset_right = 523.0
-offset_bottom = 107.0
-scale = Vector2(0.0491296, 0.0855063)
-theme_override_fonts/font = ExtResource("3_ugwd6")
-text = "Item Description"
-autowrap_mode = 3
