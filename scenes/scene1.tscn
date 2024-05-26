@@ -122,7 +122,6 @@ offset_right = 667.0
 offset_bottom = 924.0
 scale = Vector2(3.32776, 3.02778)
 theme_override_fonts/font = ExtResource("1_f662p")
-metadata/_edit_use_anchors_ = true
 
 [node name="PersonNameText" type="Label" parent="Scene1"]
 layout_mode = 0
@@ -132,7 +131,6 @@ offset_right = 254.0
 offset_bottom = 801.0
 scale = Vector2(2.31653, 2.09949)
 theme_override_fonts/font = ExtResource("1_f662p")
-metadata/_edit_use_anchors_ = true
 
 [node name="CourtRecordButton" type="Button" parent="Scene1"]
 layout_mode = 0
@@ -162,7 +160,6 @@ offset_bottom = 30.2248
 scale = Vector2(0.689314, 0.523945)
 theme_override_fonts/font = ExtResource("1_f662p")
 text = "Court Record"
-metadata/_edit_use_anchors_ = true
 
 [node name="Inventory_UI" parent="Scene1" instance=ExtResource("5_ydfr8")]
 visible = false

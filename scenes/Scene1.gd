@@ -44,6 +44,7 @@ var current_index = 0
 @onready var dialogueBox = $DialogueBox as Polygon2D
 @onready var dialogueBoxButton = $DialogueBoxButton as Button
 @onready var courtRecButton = $CourtRecordButton as Button
+@onready var transition = $SceneTransitionRect
 
 @onready var inventory = $Inventory_UI
 @onready var inv: Inv
@@ -63,14 +64,15 @@ func courtRecButton_pressed():
 	inventory.toggle()
 
 func dialogue_button_pressed():
-	dialogueBox.visible = true
-	personNameBox.visible = true
-	courtRecButton.visible = true
+	if current_index < dialogues.size():
+		dialogueBox.visible = true
+		personNameBox.visible = true
+		courtRecButton.visible = true
 		
-	update_dialogue()
-	current_index += 1
-	if current_index >= dialogues.size():
-		current_index = 0
+		update_dialogue()
+		current_index += 1
+	else:
+		SceneTransition.load_scene("res://scenes/scene2.tscn")
 
 func update_dialogue():
 	if current_index < dialogues.size():

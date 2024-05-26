@@ -1,0 +1,219 @@
+[gd_scene load_steps=30 format=3 uid="uid://blr0n2rb1fale"]
+
+[ext_resource type="Script" path="res://CrossExamination1.gd" id="1_7cp21"]
+[ext_resource type="Texture2D" uid="uid://cjirdovtydvc4" path="res://assets/backgrounds/witnessSide.jpg" id="2_rreh0"]
+[ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="3_jhibb"]
+[ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="4_jx40f"]
+[ext_resource type="PackedScene" uid="uid://bwo7hmrw6dsbj" path="res://inventory/inventory_ui.tscn" id="5_k7ph7"]
+[ext_resource type="Texture2D" uid="uid://ewgh7vd6l7a3" path="res://assets/ui/next-button.png" id="6_dfje0"]
+[ext_resource type="Texture2D" uid="uid://c03wh5m3ojobv" path="res://assets/ui/prev-button.png" id="7_e55hm"]
+[ext_resource type="PackedScene" uid="uid://bftv2b4r6kgpr" path="res://scenes/holdItTransition.tscn" id="8_h7oyc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ab7wf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_igs41"]
+texture = ExtResource("4_jx40f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4il65"]
+texture = ExtResource("4_jx40f")
+modulate_color = Color(0.836576, 0.711346, 0.605006, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_es780"]
+texture = ExtResource("4_jx40f")
+modulate_color = Color(0.541247, 0.291974, 0.221316, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ct6g5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5xlyp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xxfj8"]
+texture = ExtResource("6_dfje0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dgi71"]
+texture = ExtResource("6_dfje0")
+modulate_color = Color(1, 0.829, 0.46, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t4686"]
+texture = ExtResource("6_dfje0")
+modulate_color = Color(0.827451, 0.447059, 0.396078, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cuaxx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ducoj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qtc5j"]
+texture = ExtResource("7_e55hm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xvu8h"]
+texture = ExtResource("7_e55hm")
+modulate_color = Color(1, 0.827451, 0.458824, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ke1v7"]
+texture = ExtResource("7_e55hm")
+modulate_color = Color(0.827451, 0.447059, 0.396078, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kqmby"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d6knd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ohol"]
+texture = ExtResource("4_jx40f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nb0w1"]
+texture = ExtResource("4_jx40f")
+modulate_color = Color(0.835294, 0.709804, 0.603922, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vfxjn"]
+texture = ExtResource("4_jx40f")
+modulate_color = Color(0.541176, 0.290196, 0.219608, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fmp4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vc43d"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CrossExamination1" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_7cp21")
+
+[node name="Background" type="TextureRect" parent="CrossExamination1"]
+layout_mode = 0
+offset_right = 1930.0
+offset_bottom = 1091.0
+texture = ExtResource("2_rreh0")
+
+[node name="DialogueBoxButton" type="Button" parent="CrossExamination1"]
+layout_mode = 0
+offset_left = -1932.0
+offset_top = 803.0
+offset_right = -1924.0
+offset_bottom = 811.0
+scale = Vector2(1567.73, 159.941)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ab7wf")
+
+[node name="DialogueBox" type="Polygon2D" parent="CrossExamination1"]
+position = Vector2(-9, 0)
+scale = Vector2(1.02753, 0.99655)
+color = Color(0.168627, 0.168627, 0.168627, 0.470588)
+polygon = PackedVector2Array(3, 803, 1951, 803, 1951, 1123, 3, 1123)
+
+[node name="PersonNameBox" type="Polygon2D" parent="CrossExamination1"]
+position = Vector2(145, 763)
+scale = Vector2(0.807388, 0.375424)
+color = Color(0.48825, 0.315, 0.7, 0.917647)
+polygon = PackedVector2Array(-0.199969, 1.66217, 1.67047, -2.6637, 310.698, -2.6637, 365.822, 98.5553, 306.562, 188.651, 152.066, 188.651, -0.973211, 188.651, -60.1351, 90.5643)
+
+[node name="DialogueText" type="Label" parent="CrossExamination1"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 858.0
+offset_right = 667.0
+offset_bottom = 924.0
+scale = Vector2(3.32776, 3.02778)
+theme_override_colors/font_color = Color(1, 0.312295, 0.248026, 1)
+theme_override_fonts/font = ExtResource("3_jhibb")
+text = "- Elay's Testimony -"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PersonNameText" type="Label" parent="CrossExamination1"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 780.0
+offset_right = 254.0
+offset_bottom = 801.0
+scale = Vector2(2.31653, 2.09949)
+theme_override_fonts/font = ExtResource("3_jhibb")
+metadata/_edit_use_anchors_ = true
+
+[node name="CourtRecordButton" type="Button" parent="CrossExamination1"]
+layout_mode = 0
+offset_left = 1478.0
+offset_top = -16.0
+offset_right = 1597.0
+offset_bottom = 9.0
+scale = Vector2(3.82134, 4.93538)
+theme_override_fonts/font = ExtResource("3_jhibb")
+theme_override_styles/normal = SubResource("StyleBoxTexture_igs41")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4il65")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_es780")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ct6g5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5xlyp")
+
+[node name="CourtRecordText" type="Label" parent="CrossExamination1/CourtRecordButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.097823
+anchor_top = -0.0529059
+anchor_right = 0.0978255
+anchor_bottom = -0.0529059
+offset_left = 15.8363
+offset_top = 9.22477
+offset_right = 126.836
+offset_bottom = 30.2248
+scale = Vector2(0.689314, 0.523945)
+theme_override_fonts/font = ExtResource("3_jhibb")
+text = "Court Record"
+metadata/_edit_use_anchors_ = true
+
+[node name="NextButton" type="Button" parent="CrossExamination1"]
+layout_mode = 0
+offset_left = 1522.0
+offset_top = 222.0
+offset_right = 1896.0
+offset_bottom = 684.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_xxfj8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_dgi71")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_t4686")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_cuaxx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ducoj")
+
+[node name="PrevButton" type="Button" parent="CrossExamination1"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 226.0
+offset_right = 408.0
+offset_bottom = 689.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_qtc5j")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xvu8h")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ke1v7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kqmby")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_d6knd")
+
+[node name="PressButton" type="Button" parent="CrossExamination1"]
+layout_mode = 0
+offset_left = 393.0
+offset_top = -15.0
+offset_right = 971.0
+offset_bottom = 111.0
+scale = Vector2(-0.786007, 0.946041)
+theme_override_styles/normal = SubResource("StyleBoxTexture_4ohol")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nb0w1")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_vfxjn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2fmp4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vc43d")
+
+[node name="CourtRecordText" type="Label" parent="CrossExamination1/PressButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.618645
+anchor_top = 0.21202
+anchor_right = 0.618648
+anchor_bottom = 0.21202
+offset_left = 15.8363
+offset_top = 9.22477
+offset_right = 126.836
+offset_bottom = 30.2248
+scale = Vector2(-3.66162, 2.94265)
+theme_override_fonts/font = ExtResource("3_jhibb")
+text = "Press"
+metadata/_edit_use_anchors_ = true
+
+[node name="Inventory_UI" parent="CrossExamination1" instance=ExtResource("5_k7ph7")]
+visible = false
+
+[node name="HoldItTransition" parent="CrossExamination1" instance=ExtResource("8_h7oyc")]

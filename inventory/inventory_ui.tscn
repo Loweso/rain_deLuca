@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwo7hmrw6dsbj"]
+[gd_scene load_steps=11 format=3 uid="uid://bwo7hmrw6dsbj"]
 
 [ext_resource type="Script" path="res://inventory/Inventory_UI.gd" id="1_uroew"]
 [ext_resource type="Texture2D" uid="uid://pnkcckfosod5" path="res://assets/ui/courtRecord.png" id="2_0hfne"]
@@ -16,6 +16,10 @@ modulate_color = Color(0.861802, 0.621736, 0.602925, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ujcy8"]
 texture = ExtResource("5_nka4e")
 modulate_color = Color(0.56, 0.3752, 0.3752, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_th41o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pksmg"]
 
 [node name="Inventory_UI" type="Control"]
 layout_mode = 3
@@ -128,6 +132,8 @@ theme_override_fonts/font = ExtResource("3_ugwd6")
 theme_override_styles/normal = SubResource("StyleBoxTexture_w00qi")
 theme_override_styles/hover = SubResource("StyleBoxTexture_8usov")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_ujcy8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_th41o")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pksmg")
 
 [node name="Label" type="Label" parent="Background/Button"]
 layout_mode = 0

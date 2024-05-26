@@ -1,0 +1,113 @@
+[gd_scene load_steps=12 format=3 uid="uid://bm55nb3aylbgy"]
+
+[ext_resource type="Script" path="res://scenes/Scene2.gd" id="1_nto6t"]
+[ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="2_chiel"]
+[ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="2_vfr5g"]
+[ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="3_ub8el"]
+[ext_resource type="PackedScene" uid="uid://bwo7hmrw6dsbj" path="res://inventory/inventory_ui.tscn" id="4_raim4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tmjtj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lhc37"]
+texture = ExtResource("3_ub8el")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_418t0"]
+texture = ExtResource("3_ub8el")
+modulate_color = Color(0.836576, 0.711346, 0.605006, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y2iy0"]
+texture = ExtResource("3_ub8el")
+modulate_color = Color(0.541247, 0.291974, 0.221316, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hx00i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kg7g6"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Scene2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_nto6t")
+
+[node name="Background" type="TextureRect" parent="Scene2"]
+layout_mode = 0
+offset_right = 1930.0
+offset_bottom = 1091.0
+texture = ExtResource("2_chiel")
+
+[node name="DialogueBoxButton" type="Button" parent="Scene2"]
+layout_mode = 0
+offset_left = -1932.0
+offset_top = 803.0
+offset_right = -1924.0
+offset_bottom = 811.0
+scale = Vector2(1567.73, 159.941)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tmjtj")
+
+[node name="DialogueBox" type="Polygon2D" parent="Scene2"]
+position = Vector2(-9, 0)
+scale = Vector2(1.02753, 0.99655)
+color = Color(0.168627, 0.168627, 0.168627, 0.470588)
+polygon = PackedVector2Array(3, 803, 1951, 803, 1951, 1123, 3, 1123)
+
+[node name="PersonNameBox" type="Polygon2D" parent="Scene2"]
+position = Vector2(145, 763)
+scale = Vector2(0.807388, 0.375424)
+color = Color(0.48825, 0.315, 0.7, 0.917647)
+polygon = PackedVector2Array(-0.199969, 1.66217, 1.67047, -2.6637, 310.698, -2.6637, 365.822, 98.5553, 306.562, 188.651, 152.066, 188.651, -0.973211, 188.651, -60.1351, 90.5643)
+
+[node name="DialogueText" type="Label" parent="Scene2"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 858.0
+offset_right = 667.0
+offset_bottom = 924.0
+scale = Vector2(3.32776, 3.02778)
+theme_override_fonts/font = ExtResource("2_vfr5g")
+metadata/_edit_use_anchors_ = true
+
+[node name="PersonNameText" type="Label" parent="Scene2"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 780.0
+offset_right = 254.0
+offset_bottom = 801.0
+scale = Vector2(2.31653, 2.09949)
+theme_override_fonts/font = ExtResource("2_vfr5g")
+metadata/_edit_use_anchors_ = true
+
+[node name="CourtRecordButton" type="Button" parent="Scene2"]
+layout_mode = 0
+offset_left = 1478.0
+offset_top = -16.0
+offset_right = 1597.0
+offset_bottom = 9.0
+scale = Vector2(3.82134, 4.93538)
+theme_override_fonts/font = ExtResource("2_vfr5g")
+theme_override_styles/normal = SubResource("StyleBoxTexture_lhc37")
+theme_override_styles/hover = SubResource("StyleBoxTexture_418t0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_y2iy0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hx00i")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kg7g6")
+
+[node name="CourtRecordText" type="Label" parent="Scene2/CourtRecordButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.097823
+anchor_top = -0.0529059
+anchor_right = 0.0978255
+anchor_bottom = -0.0529059
+offset_left = 15.8363
+offset_top = 9.22477
+offset_right = 126.836
+offset_bottom = 30.2248
+scale = Vector2(0.689314, 0.523945)
+theme_override_fonts/font = ExtResource("2_vfr5g")
+text = "Court Record"
+metadata/_edit_use_anchors_ = true
+
+[node name="Inventory_UI" parent="Scene2" instance=ExtResource("4_raim4")]
+visible = false

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bftv2b4r6kgpr"]
+
+[ext_resource type="Script" path="res://scenes/holdItTransition.gd" id="1_slakt"]
+[ext_resource type="Texture2D" uid="uid://bvmxo57djcgso" path="res://assets/sprites/holdIt.png" id="1_v4m2e"]
+[ext_resource type="AudioStream" uid="uid://dopjlnrmyi2dd" path="res://assets/music/holdIt.mp3" id="3_ffwxu"]
+
+[sub_resource type="Animation" id="Animation_6skh0"]
+resource_name = "Appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_v4m2e"), ExtResource("1_v4m2e"), ExtResource("1_v4m2e")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kk82s"]
+_data = {
+"Appear": SubResource("Animation_6skh0")
+}
+
+[node name="HoldItTransition" type="CanvasLayer"]
+script = ExtResource("1_slakt")
+
+[node name="HoldItBubble" type="Sprite2D" parent="."]
+position = Vector2(347, 98)
+scale = Vector2(1.51877, 1.43922)
+texture = ExtResource("1_v4m2e")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HoldItBubble"]
+libraries = {
+"": SubResource("AnimationLibrary_kk82s")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="HoldItBubble"]
+position = Vector2(-576, -326)
+stream = ExtResource("3_ffwxu")
