@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bm55nb3aylbgy"]
+[gd_scene load_steps=13 format=3 uid="uid://bm55nb3aylbgy"]
 
 [ext_resource type="Script" path="res://scenes/Scene2.gd" id="1_nto6t"]
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="2_chiel"]
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="2_vfr5g"]
 [ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="3_ub8el"]
 [ext_resource type="PackedScene" uid="uid://bwo7hmrw6dsbj" path="res://inventory/inventory_ui.tscn" id="4_raim4"]
+[ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="6_skwdo"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tmjtj"]
 
@@ -111,3 +112,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Inventory_UI" parent="Scene2" instance=ExtResource("4_raim4")]
 visible = false
+
+[node name="blip" type="AudioStreamPlayer2D" parent="Scene2"]
+stream = ExtResource("6_skwdo")
+volume_db = 1.981

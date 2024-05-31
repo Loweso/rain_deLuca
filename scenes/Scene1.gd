@@ -41,7 +41,7 @@ var current_index = 0
 var char_index = 0
 var current_text = ""
 var current_name = ""
-var text_speed = 0.08
+var text_speed = 0.05
 var is_typing = false
 
 @onready var dialogue_label = $DialogueText as Label

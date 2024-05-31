@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://vt6q6xg42w8s"]
+[gd_scene load_steps=9 format=3 uid="uid://vt6q6xg42w8s"]
 
 [ext_resource type="Theme" uid="uid://bqho23mc0bs15" path="res://default.tres" id="1_ykjaq"]
 [ext_resource type="Script" path="res://main_menu/Main_Menu.gd" id="2_v6wos"]
 [ext_resource type="FontFile" uid="uid://dswhbqg8cmy54" path="res://assets/FOT-ModeMinBLargeStd-R.otf" id="3_08flu"]
+[ext_resource type="AudioStream" uid="uid://dhhja8htbn6ad" path="res://audio/selectsound.mp3" id="4_ne35t"]
 [ext_resource type="Texture2D" uid="uid://cg43w4ch5rd7a" path="res://assets/ui/gameLogo.png" id="4_pwv3e"]
 [ext_resource type="PackedScene" uid="uid://bxeuuvp8gld5h" path="res://scenes/scene_transition.tscn" id="5_go8se"]
+[ext_resource type="AudioStream" uid="uid://c48nekphlynm6" path="res://audio/mainmenu.mp3" id="6_60fvi"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u17kc"]
 load_path = "res://.godot/imported/mainMenuBG.jpg-135d451b5c60a2189d36d93c88359355.ctex"
@@ -91,3 +93,14 @@ scale = Vector2(0.777837, 0.777837)
 texture = ExtResource("4_pwv3e")
 
 [node name="SceneTransition" parent="Main_Menu" instance=ExtResource("5_go8se")]
+
+[node name="mainmenusound" type="AudioStreamPlayer2D" parent="Main_Menu"]
+stream = ExtResource("6_60fvi")
+volume_db = 4.952
+autoplay = true
+
+[node name="buttonblip" type="AudioStreamPlayer2D" parent="Main_Menu"]
+position = Vector2(723, 671)
+scale = Vector2(3.17544, 2.88354)
+stream = ExtResource("4_ne35t")
+volume_db = 2.971
