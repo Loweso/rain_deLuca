@@ -1,17 +1,43 @@
 extends Control
 
 var dialogues = [
-	"Welcome to our game!",
-	"This is the second line of dialogue.",
-	"And here is the third line.\nThis is to test newlines.",
-	"Good luck on your journey!"
+	"April 26, 10:30 AM\nDistrict Court\nDefendant Lobby No. 1",
+	"(…)",
+	"(*sigh*)",
+	'What’s wrong, Rain?',
+	'It’s been days since it happened, but I still can’t quite believe it.',
+	'Well, I have to say Rain, I’m impressed!',
+	'Not everyone takes on a murder trial right off the bat like this.',
+	'Uhm... Thanks.',
+	'Actually, it’s because I owe her a favor.',
+	'A favor? You mean you knew the defendant before this case?',
+	'Yes. She is a good friend of mine.',
+	'A well-known tennis player drowned in an olympic sized pool.',
+	'The person they arrested was her opponent for a match she was going to play at the time.',
+	'Alexa Yala... my best friend since grade school.',
+	'She has always been bubbly, you’d never see her faulty during a crisis.',
+	'And I know her better than anyone. Which is why I took the case.',
+	'I want to help her out in any way I can.',
 ]
 
 var char_names = [
+	"",
 	"Rain",
-	"Sunny",
 	"Rain",
-	"Serena"
+	"Ms. Cris",
+	"Rain",
+	"Ms. Cris",
+	"Ms. Cris",
+	"Rain",
+	"Rain",
+	"Ms. Cris",
+	"Rain",
+	"Rain",
+	"Rain",
+	"Rain",
+	"Rain",
+	"Rain",
+	"Rain",
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -19,10 +45,24 @@ var char_names = [
 # Text style 3 = Green, centered, Current setting (time and place)
 
 var text_styles = [
-	1,
-	2, 
 	3,
-	2
+	2,
+	2,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -30,10 +70,63 @@ var text_styles = [
 # spriteToDisplay 2 = Maya, talking
 
 var spriteToDisplay = [
+	0,
+	0,
+	0, 
 	2,
+	1,
+	2,
+	2,
+	1,
+	1,
+	2,
+	1,
+	1,
 	1, 
+	1,
+	1,
+	1, 
+	1
+]
+
+var text_sound = [
 	2,
-	0
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+]
+
+var backgrounds = [
+	0,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
 ]
 
 var current_index = 0
@@ -41,10 +134,12 @@ var current_index = 0
 var char_index = 0
 var current_text = ""
 var current_name = ""
-var text_speed = 0.05
+var text_speed = 0.06
 var is_typing = false
 
+@onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
+@onready var BlackBg = $BlackBg
 @onready var name_label = $PersonNameText as Label
 @onready var personNameBox = $PersonNameBox as Polygon2D
 @onready var dialogueBox = $DialogueBox as Polygon2D
@@ -59,12 +154,19 @@ var is_typing = false
 @onready var rain_sprite_animation = $RainSprite/RainTalking as AnimationPlayer
 
 @onready var blip = $blip
+@onready var typewrite = $blip2
+
+var current_audio: AudioStreamPlayer2D = blip
 
 
 func _ready():
+	rain_sprite.visible = false
 	name_label.horizontal_alignment = 1
 	personNameBox.visible = false
 	courtRecButton.visible = false
+	name_label.visible = false
+	await update_dialogue()
+	current_index += 1
 	
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
@@ -74,6 +176,7 @@ func courtRecButton_pressed():
 
 func dialogue_button_pressed():
 	if current_index < dialogues.size():
+		name_label.visible = true
 		dialogueBox.visible = true
 		personNameBox.visible = true
 		courtRecButton.visible = true
@@ -94,8 +197,10 @@ func update_dialogue():
 		current_name = char_names[current_index]
 		dialogue_label.text = ""
 		name_label.text = current_name
+		update_background(backgrounds[current_index])
 		apply_text_style(text_styles[current_index])
 		update_sprites(spriteToDisplay[current_index])
+		apply_text_sound(text_sound[current_index])
 		is_typing = true
 		if is_typing:
 			await start_text_update()
@@ -107,7 +212,11 @@ func start_text_update():
 	while char_index < current_text.length():
 		if not is_typing:
 			return
-		blip.play()
+		if current_audio == typewrite:
+			if char_index % 3 == 0:
+				current_audio.play()
+		else:
+			current_audio.play()
 		dialogue_label.text += current_text[char_index]
 		char_index += 1
 		await get_tree().create_timer(text_speed).timeout
@@ -117,7 +226,7 @@ func start_text_update():
 func complete_dialogue():
 	is_typing = false
 	dialogue_label.text = current_text
-	blip.stop() 
+	current_audio.stop() 
 		
 func apply_text_style(style_value: int):
 	var color := Color(1, 1, 1)
@@ -144,3 +253,21 @@ func update_sprites(sprite: int):
 		2:
 			rain_sprite.visible = true
 			rain_sprite_animation.play("Talking")
+			
+func apply_text_sound(text_value:int):
+	match text_value:
+		1: 
+			current_audio = blip
+		2:
+			current_audio = typewrite
+			
+func update_background(background_index: int):
+	var background_texture: Texture
+	background_texture = preload("res://assets/backgrounds/Courtlobby.png")
+	match background_index:
+		0:
+			BlackBg.visible = true
+		1:
+			BlackBg.visible = false
+					
+	background_sprite.texture = background_texture
