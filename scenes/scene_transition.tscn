@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxeuuvp8gld5h"]
+[gd_scene load_steps=6 format=3 uid="uid://bxeuuvp8gld5h"]
 
 [ext_resource type="Script" path="res://SceneTransition.gd" id="1_mtsao"]
 
@@ -29,6 +29,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [false, true, false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../BlackRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ujjnm"]
 length = 0.001
@@ -44,10 +56,39 @@ tracks/0/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BlackRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pu5cf"]
+resource_name = "Fade_Backwards"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BlackRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pwwfw"]
 _data = {
 "Fade": SubResource("Animation_1rlrj"),
+"Fade_Backwards": SubResource("Animation_pu5cf"),
 "RESET": SubResource("Animation_ujjnm")
 }
 
@@ -67,3 +108,9 @@ color = Color(0, 0, 0, 1)
 libraries = {
 "": SubResource("AnimationLibrary_pwwfw")
 }
+
+[node name="BlackRect" type="ColorRect" parent="."]
+modulate = Color(0, 0, 0, 0)
+offset_right = 2406.0
+offset_bottom = 1418.0
+color = Color(0, 0, 0, 1)

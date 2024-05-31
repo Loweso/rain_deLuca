@@ -103,6 +103,7 @@ func update_dialogue():
 		dialogue_label.text = ""
 		name_label.text = current_name
 		apply_text_style(text_styles[current_index])
+		update_background(current_index)
 		is_typing = true
 		if is_typing:
 			await start_text_update()

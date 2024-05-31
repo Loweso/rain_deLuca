@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cjirdovtydvc4" path="res://assets/backgrounds/witnessSide.jpg" id="2_rreh0"]
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="3_jhibb"]
 [ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="4_jx40f"]
-[ext_resource type="PackedScene" uid="uid://bwo7hmrw6dsbj" path="res://inventory/inventory_ui.tscn" id="5_k7ph7"]
 [ext_resource type="Texture2D" uid="uid://ewgh7vd6l7a3" path="res://assets/ui/next-button.png" id="6_dfje0"]
+[ext_resource type="PackedScene" uid="uid://cedc7c312rh8f" path="res://scenes/evidence.tscn" id="7_5l4xb"]
 [ext_resource type="Texture2D" uid="uid://c03wh5m3ojobv" path="res://assets/ui/prev-button.png" id="7_e55hm"]
 [ext_resource type="PackedScene" uid="uid://bftv2b4r6kgpr" path="res://scenes/holdItTransition.tscn" id="8_h7oyc"]
 
@@ -157,7 +157,8 @@ offset_right = 126.836
 offset_bottom = 30.2248
 scale = Vector2(0.689314, 0.523945)
 theme_override_fonts/font = ExtResource("3_jhibb")
-text = "Court Record"
+text = "Present"
+horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="NextButton" type="Button" parent="CrossExamination1"]
@@ -213,7 +214,7 @@ theme_override_fonts/font = ExtResource("3_jhibb")
 text = "Press"
 metadata/_edit_use_anchors_ = true
 
-[node name="Inventory_UI" parent="CrossExamination1" instance=ExtResource("5_k7ph7")]
-visible = false
+[node name="Evidence" parent="CrossExamination1" instance=ExtResource("7_5l4xb")]
+layout_mode = 1
 
 [node name="HoldItTransition" parent="CrossExamination1" instance=ExtResource("8_h7oyc")]
