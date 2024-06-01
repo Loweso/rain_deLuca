@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bm55nb3aylbgy"]
+[gd_scene load_steps=18 format=3 uid="uid://bm55nb3aylbgy"]
 
 [ext_resource type="Script" path="res://scenes/Scene2.gd" id="1_nto6t"]
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="2_chiel"]
@@ -6,6 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="3_ub8el"]
 [ext_resource type="PackedScene" uid="uid://bwo7hmrw6dsbj" path="res://inventory/inventory_ui.tscn" id="4_raim4"]
 [ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="6_skwdo"]
+[ext_resource type="VideoStream" path="res://assets/videos/judge-hammer.ogv" id="7_btef3"]
+[ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="8_3d36b"]
+[ext_resource type="AudioStream" uid="uid://c6t23ek6wr5ty" path="res://audio/gavel.mp3" id="9_38r6k"]
+[ext_resource type="FontFile" uid="uid://dswhbqg8cmy54" path="res://assets/FOT-ModeMinBLargeStd-R.otf" id="10_ucuxw"]
+[ext_resource type="AudioStream" uid="uid://dhhja8htbn6ad" path="res://audio/selectsound.mp3" id="11_bnkl8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tmjtj"]
 
@@ -26,20 +31,27 @@ modulate_color = Color(0.541247, 0.291974, 0.221316, 1)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Scene2" type="Control" parent="."]
+[node name="scene2" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_nto6t")
 
-[node name="Background" type="TextureRect" parent="Scene2"]
+[node name="Blackbg" type="ColorRect" parent="scene2"]
+offset_top = -11.0
+offset_right = 1950.0
+offset_bottom = 1090.0
+color = Color(0, 0, 0, 1)
+
+[node name="Background" type="TextureRect" parent="scene2"]
 layout_mode = 0
 offset_right = 1930.0
 offset_bottom = 1091.0
 texture = ExtResource("2_chiel")
+metadata/_edit_lock_ = true
 
-[node name="DialogueBoxButton" type="Button" parent="Scene2"]
+[node name="DialogueBoxButton" type="Button" parent="scene2"]
 layout_mode = 0
 offset_left = -1932.0
 offset_top = 803.0
@@ -48,19 +60,19 @@ offset_bottom = 811.0
 scale = Vector2(1567.73, 159.941)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tmjtj")
 
-[node name="DialogueBox" type="Polygon2D" parent="Scene2"]
+[node name="DialogueBox" type="Polygon2D" parent="scene2"]
 position = Vector2(-9, 0)
 scale = Vector2(1.02753, 0.99655)
 color = Color(0.168627, 0.168627, 0.168627, 0.470588)
 polygon = PackedVector2Array(3, 803, 1951, 803, 1951, 1123, 3, 1123)
 
-[node name="PersonNameBox" type="Polygon2D" parent="Scene2"]
+[node name="PersonNameBox" type="Polygon2D" parent="scene2"]
 position = Vector2(145, 763)
 scale = Vector2(0.807388, 0.375424)
 color = Color(0.48825, 0.315, 0.7, 0.917647)
 polygon = PackedVector2Array(-0.199969, 1.66217, 1.67047, -2.6637, 310.698, -2.6637, 365.822, 98.5553, 306.562, 188.651, 152.066, 188.651, -0.973211, 188.651, -60.1351, 90.5643)
 
-[node name="DialogueText" type="Label" parent="Scene2"]
+[node name="DialogueText" type="Label" parent="scene2"]
 layout_mode = 0
 offset_left = 219.0
 offset_top = 858.0
@@ -68,9 +80,10 @@ offset_right = 667.0
 offset_bottom = 924.0
 scale = Vector2(3.32776, 3.02778)
 theme_override_fonts/font = ExtResource("2_vfr5g")
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="PersonNameText" type="Label" parent="Scene2"]
+[node name="PersonNameText" type="Label" parent="scene2"]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 780.0
@@ -80,7 +93,7 @@ scale = Vector2(2.31653, 2.09949)
 theme_override_fonts/font = ExtResource("2_vfr5g")
 metadata/_edit_use_anchors_ = true
 
-[node name="CourtRecordButton" type="Button" parent="Scene2"]
+[node name="CourtRecordButton" type="Button" parent="scene2"]
 layout_mode = 0
 offset_left = 1478.0
 offset_top = -16.0
@@ -94,7 +107,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_y2iy0")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_hx00i")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_kg7g6")
 
-[node name="CourtRecordText" type="Label" parent="Scene2/CourtRecordButton"]
+[node name="CourtRecordText" type="Label" parent="scene2/CourtRecordButton"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.097823
@@ -110,9 +123,80 @@ theme_override_fonts/font = ExtResource("2_vfr5g")
 text = "Court Record"
 metadata/_edit_use_anchors_ = true
 
-[node name="Inventory_UI" parent="Scene2" instance=ExtResource("4_raim4")]
+[node name="Inventory_UI" parent="scene2" instance=ExtResource("4_raim4")]
 visible = false
 
-[node name="blip" type="AudioStreamPlayer2D" parent="Scene2"]
+[node name="hammer" type="VideoStreamPlayer" parent="scene2"]
+layout_mode = 0
+offset_top = -53.0
+offset_right = 2044.0
+offset_bottom = 1119.0
+audio_track = 1
+stream = ExtResource("7_btef3")
+volume_db = 5.62
+autoplay = true
+expand = true
+metadata/_edit_lock_ = true
+
+[node name="blip" type="AudioStreamPlayer2D" parent="scene2"]
 stream = ExtResource("6_skwdo")
 volume_db = 1.981
+
+[node name="typewriter" type="AudioStreamPlayer2D" parent="scene2"]
+position = Vector2(0, -53)
+stream = ExtResource("8_3d36b")
+
+[node name="gavel" type="AudioStreamPlayer2D" parent="scene2"]
+position = Vector2(0, -106)
+stream = ExtResource("9_38r6k")
+volume_db = 12.0
+
+[node name="AlexaYala" type="Button" parent="scene2"]
+offset_left = 723.0
+offset_top = 470.0
+offset_right = 871.0
+offset_bottom = 495.0
+scale = Vector2(3.17544, 2.88354)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.321569, 0.647059, 0.807843, 1)
+theme_override_colors/font_hover_color = Color(0.634902, 0.838444, 0.949069, 1)
+theme_override_colors/icon_normal_color = Color(0.329412, 0.65098, 0.831373, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_ucuxw")
+text = "Alexa Yala"
+
+[node name="selected" type="AudioStreamPlayer2D" parent="scene2"]
+position = Vector2(0, -212)
+stream = ExtResource("11_bnkl8")
+volume_db = 12.0
+
+[node name="AlexaThirsty" type="Button" parent="scene2"]
+offset_left = 723.0
+offset_top = 570.0
+offset_right = 871.0
+offset_bottom = 595.0
+scale = Vector2(3.17544, 2.88354)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.321569, 0.647059, 0.807843, 1)
+theme_override_colors/font_hover_color = Color(0.634902, 0.838444, 0.949069, 1)
+theme_override_colors/icon_normal_color = Color(0.329412, 0.65098, 0.831373, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_ucuxw")
+text = "Alexa Thirsty"
+
+[node name="AlexaYellow" type="Button" parent="scene2"]
+offset_left = 723.0
+offset_top = 370.0
+offset_right = 871.0
+offset_bottom = 395.0
+scale = Vector2(3.17544, 2.88354)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.321569, 0.647059, 0.807843, 1)
+theme_override_colors/font_hover_color = Color(0.634902, 0.838444, 0.949069, 1)
+theme_override_colors/icon_normal_color = Color(0.329412, 0.65098, 0.831373, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_ucuxw")
+text = "Alexa Yellow"
