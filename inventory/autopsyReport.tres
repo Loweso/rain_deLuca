@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://b2vlbyipwhv1q"]
+
+[ext_resource type="Script" path="res://inventory_item.gd" id="1_kqtpb"]
+[ext_resource type="Texture2D" uid="uid://djdt3vnd4fre1" path="res://assets/inventory/items/autopsyReport.jpg" id="2_ipa1f"]
+
+[resource]
+script = ExtResource("1_kqtpb")
+name = "Sirina's Autopsy Report"
+description = "Time of Death: Between 3:00PM and 3:30PM                Cause of death: Drowning "
+texture = ExtResource("2_ipa1f")

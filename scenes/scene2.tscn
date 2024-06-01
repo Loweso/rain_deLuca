@@ -124,9 +124,6 @@ theme_override_fonts/font = ExtResource("2_vfr5g")
 text = "Court Record"
 metadata/_edit_use_anchors_ = true
 
-[node name="Inventory_UI" parent="scene2" instance=ExtResource("4_raim4")]
-visible = false
-
 [node name="hammer" type="VideoStreamPlayer" parent="scene2"]
 layout_mode = 0
 offset_top = -53.0
@@ -173,7 +170,7 @@ position = Vector2(0, -212)
 stream = ExtResource("11_bnkl8")
 volume_db = 12.0
 
-[node name="AlexaThirsty" type="Button" parent="scene2"]
+[node name="MsCris" type="Button" parent="scene2"]
 layout_mode = 0
 offset_left = 723.0
 offset_top = 570.0
@@ -187,9 +184,9 @@ theme_override_colors/icon_normal_color = Color(0.329412, 0.65098, 0.831373, 1)
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_ucuxw")
-text = "Alexa Thirsty"
+text = "Ms. Cris"
 
-[node name="AlexaYellow" type="Button" parent="scene2"]
+[node name="Rain" type="Button" parent="scene2"]
 layout_mode = 0
 offset_left = 723.0
 offset_top = 370.0
@@ -203,4 +200,103 @@ theme_override_colors/icon_normal_color = Color(0.329412, 0.65098, 0.831373, 1)
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("10_ucuxw")
-text = "Alexa Yellow"
+text = "Rain de Luca"
+
+[node name="SirinaThirsty" type="Button" parent="scene2"]
+layout_mode = 0
+offset_left = 723.0
+offset_top = 570.0
+offset_right = 871.0
+offset_bottom = 595.0
+scale = Vector2(3.17544, 2.88354)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.321569, 0.647059, 0.807843, 1)
+theme_override_colors/font_hover_color = Color(0.634902, 0.838444, 0.949069, 1)
+theme_override_colors/icon_normal_color = Color(0.329412, 0.65098, 0.831373, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_ucuxw")
+text = "Sirina Thirsty"
+
+[node name="SerenaWilliams" type="Button" parent="scene2"]
+layout_mode = 0
+offset_left = 723.0
+offset_top = 470.0
+offset_right = 871.0
+offset_bottom = 495.0
+scale = Vector2(3.17544, 2.88354)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.321569, 0.647059, 0.807843, 1)
+theme_override_colors/font_hover_color = Color(0.634902, 0.838444, 0.949069, 1)
+theme_override_colors/icon_normal_color = Color(0.329412, 0.65098, 0.831373, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_ucuxw")
+text = "Serena Williams"
+
+[node name="SirinaWillie" type="Button" parent="scene2"]
+layout_mode = 0
+offset_left = 723.0
+offset_top = 370.0
+offset_right = 871.0
+offset_bottom = 395.0
+scale = Vector2(3.17544, 2.88354)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.321569, 0.647059, 0.807843, 1)
+theme_override_colors/font_hover_color = Color(0.634902, 0.838444, 0.949069, 1)
+theme_override_colors/icon_normal_color = Color(0.329412, 0.65098, 0.831373, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_ucuxw")
+text = "Sirina Willie"
+
+[node name="Poisoned" type="Button" parent="scene2"]
+layout_mode = 0
+offset_left = 723.0
+offset_top = 370.0
+offset_right = 871.0
+offset_bottom = 395.0
+scale = Vector2(3.17544, 2.88354)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.321569, 0.647059, 0.807843, 1)
+theme_override_colors/font_hover_color = Color(0.634902, 0.838444, 0.949069, 1)
+theme_override_colors/icon_normal_color = Color(0.329412, 0.65098, 0.831373, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_ucuxw")
+text = "Poisoned"
+
+[node name="Strangled" type="Button" parent="scene2"]
+layout_mode = 0
+offset_left = 723.0
+offset_top = 470.0
+offset_right = 871.0
+offset_bottom = 495.0
+scale = Vector2(3.17544, 2.88354)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.321569, 0.647059, 0.807843, 1)
+theme_override_colors/font_hover_color = Color(0.634902, 0.838444, 0.949069, 1)
+theme_override_colors/icon_normal_color = Color(0.329412, 0.65098, 0.831373, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_ucuxw")
+text = "Strangled"
+
+[node name="Drowned" type="Button" parent="scene2"]
+layout_mode = 0
+offset_left = 723.0
+offset_top = 570.0
+offset_right = 871.0
+offset_bottom = 595.0
+scale = Vector2(3.17544, 2.88354)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.321569, 0.647059, 0.807843, 1)
+theme_override_colors/font_hover_color = Color(0.634902, 0.838444, 0.949069, 1)
+theme_override_colors/icon_normal_color = Color(0.329412, 0.65098, 0.831373, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_ucuxw")
+text = "Drowned"
+
+[node name="Inventory_UI" parent="scene2" instance=ExtResource("4_raim4")]
+visible = false

@@ -15,6 +15,22 @@ var dialogues = [
 	'The prosecution is ready, Your Honor.',
 	'The, um, defense is also ready, Your Honor.',
 	"Thank you. Let's proceed with opening statements. Prosecutor, you may begin.",
+	'Certainly.',
+	'Ladies and gentlemen, today we seek justice for the tragic loss of Sirina Thirsty.',
+	"The evidence will reveal that Alexa Yala is responsible for her death. We will prove Ms. Yala's guilt beyond doubt.",
+	"Next, question. This is a murder trial. Tell me, Mr. de Luca, what is the victim’s name?",
+	"The victim's name is in the Court Records. Use the Court Records button to check anytime, okay?",
+	"Remember to check it often!",
+	'Mr. de Luca, who is the victim in this case?',
+	'Uhm... the victim’s name is Sirina Thirsty.',
+	'Very well... and why was she killed?',
+	'She died of drowning, Your Honor',
+	'Correct. You seem fairly confident, Mr. de Luca.',
+	'Of course, I always am.',
+	'Now, Ms. Sunny Flower...',
+	'Yes, Your Honor?',
+	'Ms. Flower, the prosecution may call its first witness.',
+	'The prosecution would like to call the defendant, Ms. Yala, to the stand.'
 ]
 
 var char_names = [
@@ -22,7 +38,7 @@ var char_names = [
 	"Judge",
 	'Ms. Cris',
 	'Rain',
-	'Ms.Cris',
+	'Ms. Cris',
 	'Rain',
 	'Judge',
 	'Judge',
@@ -32,6 +48,22 @@ var char_names = [
 	"Sunny",
 	"Rain",
 	"Judge",
+	'Sunny',
+	'Sunny',
+	'Sunny',
+	"Judge",
+	'Ms. Cris',
+	'Ms. Cris',
+	"Judge",
+	"Rain",
+	"Judge",
+	'Rain',
+	'Judge',
+	'Rain',
+	'Judge',
+	'Sunny',
+	"Judge",
+	'Sunny',
 	
 ]
 
@@ -46,6 +78,22 @@ var text_styles = [
 	1,
 	1,
 	2,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
 	1,
 	1,
 	1,
@@ -74,7 +122,23 @@ var spriteToDisplay = [
 	0,
 	0,
 	0,
-	0
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
 ]
 
 # background 0 = Judge Side
@@ -97,6 +161,22 @@ var backgrounds = [
 	1,
 	2,
 	0,
+	1,
+	1,
+	1,
+	0,
+	3,
+	3,
+	0,
+	2,
+	0,
+	2,
+	0,
+	2,
+	0,
+	1,
+	0,
+	1,
 ]
 
 #1 blip
@@ -117,9 +197,26 @@ var text_sound = [
 	1,
 	1,
 	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
 ]
 
 var current_index = 0
+var current_index_adder = 0
 
 var char_index = 0
 var current_text = ""
@@ -137,8 +234,14 @@ var current_audio
 @onready var courtRecButton = $CourtRecordButton as Button
 @onready var Blackbg = $Blackbg
 @onready var AlexaYalaButton = $AlexaYala
-@onready var AlexaThirstyButton = $AlexaThirsty
-@onready var AlexaYellowButton = $AlexaYellow
+@onready var MsCrisButton = $MsCris
+@onready var RainButton = $Rain
+@onready var SirinaThirsty = $SirinaThirsty
+@onready var SerenaWilliams = $SerenaWilliams
+@onready var SirinaWillie = $SirinaWillie
+@onready var Poisoned = $Poisoned
+@onready var Strangled = $Strangled
+@onready var Drowned = $Drowned
 
 @onready var inventory = $Inventory_UI
 @onready var inv: Inv
@@ -157,8 +260,15 @@ func _ready():
 	personNameBox.visible = false
 	courtRecButton.visible = false
 	AlexaYalaButton.visible = false
-	AlexaThirstyButton.visible = false
-	AlexaYellowButton.visible = false
+	MsCrisButton.visible = false
+	RainButton.visible = false
+	SirinaThirsty.visible = false
+	SerenaWilliams.visible = false
+	SirinaWillie.visible = false
+	Poisoned.visible = false
+	Strangled.visible = false
+	Drowned.visible = false
+
 	
 	await update_dialogue()
 	current_index += 1
@@ -166,25 +276,31 @@ func _ready():
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
 	AlexaYalaButton.pressed.connect(AlexaYalaButton_pressed)
-	AlexaThirstyButton.pressed.connect(AlexaThirstyButton_pressed)
-	AlexaYellowButton.pressed.connect(AlexaYellowButton_pressed)
+	MsCrisButton.pressed.connect(MsCrisButton_pressed)
+	RainButton.pressed.connect(RainButton_pressed)
+	SirinaThirsty.pressed.connect(SirinaThirsty_pressed)
+	SerenaWilliams.pressed.connect(SerenaWilliams_pressed)
+	SirinaWillie.pressed.connect(SirinaWillie_pressed)
+	Poisoned.pressed.connect(Poisoned_pressed)
+	Strangled.pressed.connect(Strangled_pressed)
+	Drowned.pressed.connect(Drowned_pressed)
 
 func AlexaYalaButton_pressed():
 	selected.play()
-	AlexaYellowButton.visible = false
-	AlexaThirstyButton.visible = false
+	MsCrisButton.visible = false
+	RainButton.visible = false
 	AlexaYalaButton.visible = false
 	dialogueBoxButton.visible = true
 	update_dialogue()
 	current_index += 1
 
-func AlexaThirstyButton_pressed():
+func MsCrisButton_pressed():
 	selected.play()
-	AlexaYellowButton.visible = false
-	AlexaThirstyButton.visible = false
+	MsCrisButton.visible = false
+	RainButton.visible = false
 	AlexaYalaButton.visible = false
 	dialogueBoxButton.visible = true
-	dialogues[8] = 'The defendant? Well, that’s Alexa Thirsty, Your Honor.'
+	dialogues[8] = 'The defendant? Well, that’s Ms.Cris, Your Honor.'
 	dialogues[9] = "Wrong! It's Alexa Yala!"
 	dialogues.insert(10, "(How... How could I forget my client's name...)")
 	dialogues.insert(11, "I am sorry, Your Honor. I will never do that again.")
@@ -204,16 +320,17 @@ func AlexaThirstyButton_pressed():
 	backgrounds.insert(10,2)
 	backgrounds.insert(11,2)
 	backgrounds.insert(12,0)
+	current_index_adder += 3
 	update_dialogue()
 	current_index += 1
 
-func AlexaYellowButton_pressed():
+func RainButton_pressed():
 	selected.play()
-	AlexaYellowButton.visible = false
-	AlexaThirstyButton.visible = false
+	MsCrisButton.visible = false
+	RainButton.visible = false
 	AlexaYalaButton.visible = false
 	dialogueBoxButton.visible = true
-	dialogues[8] = 'The defendant? Well, that’s Alexa Yellow, Your Honor.'
+	dialogues[8] = 'The defendant? Well, that’s Rain de Luca, Your Honor.'
 	dialogues[9] = "Wrong! It's Alexa Yala! "
 	dialogues.insert(10, "(How... How could I forget my client's name...)")
 	dialogues.insert(11, "I am sorry, Your Honor. I will never do that again.")
@@ -233,6 +350,167 @@ func AlexaYellowButton_pressed():
 	backgrounds.insert(10,2)
 	backgrounds.insert(11,2)
 	backgrounds.insert(12,0)
+	current_index_adder += 3
+	update_dialogue()
+	current_index += 1
+	
+func SirinaThirsty_pressed():
+	selected.play()
+	SirinaThirsty.visible = false
+	SerenaWilliams.visible = false
+	SirinaWillie.visible = false
+	dialogueBoxButton.visible = true
+	update_dialogue()
+	current_index += 1
+	
+func SerenaWilliams_pressed():
+	selected.play()
+	SirinaThirsty.visible = false
+	SerenaWilliams.visible = false
+	SirinaWillie.visible = false
+	dialogueBoxButton.visible = true
+	dialogues[21 + current_index_adder] = 'Uhm... the victim’s name is Serena Williams.'
+	dialogues.insert(22 + current_index_adder, "Wrong! It's Sirina Thirsty!")
+	dialogues.insert(23 + current_index_adder, "(How... How could I forget the victim's name..)")
+	dialogues.insert(24 + current_index_adder, "I am sorry, Your Honor. I will never do that again.")
+	dialogues.insert(25 + current_index_adder, "Focus, Rain! This is a serious matter!")
+	char_names.insert(22 + current_index_adder, 'Judge')
+	char_names.insert(23 + current_index_adder, 'Rain')
+	char_names.insert(24 + current_index_adder,'Rain')
+	char_names.insert(25 + current_index_adder, 'Ms. Cris')
+	text_styles.insert(22 + current_index_adder, 1)
+	text_styles.insert(23 + current_index_adder, 2)
+	text_styles.insert(24 + current_index_adder, 1)
+	text_styles.insert(25 + current_index_adder, 1)
+	text_sound.insert(22 + current_index_adder,1)
+	text_sound.insert(23 + current_index_adder,1)
+	text_sound.insert(24 + current_index_adder,1)
+	text_sound.insert(25 + current_index_adder,1)
+	spriteToDisplay.insert(22 + current_index_adder,0)
+	spriteToDisplay.insert(23 + current_index_adder,0)
+	spriteToDisplay.insert(24 + current_index_adder,0)
+	spriteToDisplay.insert(25 + current_index_adder,0)
+	backgrounds.insert(22 + current_index_adder,0)
+	backgrounds.insert(23 + current_index_adder,2)
+	backgrounds.insert(24 + current_index_adder,2)
+	backgrounds.insert(25 + current_index_adder,3)
+	current_index_adder += 4
+	update_dialogue()
+	current_index += 1
+	
+func SirinaWillie_pressed():
+	selected.play()
+	SirinaThirsty.visible = false
+	SerenaWilliams.visible = false
+	SirinaWillie.visible = false
+	dialogueBoxButton.visible = true
+	dialogues[21 + current_index_adder] = 'Uhm... the victim’s name is Sirina Willie'
+	dialogues.insert(22 + current_index_adder, "Wrong! It's Sirina Thirsty!")
+	dialogues.insert(23 + current_index_adder, "(How... How could I forget the victim's name..)")
+	dialogues.insert(24 + current_index_adder, "I am sorry, Your Honor. I will never do that again.")
+	dialogues.insert(25 + current_index_adder, "Focus, Rain! This is a serious matter!")
+	char_names.insert(22 + current_index_adder, 'Judge')
+	char_names.insert(23 + current_index_adder, 'Rain')
+	char_names.insert(24 + current_index_adder, 'Rain')
+	char_names.insert(25 + current_index_adder, 'Ms. Cris')
+	text_styles.insert(22 + current_index_adder, 1)
+	text_styles.insert(23 + current_index_adder, 2)
+	text_styles.insert(24 + current_index_adder, 1)
+	text_styles.insert(25 + current_index_adder, 1)
+	text_sound.insert(22 + current_index_adder,1)
+	text_sound.insert(23 + current_index_adder,1)
+	text_sound.insert(24 + current_index_adder,1)
+	text_sound.insert(25 + current_index_adder,1)
+	spriteToDisplay.insert(22 + current_index_adder,0)
+	spriteToDisplay.insert(23 + current_index_adder,0)
+	spriteToDisplay.insert(24 + current_index_adder,0)
+	spriteToDisplay.insert(25 + current_index_adder,0)
+	backgrounds.insert(22 + current_index_adder,0)
+	backgrounds.insert(23 + current_index_adder,2)
+	backgrounds.insert(24 + current_index_adder,2)
+	backgrounds.insert(25 + current_index_adder,3)
+	current_index_adder += 4
+	update_dialogue()
+	current_index += 1
+	
+func Poisoned_pressed():
+	selected.play()
+	Poisoned.visible = false
+	Strangled.visible = false
+	Drowned.visible = false
+	dialogueBoxButton.visible = true
+	dialogues[23 + current_index_adder] = 'She died of poisoning, Your Honor'
+	dialogues[24 + current_index_adder] = "I'll let that slide for now Mr.de Luca"
+	dialogues[25 + current_index_adder] = "Thank you, Your Honor."
+	dialogues.insert(24 + current_index_adder, "Wrong! She died of drowning!")
+	dialogues.insert(25 + current_index_adder, "(How... How could I forget how the victim died...)")
+	dialogues.insert(26 + current_index_adder, "I am sorry, Your Honor. I will never do that again.")
+	dialogues.insert(27 + current_index_adder, "Rain! focus!")
+	char_names.insert(24 + current_index_adder, 'Judge')
+	char_names.insert(25 + current_index_adder, 'Rain')
+	char_names.insert(26 + current_index_adder, 'Rain')
+	char_names.insert(27 + current_index_adder, 'Ms.Cris')
+	text_styles.insert(24 + current_index_adder, 1)
+	text_styles.insert(25 + current_index_adder, 2)
+	text_styles.insert(26 + current_index_adder, 1)
+	text_styles.insert(27 + current_index_adder, 1)
+	text_sound.insert(24 + current_index_adder,1)
+	text_sound.insert(25 + current_index_adder,1)
+	text_sound.insert(26 + current_index_adder,1)
+	text_sound.insert(27 + current_index_adder,1)
+	spriteToDisplay.insert(24 + current_index_adder,0)
+	spriteToDisplay.insert(25 + current_index_adder,0)
+	spriteToDisplay.insert(26 + current_index_adder,0)
+	spriteToDisplay.insert(27 + current_index_adder,0)
+	backgrounds.insert(24 + current_index_adder,0)
+	backgrounds.insert(25 + current_index_adder,2)
+	backgrounds.insert(26 + current_index_adder,2)
+	backgrounds.insert(27 + current_index_adder,3)
+	update_dialogue()
+	current_index += 1
+
+func Strangled_pressed():
+	selected.play()
+	Poisoned.visible = false
+	Strangled.visible = false
+	Drowned.visible = false
+	dialogueBoxButton.visible = true
+	dialogues[23 + current_index_adder] = 'She died of strangling, Your Honor'
+	dialogues[24 + current_index_adder] = "I'll let that slide for now Mr.de Luca"
+	dialogues[25 + current_index_adder] = "Thank you, Your Honor."
+	dialogues.insert(24 + current_index_adder, "Wrong! She died of drowning!")
+	dialogues.insert(25 + current_index_adder, "(How... How could I forget how the victim died...)")
+	dialogues.insert(26 + current_index_adder, "I am sorry, Your Honor. I will never do that again.")
+	dialogues.insert(27 + current_index_adder, "Rain! focus!")
+	char_names.insert(24 + current_index_adder, 'Judge')
+	char_names.insert(25 + current_index_adder, 'Rain')
+	char_names.insert(26 + current_index_adder, 'Rain')
+	char_names.insert(27 + current_index_adder, 'Ms.Cris')
+	text_styles.insert(24 + current_index_adder, 1)
+	text_styles.insert(25 + current_index_adder, 2)
+	text_styles.insert(26 + current_index_adder, 1)
+	text_styles.insert(27 + current_index_adder, 1)
+	text_sound.insert(24 + current_index_adder,1)
+	text_sound.insert(25 + current_index_adder,1)
+	text_sound.insert(26 + current_index_adder,1)
+	text_sound.insert(27 + current_index_adder,1)
+	spriteToDisplay.insert(24 + current_index_adder,0)
+	spriteToDisplay.insert(25 + current_index_adder,0)
+	spriteToDisplay.insert(26 + current_index_adder,0)
+	spriteToDisplay.insert(27 + current_index_adder,0)
+	backgrounds.insert(24 + current_index_adder,0)
+	backgrounds.insert(25 + current_index_adder,2)
+	backgrounds.insert(26 + current_index_adder,2)
+	backgrounds.insert(27 + current_index_adder,3)
+	update_dialogue()
+	current_index += 1
+	
+func Drowned_pressed():
+	selected.play()
+	Poisoned.visible = false
+	Strangled.visible = false
+	Drowned.visible = false
+	dialogueBoxButton.visible = true
 	update_dialogue()
 	current_index += 1
 	
@@ -250,9 +528,21 @@ func dialogue_button_pressed():
 			hammer.visible = false
 		if current_index == 8:
 			AlexaYalaButton.visible = true
-			AlexaThirstyButton.visible = true
-			AlexaYellowButton.visible = true
+			MsCrisButton.visible = true
+			RainButton.visible = true
 			dialogueBoxButton.visible = false
+		if (current_index == 24 && current_index_adder == 3) || (current_index == 21 && current_index_adder == 0):
+			SirinaThirsty.visible = true
+			SerenaWilliams.visible = true
+			SirinaWillie.visible = true
+			dialogueBoxButton.visible = false
+		
+		if (current_index == 23 && current_index_adder == 0) ||  (current_index == 27 && current_index_adder == 4) || (current_index == 30 && current_index_adder == 7) || (current_index == 26 && current_index_adder == 3):
+			Poisoned.visible = true
+			Strangled.visible = true
+			Drowned.visible = true
+			dialogueBoxButton.visible = false
+		
 		dialogueBox.visible = true
 		personNameBox.visible = true
 		courtRecButton.visible = true
@@ -294,7 +584,6 @@ func start_text_update():
 			current_audio.play()
 		dialogue_label.text += current_text[char_index]
 		char_index += 1
-		
 		await get_tree().create_timer(text_speed).timeout
 	is_typing = false
 	dialogue_label.text = current_text
