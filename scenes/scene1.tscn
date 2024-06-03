@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="1_f662p"]
 [ext_resource type="Script" path="res://scenes/Scene1.gd" id="1_qpuhb"]
 [ext_resource type="Texture2D" uid="uid://c7tkyyfd06cts" path="res://assets/backgrounds/Courtlobby.png" id="1_seny3"]
-[ext_resource type="Texture2D" uid="uid://bhxjqckw54ita" path="res://assets/sprites/Ms. Cris (Mia Fey) (1).png" id="3_a1fb7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Ms. Cris (Mia Fey) (1).png" id="3_a1fb7"]
 [ext_resource type="PackedScene" uid="uid://bwo7hmrw6dsbj" path="res://inventory/inventory_ui.tscn" id="5_ydfr8"]
 [ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="6_1aorj"]
 [ext_resource type="PackedScene" uid="uid://bxeuuvp8gld5h" path="res://scenes/scene_transition.tscn" id="8_4jih4"]

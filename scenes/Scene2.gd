@@ -310,7 +310,7 @@ func AlexaYalaButton_pressed():
 	AlexaYalaButton.visible = false
 	dialogueBoxButton.visible = true
 	update_dialogue()
-	current_index += 1
+
 
 func MsCrisButton_pressed():
 	selected.play()
@@ -332,15 +332,15 @@ func MsCrisButton_pressed():
 	text_sound.insert(10,1)
 	text_sound.insert(11,1)
 	text_sound.insert(12,1)
-	spriteToDisplay.insert(10,0)
-	spriteToDisplay.insert(11,0)
-	spriteToDisplay.insert(12,0)
+	spriteToDisplay.insert(10,3)
+	spriteToDisplay.insert(11,3)
+	spriteToDisplay.insert(12,1)
 	backgrounds.insert(10,2)
 	backgrounds.insert(11,2)
 	backgrounds.insert(12,0)
 	current_index_adder += 3
 	update_dialogue()
-	current_index += 1
+	
 
 func RainButton_pressed():
 	selected.play()
@@ -362,15 +362,15 @@ func RainButton_pressed():
 	text_sound.insert(10,1)
 	text_sound.insert(11,1)
 	text_sound.insert(12,1)
-	spriteToDisplay.insert(10,0)
-	spriteToDisplay.insert(11,0)
-	spriteToDisplay.insert(12,0)
+	spriteToDisplay.insert(10,3)
+	spriteToDisplay.insert(11,3)
+	spriteToDisplay.insert(12,1)
 	backgrounds.insert(10,2)
 	backgrounds.insert(11,2)
 	backgrounds.insert(12,0)
 	current_index_adder += 3
 	update_dialogue()
-	current_index += 1
+	
 	
 func SirinaThirsty_pressed():
 	selected.play()
@@ -379,7 +379,7 @@ func SirinaThirsty_pressed():
 	SirinaWillie.visible = false
 	dialogueBoxButton.visible = true
 	update_dialogue()
-	current_index += 1
+	
 	
 func SerenaWilliams_pressed():
 	selected.play()
@@ -404,17 +404,17 @@ func SerenaWilliams_pressed():
 	text_sound.insert(23 + current_index_adder,1)
 	text_sound.insert(24 + current_index_adder,1)
 	text_sound.insert(25 + current_index_adder,1)
-	spriteToDisplay.insert(22 + current_index_adder,0)
-	spriteToDisplay.insert(23 + current_index_adder,0)
-	spriteToDisplay.insert(24 + current_index_adder,0)
-	spriteToDisplay.insert(25 + current_index_adder,0)
+	spriteToDisplay.insert(22 + current_index_adder,1)
+	spriteToDisplay.insert(23 + current_index_adder,3)
+	spriteToDisplay.insert(24 + current_index_adder,3)
+	spriteToDisplay.insert(25 + current_index_adder,2)
 	backgrounds.insert(22 + current_index_adder,0)
 	backgrounds.insert(23 + current_index_adder,2)
 	backgrounds.insert(24 + current_index_adder,2)
 	backgrounds.insert(25 + current_index_adder,3)
 	current_index_adder += 4
 	update_dialogue()
-	current_index += 1
+	
 	
 func SirinaWillie_pressed():
 	selected.play()
@@ -439,17 +439,17 @@ func SirinaWillie_pressed():
 	text_sound.insert(23 + current_index_adder,1)
 	text_sound.insert(24 + current_index_adder,1)
 	text_sound.insert(25 + current_index_adder,1)
-	spriteToDisplay.insert(22 + current_index_adder,0)
-	spriteToDisplay.insert(23 + current_index_adder,0)
-	spriteToDisplay.insert(24 + current_index_adder,0)
-	spriteToDisplay.insert(25 + current_index_adder,0)
+	spriteToDisplay.insert(22 + current_index_adder,1)
+	spriteToDisplay.insert(23 + current_index_adder,3)
+	spriteToDisplay.insert(24 + current_index_adder,3)
+	spriteToDisplay.insert(25 + current_index_adder,2)
 	backgrounds.insert(22 + current_index_adder,0)
 	backgrounds.insert(23 + current_index_adder,2)
 	backgrounds.insert(24 + current_index_adder,2)
 	backgrounds.insert(25 + current_index_adder,3)
 	current_index_adder += 4
 	update_dialogue()
-	current_index += 1
+	
 	
 func Poisoned_pressed():
 	selected.play()
@@ -476,16 +476,16 @@ func Poisoned_pressed():
 	text_sound.insert(25 + current_index_adder,1)
 	text_sound.insert(26 + current_index_adder,1)
 	text_sound.insert(27 + current_index_adder,1)
-	spriteToDisplay.insert(24 + current_index_adder,0)
-	spriteToDisplay.insert(25 + current_index_adder,0)
-	spriteToDisplay.insert(26 + current_index_adder,0)
-	spriteToDisplay.insert(27 + current_index_adder,0)
+	spriteToDisplay.insert(24 + current_index_adder,1)
+	spriteToDisplay.insert(25 + current_index_adder,3)
+	spriteToDisplay.insert(26 + current_index_adder,3)
+	spriteToDisplay.insert(27 + current_index_adder,2)
 	backgrounds.insert(24 + current_index_adder,0)
 	backgrounds.insert(25 + current_index_adder,2)
 	backgrounds.insert(26 + current_index_adder,2)
 	backgrounds.insert(27 + current_index_adder,3)
 	update_dialogue()
-	current_index += 1
+	
 
 func Strangled_pressed():
 	selected.play()
@@ -512,16 +512,16 @@ func Strangled_pressed():
 	text_sound.insert(25 + current_index_adder,1)
 	text_sound.insert(26 + current_index_adder,1)
 	text_sound.insert(27 + current_index_adder,1)
-	spriteToDisplay.insert(24 + current_index_adder,0)
-	spriteToDisplay.insert(25 + current_index_adder,0)
-	spriteToDisplay.insert(26 + current_index_adder,0)
-	spriteToDisplay.insert(27 + current_index_adder,0)
+	spriteToDisplay.insert(24 + current_index_adder,1)
+	spriteToDisplay.insert(25 + current_index_adder,3)
+	spriteToDisplay.insert(26 + current_index_adder,3)
+	spriteToDisplay.insert(27 + current_index_adder,2)
 	backgrounds.insert(24 + current_index_adder,0)
 	backgrounds.insert(25 + current_index_adder,2)
 	backgrounds.insert(26 + current_index_adder,2)
 	backgrounds.insert(27 + current_index_adder,3)
 	update_dialogue()
-	current_index += 1
+	
 	
 func Drowned_pressed():
 	selected.play()
@@ -530,14 +530,13 @@ func Drowned_pressed():
 	Drowned.visible = false
 	dialogueBoxButton.visible = true
 	update_dialogue()
-	current_index += 1
+
 	
 	
 func courtRecButton_pressed():
 	inventory.toggle()
 
 func dialogue_button_pressed():
-	print(current_index)
 	if current_index < dialogues.size():
 		if !is_typing:
 			update_dialogue()
