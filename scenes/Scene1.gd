@@ -66,27 +66,30 @@ var text_styles = [
 ]
 
 # spriteToDisplay 0 = No sprite to display
-# spriteToDisplay 1 = Maya, looking forward
+# spriteToDisplay 1 = Maya, listening
 # spriteToDisplay 2 = Maya, talking
+# 3 = maya, talking longer
+#4 = maya, talking longer than ever
+#5 maya listening 2
 
 var spriteToDisplay = [
 	0,
-	0,
-	0, 
-	2,
-	1,
-	2,
-	2,
-	1,
-	1,
-	2,
-	1,
 	1,
 	1, 
+	2,
 	1,
+	3,
+	4,
+	1,
+	5,
+	4,
+	1,
+	5,
+	1, 
+	5,
 	1,
 	1, 
-	1
+	5
 ]
 
 var text_sound = [
@@ -134,7 +137,7 @@ var current_index = 0
 var char_index = 0
 var current_text = ""
 var current_name = ""
-var text_speed = 0.06
+var text_speed = 0.05
 var is_typing = false
 
 @onready var background_sprite = $Background as TextureRect
@@ -150,8 +153,8 @@ var is_typing = false
 @onready var inventory = $Inventory_UI
 @onready var inv: Inv
 
-@onready var rain_sprite = $RainSprite as Sprite2D
-@onready var rain_sprite_animation = $RainSprite/RainTalking as AnimationPlayer
+@onready var mscris_sprite = $MsCris
+@onready var mscris_sprite_animation = $MsCris/MsCrisTalking
 
 @onready var blip = $blip
 @onready var typewrite = $blip2
@@ -160,7 +163,7 @@ var current_audio: AudioStreamPlayer2D = blip
 
 
 func _ready():
-	rain_sprite.visible = false
+	mscris_sprite.visible = false
 	name_label.horizontal_alignment = 1
 	personNameBox.visible = false
 	courtRecButton.visible = false
@@ -244,15 +247,24 @@ func apply_text_style(style_value: int):
 	dialogue_label.add_theme_color_override("font_color", color)
 	
 func update_sprites(sprite: int):
-	rain_sprite.visible = false
+	mscris_sprite.visible = false
 	
 	match sprite:
 		1:
-			rain_sprite.visible = true
-			rain_sprite_animation.play("Listening")
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Listening")
 		2:
-			rain_sprite.visible = true
-			rain_sprite_animation.play("Talking")
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Talking")
+		3:
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Talking_2")
+		4:
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Talking_3")
+		5: 
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Listening_2")
 			
 func apply_text_sound(text_value:int):
 	match text_value:
