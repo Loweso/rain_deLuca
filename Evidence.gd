@@ -14,6 +14,11 @@ var correctStatement = [
 	1
 ]
 
+var mistakeScenes = [
+	"res://scenes/crossExam1_mistakeScene.tscn",
+	"res://scenes/crossExam1_mistakeScene.tscn",
+]
+
 var is_Open = false
 var currentCrossExam = 0
 var currentStatement = 0
@@ -96,3 +101,5 @@ func presentEvidence():
 			print("Correct item!")
 		else:
 			print("Wrong item!")
+			get_tree().change_scene_to_file(mistakeScenes[currentCrossExam])
+			

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://blr0n2rb1fale"]
+[gd_scene load_steps=31 format=3 uid="uid://blr0n2rb1fale"]
 
 [ext_resource type="Script" path="res://CrossExamination1.gd" id="1_7cp21"]
 [ext_resource type="Texture2D" uid="uid://cjirdovtydvc4" path="res://assets/backgrounds/witnessSide.jpg" id="2_rreh0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ewgh7vd6l7a3" path="res://assets/ui/next-button.png" id="6_dfje0"]
 [ext_resource type="PackedScene" uid="uid://cedc7c312rh8f" path="res://scenes/evidence.tscn" id="7_5l4xb"]
 [ext_resource type="Texture2D" uid="uid://c03wh5m3ojobv" path="res://assets/ui/prev-button.png" id="7_e55hm"]
+[ext_resource type="Texture2D" uid="uid://cnim4d3utyyik" path="res://assets/ui/mistake.png" id="7_x3qo8"]
 [ext_resource type="PackedScene" uid="uid://bftv2b4r6kgpr" path="res://scenes/holdItTransition.tscn" id="8_h7oyc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ab7wf"]
@@ -163,10 +164,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="NextButton" type="Button" parent="CrossExamination1"]
 layout_mode = 0
-offset_left = 1522.0
-offset_top = 222.0
-offset_right = 1896.0
-offset_bottom = 684.0
+offset_left = 1550.0
+offset_top = 288.0
+offset_right = 1924.0
+offset_bottom = 750.0
+scale = Vector2(0.914229, 0.935849)
 theme_override_styles/normal = SubResource("StyleBoxTexture_xxfj8")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dgi71")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_t4686")
@@ -176,9 +178,10 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_ducoj")
 [node name="PrevButton" type="Button" parent="CrossExamination1"]
 layout_mode = 0
 offset_left = 36.0
-offset_top = 226.0
+offset_top = 284.0
 offset_right = 408.0
-offset_bottom = 689.0
+offset_bottom = 747.0
+scale = Vector2(0.907557, 0.937458)
 theme_override_styles/normal = SubResource("StyleBoxTexture_qtc5j")
 theme_override_styles/hover = SubResource("StyleBoxTexture_xvu8h")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_ke1v7")
@@ -214,7 +217,29 @@ theme_override_fonts/font = ExtResource("3_jhibb")
 text = "Press"
 metadata/_edit_use_anchors_ = true
 
+[node name="MistakesContainer" type="GridContainer" parent="CrossExamination1"]
+layout_mode = 2
+offset_left = 48.0
+offset_top = 163.0
+offset_right = 1811.0
+offset_bottom = 748.0
+scale = Vector2(0.150628, 0.162304)
+columns = 3
+
+[node name="mistake1" type="TextureRect" parent="CrossExamination1/MistakesContainer"]
+layout_mode = 2
+texture = ExtResource("7_x3qo8")
+
+[node name="mistake2" type="TextureRect" parent="CrossExamination1/MistakesContainer"]
+layout_mode = 2
+texture = ExtResource("7_x3qo8")
+
+[node name="mistake3" type="TextureRect" parent="CrossExamination1/MistakesContainer"]
+layout_mode = 2
+texture = ExtResource("7_x3qo8")
+
 [node name="Evidence" parent="CrossExamination1" instance=ExtResource("7_5l4xb")]
+visible = false
 layout_mode = 1
 
 [node name="HoldItTransition" parent="CrossExamination1" instance=ExtResource("8_h7oyc")]

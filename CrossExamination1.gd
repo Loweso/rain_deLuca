@@ -63,7 +63,9 @@ var backgrounds = [
 
 var current_index = 0
 var current_crossExam = 0
+var current_no_mistakes = 0
 var save_file_path = "user://current_index.txt"
+var no_of_mistakes_path = "user://mistakes_num.txt"
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -79,11 +81,20 @@ var save_file_path = "user://current_index.txt"
 @onready var nextButton = $NextButton as Button
 @onready var prevButton = $PrevButton as Button
 @onready var pressButton = $PressButton as Button
+@onready var mistakesContainer = $MistakesContainer
+@onready var mistakes: Array = $MistakesContainer.get_children()
 @onready var holdItTransition = $HoldItTransition
 
 func _ready():
 	load_current_index()
 	update_dialogue()
+	
+	var mistakesFile = FileAccess.open(no_of_mistakes_path, FileAccess.READ)
+	if mistakesFile:
+		current_no_mistakes = mistakesFile.get_var()
+		mistakesFile.close()
+	else:
+		save_num(0, no_of_mistakes_path)
 	
 	if current_index == 0:
 		personNameBox.visible = false
@@ -91,6 +102,11 @@ func _ready():
 		nextButton.visible = false
 		prevButton.visible = false
 		pressButton.visible = false
+		mistakesContainer.visible = false
+		mistakesContainer.layout_direction = 2
+		
+	for i in range(current_no_mistakes):
+		mistakes[i].visible = false
 	
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	nextButton.pressed.connect(dialogue_button_pressed)
@@ -105,11 +121,11 @@ func load_current_index():
 		print(current_index)
 		file.close()
 	else:
-		save_current_index(0)
+		save_num(0, save_file_path)
 
-func save_current_index(index):
-	var file = FileAccess.open(save_file_path, FileAccess.WRITE)
-	file.store_var(index)
+func save_num(num: int, filePath: String):
+	var file = FileAccess.open(filePath, FileAccess.WRITE)
+	file.store_var(num)
 	file.close()
 
 func courtRecButton_pressed():
@@ -122,6 +138,7 @@ func dialogue_button_pressed():
 	courtRecButton.visible = true
 	nextButton.visible = true
 	pressButton.visible = true
+	mistakesContainer.visible = true
 	
 	current_index += 1
 	update_dialogue()
@@ -187,7 +204,7 @@ func press_button_pressed():
 	match current_index:
 		1:	
 			# Put the next index of the current index in save_current_index
-			save_current_index(0)
+			save_num(0, save_file_path)
 			holdItTransition.load_scene("res://scenes/pressScene1_1.tscn")
 		_:
 			pass
