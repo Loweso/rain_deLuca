@@ -105,40 +105,43 @@ var text_styles = [
 ]
 
 # spriteToDisplay 0 = No sprite to display
-# spriteToDisplay 1 = Maya, looking forward
-# spriteToDisplay 2 = Maya, talking
+# spriteToDisplay 1 = Judge, talking
+# spriteToDisplay 2 = Ms Cris, talking
+# spriteToDisplay 3 = Rain de Luca
+# 4 = ms cris, talking longer
+# 5 = sunny,
 
 var spriteToDisplay = [
 	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
+	1,
+	2,
+	3,
+	4,
+	3,
+	1,
+	1,
+	3,
+	1,
+	1,
+	5,
+	3,
+	1,
+	5,
+	5,
+	5,
+	1,
+	2,
+	2,
+	1,
+	3,
+	1,
+	3,
+	1,
+	3,
+	1,
+	5,
+	1,
+	5,
 ]
 
 # background 0 = Judge Side
@@ -251,10 +254,26 @@ var current_audio
 @onready var gavel = $gavel
 @onready var selected = $selected
 
-
 @onready var hammer = $hammer
 
+@onready var judge_sprite = $judge_sprite
+@onready var judge_sprite_animation = $judge_sprite/judge_sprite_animation
+@onready var mscris_sprite = $mscris_sprite
+@onready var mscris_sprite_animation = $mscris_sprite/mscris_sprite_animation
+@onready var rain_sprite = $rain_sprite
+@onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
+@onready var defense_bench = $"defense-bench"
+@onready var sunny_sprite = $sunny_sprite
+@onready var sunny_sprite_animation = $sunny_sprite/sunny_sprite_animation
+@onready var prosecutor_bench = $"prosecutor-bench"
+
 func _ready():
+	sunny_sprite.visible = false
+	prosecutor_bench.visible = false
+	rain_sprite.visible = false
+	defense_bench.visible = false
+	judge_sprite.visible = false
+	mscris_sprite.visible = false
 	name_label.horizontal_alignment = 1
 	hammer.visible = false
 	personNameBox.visible = false
@@ -271,7 +290,6 @@ func _ready():
 
 	
 	await update_dialogue()
-	current_index += 1
 	
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
@@ -519,45 +537,49 @@ func courtRecButton_pressed():
 	inventory.toggle()
 
 func dialogue_button_pressed():
+	print(current_index)
 	if current_index < dialogues.size():
-		if current_index == 1:
+		if !is_typing:
+			update_dialogue()
+		else:
+			complete_dialogue()
+		
+		if current_index == 1 && is_typing:
 			hammer.visible = true
 			hammer.play()
 			gavel.play()
 			await get_tree().create_timer(0.8).timeout
 			hammer.visible = false
-		if current_index == 8:
+		if current_index == 7:
+			dialogueBoxButton.visible = false
 			AlexaYalaButton.visible = true
 			MsCrisButton.visible = true
 			RainButton.visible = true
+			
+		if (current_index == 23 && current_index_adder == 3) || (current_index == 20 && current_index_adder == 0):
 			dialogueBoxButton.visible = false
-		if (current_index == 24 && current_index_adder == 3) || (current_index == 21 && current_index_adder == 0):
 			SirinaThirsty.visible = true
 			SerenaWilliams.visible = true
 			SirinaWillie.visible = true
-			dialogueBoxButton.visible = false
+			
 		
-		if (current_index == 23 && current_index_adder == 0) ||  (current_index == 27 && current_index_adder == 4) || (current_index == 30 && current_index_adder == 7) || (current_index == 26 && current_index_adder == 3):
+		if (current_index == 22 && current_index_adder == 0) ||  (current_index == 26 && current_index_adder == 4) || (current_index == 29 && current_index_adder == 7) || (current_index == 25 && current_index_adder == 3):
+			dialogueBoxButton.visible = false
 			Poisoned.visible = true
 			Strangled.visible = true
 			Drowned.visible = true
-			dialogueBoxButton.visible = false
 		
 		dialogueBox.visible = true
 		personNameBox.visible = true
 		courtRecButton.visible = true
 		
-		if is_typing:
-			complete_dialogue()
-		else:
-			update_dialogue()
-			current_index += 1
 	else:
 		complete_dialogue()
 		await get_tree().create_timer(1).timeout
 		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
 
 func update_dialogue():
+	is_typing = true
 	if current_index < dialogues.size():
 		current_text = dialogues[current_index]
 		current_name = char_names[current_index]
@@ -566,11 +588,12 @@ func update_dialogue():
 		apply_text_sound(text_sound[current_index])
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
-		is_typing = true
+		update_sprites(spriteToDisplay[current_index])
 		if is_typing:
 			await start_text_update()
 	else:
 		dialogue_label.text = "End of dialogues."
+	current_index += 1
 		
 func start_text_update():
 	char_index = 0
@@ -585,14 +608,35 @@ func start_text_update():
 		dialogue_label.text += current_text[char_index]
 		char_index += 1
 		await get_tree().create_timer(text_speed).timeout
-	is_typing = false
 	dialogue_label.text = current_text
+	is_typing = false
 
 func complete_dialogue():
-	is_typing = false
 	dialogue_label.text = current_text
-	blip.stop() 
-		
+	is_typing = false
+	current_audio.stop() 
+	
+func update_sprites(sprite: int):
+	judge_sprite.visible = false
+	mscris_sprite.visible = false
+	rain_sprite.visible = false
+	sunny_sprite.visible = false
+	
+	match sprite:
+		1:
+			judge_sprite.visible = true
+			judge_sprite_animation.play("Talking")
+		2:
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Talking")
+		3:
+			rain_sprite.visible = true
+		4: 
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Talking_2")
+		5:
+			sunny_sprite.visible = true
+			
 		
 func apply_text_style(style_value: int):
 	var color := Color(1, 1, 1)
@@ -611,13 +655,17 @@ func apply_text_style(style_value: int):
 	
 func update_background(background_index: int):
 	var background_texture: Texture
+	defense_bench.visible = false
+	prosecutor_bench.visible = false
 	match background_index:
 		0:
 			background_texture = preload("res://assets/backgrounds/judgesSide.png")
 		1:
 			background_texture = preload("res://assets/backgrounds/prosecutorSide.jpg")
+			prosecutor_bench.visible = true
 		2:
 			background_texture = preload("res://assets/backgrounds/defenseSide.png")
+			defense_bench.visible = true
 		3:
 			background_texture = preload("res://assets/backgrounds/cocounselSide.png")
 		4:
