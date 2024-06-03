@@ -3,15 +3,15 @@
 [ext_resource type="Script" path="res://scenes/Scene2.gd" id="1_nto6t"]
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="2_chiel"]
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="2_vfr5g"]
-[ext_resource type="Texture2D" uid="uid://cp538y3i85kjj" path="res://assets/sprites/sprites-judge.png" id="3_5adka"]
-[ext_resource type="Texture2D" uid="uid://chh8h0g5ugfw1" path="res://assets/sprites/sprites-rain.png" id="3_5x1gw"]
-[ext_resource type="Texture2D" uid="uid://cok77c2tkp7p0" path="res://assets/sprites/Sunny Flower (Franziska von Karma).png" id="3_i7hsu"]
+[ext_resource type="Texture2D" path="res://assets/sprites/sprites-judge.png" id="3_5adka"]
+[ext_resource type="Texture2D" path="res://assets/sprites/sprites-rain.png" id="3_5x1gw"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Sunny Flower (Franziska von Karma).png" id="3_i7hsu"]
 [ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="3_ub8el"]
-[ext_resource type="Texture2D" uid="uid://bhxjqckw54ita" path="res://assets/sprites/Ms. Cris (Mia Fey) (1).png" id="4_a8odg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Ms. Cris (Mia Fey) (1).png" id="4_a8odg"]
 [ext_resource type="PackedScene" uid="uid://bwo7hmrw6dsbj" path="res://inventory/inventory_ui.tscn" id="4_raim4"]
-[ext_resource type="Texture2D" uid="uid://c786m4q5scs3b" path="res://assets/backgrounds/defense-bench.png" id="6_7gwlw"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/defense-bench.png" id="6_7gwlw"]
 [ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="6_skwdo"]
-[ext_resource type="Texture2D" uid="uid://b5dwq1rgckqxk" path="res://assets/backgrounds/prosecutor-bench.png" id="7_7nwli"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/prosecutor-bench.png" id="7_7nwli"]
 [ext_resource type="VideoStream" path="res://assets/videos/judge-hammer.ogv" id="7_btef3"]
 [ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="8_3d36b"]
 [ext_resource type="AudioStream" uid="uid://c6t23ek6wr5ty" path="res://audio/gavel.mp3" id="9_38r6k"]
@@ -278,7 +278,6 @@ stream = ExtResource("9_38r6k")
 volume_db = 12.0
 
 [node name="AlexaYala" type="Button" parent="scene2"]
-visible = false
 layout_mode = 0
 offset_left = 723.0
 offset_top = 470.0
@@ -300,7 +299,6 @@ stream = ExtResource("11_bnkl8")
 volume_db = 12.0
 
 [node name="MsCris" type="Button" parent="scene2"]
-visible = false
 layout_mode = 0
 offset_left = 723.0
 offset_top = 570.0
