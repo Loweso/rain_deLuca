@@ -1,16 +1,81 @@
-[gd_scene load_steps=18 format=3 uid="uid://bm55nb3aylbgy"]
+[gd_scene load_steps=29 format=3 uid="uid://bm55nb3aylbgy"]
 
 [ext_resource type="Script" path="res://scenes/Scene2.gd" id="1_nto6t"]
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="2_chiel"]
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="2_vfr5g"]
+[ext_resource type="Texture2D" uid="uid://cp538y3i85kjj" path="res://assets/sprites/sprites-judge.png" id="3_5adka"]
+[ext_resource type="Texture2D" uid="uid://chh8h0g5ugfw1" path="res://assets/sprites/sprites-rain.png" id="3_5x1gw"]
+[ext_resource type="Texture2D" uid="uid://cok77c2tkp7p0" path="res://assets/sprites/Sunny Flower (Franziska von Karma).png" id="3_i7hsu"]
 [ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="3_ub8el"]
+[ext_resource type="Texture2D" uid="uid://bhxjqckw54ita" path="res://assets/sprites/Ms. Cris (Mia Fey) (1).png" id="4_a8odg"]
 [ext_resource type="PackedScene" uid="uid://bwo7hmrw6dsbj" path="res://inventory/inventory_ui.tscn" id="4_raim4"]
+[ext_resource type="Texture2D" uid="uid://c786m4q5scs3b" path="res://assets/backgrounds/defense-bench.png" id="6_7gwlw"]
 [ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="6_skwdo"]
+[ext_resource type="Texture2D" uid="uid://b5dwq1rgckqxk" path="res://assets/backgrounds/prosecutor-bench.png" id="7_7nwli"]
 [ext_resource type="VideoStream" path="res://assets/videos/judge-hammer.ogv" id="7_btef3"]
 [ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="8_3d36b"]
 [ext_resource type="AudioStream" uid="uid://c6t23ek6wr5ty" path="res://audio/gavel.mp3" id="9_38r6k"]
 [ext_resource type="FontFile" uid="uid://dswhbqg8cmy54" path="res://assets/FOT-ModeMinBLargeStd-R.otf" id="10_ucuxw"]
 [ext_resource type="AudioStream" uid="uid://dhhja8htbn6ad" path="res://audio/selectsound.mp3" id="11_bnkl8"]
+
+[sub_resource type="Animation" id="Animation_x8q54"]
+resource_name = "Talking"
+length = 2.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [50, 51, 52, 53, 54, 50, 51, 52, 53, 54, 50, 51, 53, 54]
+}
+
+[sub_resource type="Animation" id="Animation_bdj5p"]
+resource_name = "Talking_2"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [50, 51, 52, 53, 54, 50, 51, 52, 53, 54, 50, 51, 53, 54, 51, 52, 53, 54]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rc0nm"]
+_data = {
+"Talking": SubResource("Animation_x8q54"),
+"Talking_2": SubResource("Animation_bdj5p")
+}
+
+[sub_resource type="Animation" id="Animation_o1ib2"]
+resource_name = "Talking"
+length = 3.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("scene2/judge_sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 9, 11, 12, 11, 12, 11, 7, 11, 12, 11, 7, 11, 12, 11, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ohdnx"]
+_data = {
+"Talking": SubResource("Animation_o1ib2")
+}
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tmjtj"]
 
@@ -44,6 +109,7 @@ offset_top = -11.0
 offset_right = 1950.0
 offset_bottom = 1090.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="Background" type="TextureRect" parent="scene2"]
 layout_mode = 0
@@ -52,12 +118,74 @@ offset_bottom = 1091.0
 texture = ExtResource("2_chiel")
 metadata/_edit_lock_ = true
 
+[node name="sunny_sprite" type="Sprite2D" parent="scene2"]
+position = Vector2(1436, 422)
+scale = Vector2(7.30467, 7.04892)
+texture = ExtResource("3_i7hsu")
+hframes = 9
+vframes = 16
+frame = 19
+
+[node name="sunny_sprite_animation" type="AnimationPlayer" parent="scene2/sunny_sprite"]
+
+[node name="rain_sprite" type="Sprite2D" parent="scene2"]
+position = Vector2(625.5, 428.812)
+scale = Vector2(5.812, 5.5265)
+texture = ExtResource("3_5x1gw")
+hframes = 13
+vframes = 12
+
+[node name="rain_sprite_animation" type="AnimationPlayer" parent="scene2/rain_sprite"]
+
+[node name="mscris_sprite" type="Sprite2D" parent="scene2"]
+position = Vector2(952, 619)
+scale = Vector2(1.51966, 1.48716)
+texture = ExtResource("4_a8odg")
+hframes = 10
+vframes = 14
+frame = 52
+
+[node name="mscris_sprite_animation" type="AnimationPlayer" parent="scene2/mscris_sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_rc0nm")
+}
+
+[node name="judge_sprite" type="Sprite2D" parent="scene2"]
+position = Vector2(1075, 316)
+scale = Vector2(6.89333, 6.70711)
+texture = ExtResource("3_5adka")
+hframes = 13
+vframes = 2
+frame = 9
+
+[node name="judge_sprite_animation" type="AnimationPlayer" parent="scene2/judge_sprite"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_ohdnx")
+}
+
+[node name="prosecutor-bench" type="TextureRect" parent="scene2"]
+layout_mode = 0
+offset_left = -279.0
+offset_top = -115.0
+offset_right = 1925.0
+offset_bottom = 1090.0
+texture = ExtResource("7_7nwli")
+
+[node name="defense-bench" type="TextureRect" parent="scene2"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = -93.0
+offset_right = 2146.0
+offset_bottom = 1090.0
+texture = ExtResource("6_7gwlw")
+
 [node name="DialogueBoxButton" type="Button" parent="scene2"]
 layout_mode = 0
-offset_left = -1932.0
-offset_top = 803.0
-offset_right = -1924.0
-offset_bottom = 811.0
+offset_left = -2956.0
+offset_top = 805.0
+offset_right = -2948.0
+offset_bottom = 813.0
 scale = Vector2(1567.73, 159.941)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tmjtj")
 
@@ -150,6 +278,7 @@ stream = ExtResource("9_38r6k")
 volume_db = 12.0
 
 [node name="AlexaYala" type="Button" parent="scene2"]
+visible = false
 layout_mode = 0
 offset_left = 723.0
 offset_top = 470.0
@@ -171,6 +300,7 @@ stream = ExtResource("11_bnkl8")
 volume_db = 12.0
 
 [node name="MsCris" type="Button" parent="scene2"]
+visible = false
 layout_mode = 0
 offset_left = 723.0
 offset_top = 570.0
@@ -187,6 +317,7 @@ theme_override_fonts/font = ExtResource("10_ucuxw")
 text = "Ms. Cris"
 
 [node name="Rain" type="Button" parent="scene2"]
+visible = false
 layout_mode = 0
 offset_left = 723.0
 offset_top = 370.0
@@ -203,6 +334,7 @@ theme_override_fonts/font = ExtResource("10_ucuxw")
 text = "Rain de Luca"
 
 [node name="SirinaThirsty" type="Button" parent="scene2"]
+visible = false
 layout_mode = 0
 offset_left = 723.0
 offset_top = 570.0
@@ -219,6 +351,7 @@ theme_override_fonts/font = ExtResource("10_ucuxw")
 text = "Sirina Thirsty"
 
 [node name="SerenaWilliams" type="Button" parent="scene2"]
+visible = false
 layout_mode = 0
 offset_left = 723.0
 offset_top = 470.0
@@ -235,6 +368,7 @@ theme_override_fonts/font = ExtResource("10_ucuxw")
 text = "Serena Williams"
 
 [node name="SirinaWillie" type="Button" parent="scene2"]
+visible = false
 layout_mode = 0
 offset_left = 723.0
 offset_top = 370.0
@@ -251,6 +385,7 @@ theme_override_fonts/font = ExtResource("10_ucuxw")
 text = "Sirina Willie"
 
 [node name="Poisoned" type="Button" parent="scene2"]
+visible = false
 layout_mode = 0
 offset_left = 723.0
 offset_top = 370.0
@@ -267,6 +402,7 @@ theme_override_fonts/font = ExtResource("10_ucuxw")
 text = "Poisoned"
 
 [node name="Strangled" type="Button" parent="scene2"]
+visible = false
 layout_mode = 0
 offset_left = 723.0
 offset_top = 470.0
@@ -283,6 +419,7 @@ theme_override_fonts/font = ExtResource("10_ucuxw")
 text = "Strangled"
 
 [node name="Drowned" type="Button" parent="scene2"]
+visible = false
 layout_mode = 0
 offset_left = 723.0
 offset_top = 570.0

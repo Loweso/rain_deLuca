@@ -1,9 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://du73yjpwprpk3"]
+[gd_scene load_steps=22 format=3 uid="uid://du73yjpwprpk3"]
 
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="1_f662p"]
 [ext_resource type="Script" path="res://scenes/Scene1.gd" id="1_qpuhb"]
 [ext_resource type="Texture2D" uid="uid://c7tkyyfd06cts" path="res://assets/backgrounds/Courtlobby.png" id="1_seny3"]
-[ext_resource type="Texture2D" uid="uid://dfc43eksf47gx" path="res://assets/sprites/sprites-maya.png" id="3_jkarv"]
+[ext_resource type="Texture2D" uid="uid://bhxjqckw54ita" path="res://assets/sprites/Ms. Cris (Mia Fey) (1).png" id="3_a1fb7"]
 [ext_resource type="PackedScene" uid="uid://bwo7hmrw6dsbj" path="res://inventory/inventory_ui.tscn" id="5_ydfr8"]
 [ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="6_1aorj"]
 [ext_resource type="PackedScene" uid="uid://bxeuuvp8gld5h" path="res://scenes/scene_transition.tscn" id="8_4jih4"]
@@ -12,21 +12,7 @@
 
 [sub_resource type="Animation" id="Animation_3h1pr"]
 resource_name = "Listening"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-
-[sub_resource type="Animation" id="Animation_5qrea"]
-resource_name = "Talking"
+length = 3.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -35,16 +21,83 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.9, 1.1, 1.3, 1.7, 2, 2.3, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [2, 0, 1, 2, 1]
+"values": [10, 22, 0, 0, 0, 10, 22, 10]
+}
+
+[sub_resource type="Animation" id="Animation_wjxg4"]
+resource_name = "Listening_2"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.1, 1.3, 1.7, 2, 2.3, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 22, 0, 0, 30, 31, 33, 30]
+}
+
+[sub_resource type="Animation" id="Animation_5qrea"]
+resource_name = "Talking"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1, 2, 3, 2, 0]
+}
+
+[sub_resource type="Animation" id="Animation_lw5oe"]
+resource_name = "Talking_2"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1, 2, 3, 2, 3, 2, 0]
+}
+
+[sub_resource type="Animation" id="Animation_dlxdi"]
+resource_name = "Talking_3"
+length = 3.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 10, 11, 12, 13, 20, 2, 1, 2, 1, 12, 13, 12, 13, 2, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1l11t"]
 _data = {
 "Listening": SubResource("Animation_3h1pr"),
-"Talking": SubResource("Animation_5qrea")
+"Listening_2": SubResource("Animation_wjxg4"),
+"Talking": SubResource("Animation_5qrea"),
+"Talking_2": SubResource("Animation_lw5oe"),
+"Talking_3": SubResource("Animation_dlxdi")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vi03j"]
@@ -83,21 +136,21 @@ texture = ExtResource("1_seny3")
 metadata/_edit_use_anchors_ = true
 
 [node name="BlackBg" type="ColorRect" parent="Scene1"]
+visible = false
 layout_mode = 0
 offset_right = 2009.0
 offset_bottom = 1201.0
 color = Color(0, 0, 0, 1)
 
-[node name="RainSprite" type="Sprite2D" parent="Scene1"]
-visible = false
-position = Vector2(937, 573)
-scale = Vector2(1.71515, 1.71515)
-texture = ExtResource("3_jkarv")
-hframes = 8
-vframes = 8
-frame = 2
+[node name="MsCris" type="Sprite2D" parent="Scene1"]
+texture_filter = 6
+position = Vector2(981, 651)
+scale = Vector2(1.38624, 1.45948)
+texture = ExtResource("3_a1fb7")
+hframes = 10
+vframes = 14
 
-[node name="RainTalking" type="AnimationPlayer" parent="Scene1/RainSprite"]
+[node name="MsCrisTalking" type="AnimationPlayer" parent="Scene1/MsCris"]
 libraries = {
 "": SubResource("AnimationLibrary_1l11t")
 }
