@@ -2,20 +2,20 @@ extends Control
 
 var dialogues = [
 	"- Elay's Testimony -",
-	"Cross examination!",
-	"First testimony.",
-	"Second testimony.",
-	"Third testimony.",
-	"Fourth testimony.",
+	"I was finishing up my last shift of the day near the pool area when I saw Ms. Yala rush to the pool area alone.",
+	"I didn’t think of it as anything suspicious and so I just left.",
+	"After an hour, I returned to the pool area to check if I had emptied the skimmer basket.",
+	"That’s when I saw a body floating.",
+	"Other than she was the last person seen entering the pool area, the handkerchief found has her name on it, who else would own that?",
 ]
 
 var char_names = [
 	"",
-	"Judge",
-	"Sunny",
-	"Judge",
-	"Serena",
-	"Judge",
+	"Elay",
+	"Elay",
+	"Elay",
+	"Elay",
+	"Elay",
 ]
 
 var text_sound = [
@@ -70,6 +70,18 @@ var backgrounds = [
 	4,
 ]
 
+# witness_anim 0 = witness blinking
+# witness_anim 1 = witness talking
+
+var witness_anim = [
+	0,
+	1,
+	1,
+	1,
+	1,
+	1,
+]
+
 var current_index = 0
 var current_crossExam = 0
 var current_no_mistakes = 0
@@ -81,6 +93,7 @@ var is_typing = false
 var char_index = 0
 var current_text = ""
 var text_speed = 0.05
+var dialoguetime = 0
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -89,6 +102,8 @@ var text_speed = 0.05
 @onready var dialogueBox = $DialogueBox as Polygon2D
 @onready var dialogueBoxButton = $DialogueBoxButton as Button
 @onready var courtRecButton = $CourtRecordButton as Button
+@onready var witness_sprite = $Background/WitnessSprite
+@onready var witness_animation = $Background/WitnessSprite/AnimationPlayer
 
 @onready var evidenceBox = $Evidence
 @onready var inv: Inv
@@ -122,6 +137,7 @@ func _ready():
 		prevButton.visible = false
 		pressButton.visible = false
 		mistakesContainer.visible = false
+		witness_sprite.visible = true
 		mistakesContainer.layout_direction = 2
 		
 	for i in range(current_no_mistakes):
@@ -179,9 +195,8 @@ func update_dialogue():
 	apply_text_sound(text_sound[current_index])
 	apply_text_style(text_styles[current_index])
 	update_background(backgrounds[current_index])
+	update_sprites(witness_anim[current_index])
 	update_buttons_visibility()
-	if is_typing:
-		await start_text_update()
 	
 	
 func start_text_update():
@@ -238,13 +253,26 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 
+func update_sprites(sprite: int):
+	match sprite:
+		0:
+			witness_animation.play("blinking")
+			if is_typing:
+				await start_text_update()
+		1:
+			witness_animation.play("talking")
+			if is_typing:
+				await start_text_update()
+			witness_animation.play("blinking")
+		_:
+			pass
+
 func apply_text_sound(text_value:int):
 	match text_value:
 		1: 
 			current_audio = blip
 		2:
 			current_audio = typewrite
-
 
 func update_buttons_visibility():
 	if current_index <= 1:
