@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=35 format=3 uid="uid://blr0n2rb1fale"]
+=======
+[gd_scene load_steps=33 format=3 uid="uid://blr0n2rb1fale"]
+>>>>>>> 3de1d7b1facd59de805fe9b1bd55b2ecfde7c4e5
 
 [ext_resource type="Script" path="res://CrossExamination1.gd" id="1_7cp21"]
 [ext_resource type="Texture2D" uid="uid://cjirdovtydvc4" path="res://assets/backgrounds/witnessSide.jpg" id="2_rreh0"]
@@ -11,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://c03wh5m3ojobv" path="res://assets/ui/prev-button.png" id="7_e55hm"]
 [ext_resource type="Texture2D" uid="uid://cnim4d3utyyik" path="res://assets/ui/mistake.png" id="7_x3qo8"]
 [ext_resource type="PackedScene" uid="uid://bftv2b4r6kgpr" path="res://scenes/holdItTransition.tscn" id="8_h7oyc"]
+[ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="10_a2c5u"]
+[ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="11_jeg25"]
 
 [sub_resource type="Animation" id="Animation_ngffg"]
 resource_name = "blinking"
@@ -288,4 +294,15 @@ visible = false
 layout_mode = 1
 
 [node name="HoldItTransition" parent="CrossExamination1" instance=ExtResource("8_h7oyc")]
+<<<<<<< HEAD
 visible = false
+=======
+
+[node name="blip" type="AudioStreamPlayer2D" parent="CrossExamination1"]
+stream = ExtResource("10_a2c5u")
+volume_db = 6.559
+
+[node name="typewrite" type="AudioStreamPlayer2D" parent="CrossExamination1"]
+stream = ExtResource("11_jeg25")
+volume_db = 5.943
+>>>>>>> 3de1d7b1facd59de805fe9b1bd55b2ecfde7c4e5

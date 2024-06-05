@@ -287,9 +287,11 @@ func _ready():
 	Poisoned.visible = false
 	Strangled.visible = false
 	Drowned.visible = false
+	dialogueBoxButton.visible = false
 
 	
 	await update_dialogue()
+	dialogueBoxButton.visible = true
 	
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
@@ -309,7 +311,8 @@ func AlexaYalaButton_pressed():
 	RainButton.visible = false
 	AlexaYalaButton.visible = false
 	dialogueBoxButton.visible = true
-	update_dialogue()
+	current_index += 1
+	await update_dialogue()
 
 
 func MsCrisButton_pressed():
@@ -339,7 +342,8 @@ func MsCrisButton_pressed():
 	backgrounds.insert(11,2)
 	backgrounds.insert(12,0)
 	current_index_adder += 3
-	update_dialogue()
+	current_index += 1
+	await update_dialogue()
 	
 
 func RainButton_pressed():
@@ -369,7 +373,8 @@ func RainButton_pressed():
 	backgrounds.insert(11,2)
 	backgrounds.insert(12,0)
 	current_index_adder += 3
-	update_dialogue()
+	current_index += 1
+	await update_dialogue()
 	
 	
 func SirinaThirsty_pressed():
@@ -378,7 +383,8 @@ func SirinaThirsty_pressed():
 	SerenaWilliams.visible = false
 	SirinaWillie.visible = false
 	dialogueBoxButton.visible = true
-	update_dialogue()
+	current_index += 1
+	await update_dialogue()
 	
 	
 func SerenaWilliams_pressed():
@@ -413,7 +419,8 @@ func SerenaWilliams_pressed():
 	backgrounds.insert(24 + current_index_adder,2)
 	backgrounds.insert(25 + current_index_adder,3)
 	current_index_adder += 4
-	update_dialogue()
+	current_index += 1
+	await update_dialogue()
 	
 	
 func SirinaWillie_pressed():
@@ -448,7 +455,8 @@ func SirinaWillie_pressed():
 	backgrounds.insert(24 + current_index_adder,2)
 	backgrounds.insert(25 + current_index_adder,3)
 	current_index_adder += 4
-	update_dialogue()
+	current_index += 1
+	await update_dialogue()
 	
 	
 func Poisoned_pressed():
@@ -484,7 +492,8 @@ func Poisoned_pressed():
 	backgrounds.insert(25 + current_index_adder,2)
 	backgrounds.insert(26 + current_index_adder,2)
 	backgrounds.insert(27 + current_index_adder,3)
-	update_dialogue()
+	current_index += 1
+	await update_dialogue()
 	
 
 func Strangled_pressed():
@@ -520,7 +529,8 @@ func Strangled_pressed():
 	backgrounds.insert(25 + current_index_adder,2)
 	backgrounds.insert(26 + current_index_adder,2)
 	backgrounds.insert(27 + current_index_adder,3)
-	update_dialogue()
+	current_index += 1
+	await update_dialogue()
 	
 	
 func Drowned_pressed():
@@ -529,7 +539,8 @@ func Drowned_pressed():
 	Strangled.visible = false
 	Drowned.visible = false
 	dialogueBoxButton.visible = true
-	update_dialogue()
+	current_index += 1
+	await update_dialogue()
 
 	
 	
@@ -538,39 +549,42 @@ func courtRecButton_pressed():
 
 func dialogue_button_pressed():
 	if current_index < dialogues.size():
-		if !is_typing:
-			update_dialogue()
-		else:
-			complete_dialogue()
+		name_label.visible = true
+		dialogueBox.visible = true
+		personNameBox.visible = true
+		courtRecButton.visible = true
 		
+		if is_typing:
+			complete_dialogue()
+		else:
+			update_dialogue()
+			
+			
 		if current_index == 1 && is_typing:
 			hammer.visible = true
 			hammer.play()
 			gavel.play()
 			await get_tree().create_timer(0.8).timeout
 			hammer.visible = false
-		if current_index == 7:
-			dialogueBoxButton.visible = false
-			AlexaYalaButton.visible = true
-			MsCrisButton.visible = true
-			RainButton.visible = true
+		if dialogue_label.text == current_text:
+			if current_index == 7:
+				dialogueBoxButton.visible = false
+				AlexaYalaButton.visible = true
+				MsCrisButton.visible = true
+				RainButton.visible = true
+				
+			if (current_index == 23 && current_index_adder == 3) || (current_index == 20 && current_index_adder == 0):
+				dialogueBoxButton.visible = false
+				SirinaThirsty.visible = true
+				SerenaWilliams.visible = true
+				SirinaWillie.visible = true
+				
 			
-		if (current_index == 23 && current_index_adder == 3) || (current_index == 20 && current_index_adder == 0):
-			dialogueBoxButton.visible = false
-			SirinaThirsty.visible = true
-			SerenaWilliams.visible = true
-			SirinaWillie.visible = true
-			
-		
-		if (current_index == 22 && current_index_adder == 0) ||  (current_index == 26 && current_index_adder == 4) || (current_index == 29 && current_index_adder == 7) || (current_index == 25 && current_index_adder == 3):
-			dialogueBoxButton.visible = false
-			Poisoned.visible = true
-			Strangled.visible = true
-			Drowned.visible = true
-		
-		dialogueBox.visible = true
-		personNameBox.visible = true
-		courtRecButton.visible = true
+			if (current_index == 22 && current_index_adder == 0) ||  (current_index == 26 && current_index_adder == 4) || (current_index == 29 && current_index_adder == 7) || (current_index == 25 && current_index_adder == 3):
+				dialogueBoxButton.visible = false
+				Poisoned.visible = true
+				Strangled.visible = true
+				Drowned.visible = true
 		
 	else:
 		complete_dialogue()
@@ -578,6 +592,7 @@ func dialogue_button_pressed():
 		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
 
 func update_dialogue():
+	
 	is_typing = true
 	if current_index < dialogues.size():
 		current_text = dialogues[current_index]
@@ -592,10 +607,11 @@ func update_dialogue():
 			await start_text_update()
 	else:
 		dialogue_label.text = "End of dialogues."
-	current_index += 1
-		
+	current_index += 1	
 func start_text_update():
 	char_index = 0
+	if current_index == 1:
+		await get_tree().create_timer(1).timeout
 	while char_index < current_text.length():
 		if not is_typing:
 			return
