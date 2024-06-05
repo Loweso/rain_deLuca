@@ -1,6 +1,6 @@
 extends Control
 
-var main_dialogues = [
+var dialogues = [
 	"- Elay's Testimony -",
 	"Cross examination!",
 	"First testimony.",
@@ -16,6 +16,15 @@ var char_names = [
 	"Judge",
 	"Serena",
 	"Judge",
+]
+
+var text_sound = [
+	2,
+	1,
+	1,
+	1,
+	1,
+	1,
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -67,6 +76,12 @@ var current_no_mistakes = 0
 var save_file_path = "user://current_index.txt"
 var no_of_mistakes_path = "user://mistakes_num.txt"
 
+var current_audio
+var is_typing = false
+var char_index = 0
+var current_text = ""
+var text_speed = 0.05
+
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
 @onready var name_label = $PersonNameText as Label
@@ -84,6 +99,9 @@ var no_of_mistakes_path = "user://mistakes_num.txt"
 @onready var mistakesContainer = $MistakesContainer
 @onready var mistakes: Array = $MistakesContainer.get_children()
 @onready var holdItTransition = $HoldItTransition
+
+@onready var blip = $blip
+@onready var typewrite = $typewrite
 
 func _ready():
 	load_current_index()
@@ -148,14 +166,35 @@ func prev_button_pressed():
 	update_dialogue()
 
 func update_dialogue():
-	if current_index >= main_dialogues.size():
+	is_typing = true
+	if current_index >= dialogues.size():
 		current_index = 1
-		
-	dialogue_label.text = main_dialogues[current_index]
+	current_text = dialogues[current_index]
+	dialogue_label.text = ""
 	name_label.text = char_names[current_index]
+	apply_text_sound(text_sound[current_index])
 	apply_text_style(text_styles[current_index])
 	update_background(backgrounds[current_index])
 	update_buttons_visibility()
+	if is_typing:
+		await start_text_update()
+	
+	
+func start_text_update():
+	char_index = 0
+	while char_index < current_text.length():
+		if not is_typing:
+			return
+		if current_audio == typewrite:
+			if char_index % 3 == 0:
+				current_audio.play()
+		else:
+			current_audio.play()
+		dialogue_label.text += current_text[char_index]
+		char_index += 1
+		await get_tree().create_timer(text_speed).timeout
+	dialogue_label.text = current_text
+	is_typing = false
 		
 func apply_text_style(style_value: int):
 	var color := Color(1, 1, 1)
@@ -193,6 +232,15 @@ func update_background(background_index: int):
 			background_texture = preload("res://assets/backgrounds/witnessSide.jpg") # Default background if needed
 	
 	background_sprite.texture = background_texture
+	
+
+func apply_text_sound(text_value:int):
+	match text_value:
+		1: 
+			current_audio = blip
+		2:
+			current_audio = typewrite
+
 
 func update_buttons_visibility():
 	if current_index <= 1:
