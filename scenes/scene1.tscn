@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://du73yjpwprpk3"]
+[gd_scene load_steps=21 format=3 uid="uid://du73yjpwprpk3"]
 
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="1_f662p"]
 [ext_resource type="Script" path="res://scenes/Scene1.gd" id="1_qpuhb"]
@@ -45,7 +45,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_5qrea"]
 resource_name = "Talking"
-length = 3.0
+length = 2.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -57,22 +58,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 0, 1, 2, 3, 2, 0]
-}
-
-[sub_resource type="Animation" id="Animation_lw5oe"]
-resource_name = "Talking_2"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 0, 1, 2, 3, 2, 3, 2, 0]
 }
 
 [sub_resource type="Animation" id="Animation_dlxdi"]
@@ -96,7 +81,6 @@ _data = {
 "Listening": SubResource("Animation_3h1pr"),
 "Listening_2": SubResource("Animation_wjxg4"),
 "Talking": SubResource("Animation_5qrea"),
-"Talking_2": SubResource("Animation_lw5oe"),
 "Talking_3": SubResource("Animation_dlxdi")
 }
 
@@ -144,11 +128,12 @@ color = Color(0, 0, 0, 1)
 
 [node name="MsCris" type="Sprite2D" parent="Scene1"]
 texture_filter = 6
-position = Vector2(981, 651)
-scale = Vector2(1.38624, 1.45948)
+position = Vector2(985, 605)
+scale = Vector2(1.51812, 1.62349)
 texture = ExtResource("3_a1fb7")
 hframes = 10
 vframes = 14
+frame = 31
 
 [node name="MsCrisTalking" type="AnimationPlayer" parent="Scene1/MsCris"]
 libraries = {
