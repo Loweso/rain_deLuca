@@ -540,8 +540,6 @@ func Drowned_pressed():
 	current_index += 1
 	await update_dialogue()
 
-	
-	
 func courtRecButton_pressed():
 	inventory.toggle()
 
@@ -564,7 +562,7 @@ func dialogue_button_pressed():
 			hammer.visible = true
 			hammer.play()
 			gavel.play()
-			await get_tree().create_timer(0.8).timeout
+			await hammer.finished
 			hammer.visible = false
 		if dialogue_label.text == current_text:
 			if current_index == 7:
@@ -589,7 +587,7 @@ func dialogue_button_pressed():
 	else:
 		complete_dialogue()
 		await get_tree().create_timer(1).timeout
-		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
+		SceneTransition.load_scene("res://scenes/scene3.tscn")
 
 func update_dialogue():
 	is_typing = true
