@@ -164,6 +164,7 @@ libraries = {
 }
 
 [node name="stand" type="TextureRect" parent="scene2"]
+layout_mode = 0
 offset_top = -3.05176e-05
 offset_right = 1930.0
 offset_bottom = 1091.0
