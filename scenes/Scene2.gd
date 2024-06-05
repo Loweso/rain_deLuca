@@ -262,16 +262,14 @@ var current_audio
 @onready var mscris_sprite_animation = $mscris_sprite/mscris_sprite_animation
 @onready var rain_sprite = $rain_sprite
 @onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
-@onready var defense_bench = $"defense-bench"
 @onready var sunny_sprite = $sunny_sprite
 @onready var sunny_sprite_animation = $sunny_sprite/sunny_sprite_animation
-@onready var prosecutor_bench = $"prosecutor-bench"
+
+@onready var stand = $stand
 
 func _ready():
 	sunny_sprite.visible = false
-	prosecutor_bench.visible = false
 	rain_sprite.visible = false
-	defense_bench.visible = false
 	judge_sprite.visible = false
 	mscris_sprite.visible = false
 	name_label.horizontal_alignment = 1
@@ -667,25 +665,31 @@ func apply_text_style(style_value: int):
 	
 func update_background(background_index: int):
 	var background_texture: Texture
-	defense_bench.visible = false
-	prosecutor_bench.visible = false
+	var stand_texture: Texture
+	stand.visible = false
 	match background_index:
 		0:
 			background_texture = preload("res://assets/backgrounds/judgesSide.png")
 		1:
 			background_texture = preload("res://assets/backgrounds/prosecutorSide.jpg")
-			prosecutor_bench.visible = true
+			stand_texture = preload("res://assets/backgrounds/prosecutor-bench.png")
+			stand.visible = true
 		2:
 			background_texture = preload("res://assets/backgrounds/defenseSide.png")
-			defense_bench.visible = true
+			stand_texture = preload("res://assets/backgrounds/defense-bench.png")
+			stand.visible = true
 		3:
 			background_texture = preload("res://assets/backgrounds/cocounselSide.png")
 		4:
-			background_texture = preload("res://assets/backgrounds/witnessSide.jpg") # Default background if needed
+			background_texture = preload("res://assets/backgrounds/witnessSide.jpg")
+			stand_texture = preload("res://assets/backgrounds/witness-stand.png")
+			stand.visible = true
+			# Default background if needed
 		5:
 			Blackbg.visible = true
 	
 	background_sprite.texture = background_texture
+	stand.texture = stand_texture
 
 func apply_text_sound(text_value:int):
 	match text_value:
