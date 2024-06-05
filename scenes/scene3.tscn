@@ -1,12 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://otapcp4rebvt"]
+[gd_scene load_steps=15 format=3 uid="uid://otapcp4rebvt"]
 
 [ext_resource type="Script" path="res://scenes/scene3.gd" id="1_2oslb"]
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="2_ta1se"]
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="3_ud0bp"]
 [ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="4_a3kke"]
 [ext_resource type="PackedScene" uid="uid://bwo7hmrw6dsbj" path="res://inventory/inventory_ui.tscn" id="5_kty86"]
-[ext_resource type="Texture2D" uid="uid://b5dwq1rgckqxk" path="res://assets/backgrounds/prosecutor-bench.png" id="6_3walx"]
-[ext_resource type="Texture2D" uid="uid://c786m4q5scs3b" path="res://assets/backgrounds/defense-bench.png" id="7_h04as"]
 [ext_resource type="Texture2D" uid="uid://1l03kq0eie04" path="res://assets/backgrounds/witness-stand.png" id="8_rfba5"]
 [ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="9_qqqyg"]
 [ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="10_2of3l"]
@@ -43,28 +41,9 @@ offset_right = 1930.0
 offset_bottom = 1091.0
 texture = ExtResource("2_ta1se")
 
-[node name="prosecutor-bench" type="TextureRect" parent="scene3"]
-layout_mode = 0
-offset_left = -279.0
-offset_top = -115.0
-offset_right = 1925.0
-offset_bottom = 1090.0
-texture = ExtResource("6_3walx")
-
-[node name="defense-bench" type="TextureRect" parent="scene3"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = -93.0
-offset_right = 2146.0
-offset_bottom = 1090.0
-texture = ExtResource("7_h04as")
-
-[node name="witness-stand" type="TextureRect" parent="scene3"]
-layout_mode = 0
-offset_left = -122.0
-offset_top = -83.0
-offset_right = 2055.0
-offset_bottom = 1088.0
+[node name="stand" type="TextureRect" parent="scene3"]
+offset_right = 1930.0
+offset_bottom = 1091.0
 texture = ExtResource("8_rfba5")
 
 [node name="DialogueBoxButton" type="Button" parent="scene3"]

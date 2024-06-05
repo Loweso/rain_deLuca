@@ -148,9 +148,7 @@ var current_audio
 @onready var inventory = $Inventory_UI
 @onready var inv: Inv
 
-@onready var defense_bench = $"defense-bench"
-@onready var prosecutor_bench = $"prosecutor-bench"
-@onready var witness_stand = $"witness-stand"
+@onready var stand = $stand as TextureRect
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
@@ -240,23 +238,27 @@ func apply_text_style(style_value: int):
 	
 func update_background(background_index: int):
 	var background_texture: Texture
-	defense_bench.visible = false
-	prosecutor_bench.visible = false
-	witness_stand.visible = false
+	var stand_texture: Texture
+	stand.visible = false
 	match background_index:
 		0:
 			background_texture = preload("res://assets/backgrounds/judgesSide.png")
 		1:
 			background_texture = preload("res://assets/backgrounds/prosecutorSide.jpg")
-			prosecutor_bench.visible = true
+			stand_texture = preload("res://assets/backgrounds/prosecutor-bench.png")
+			stand.visible = true
 		2:
 			background_texture = preload("res://assets/backgrounds/defenseSide.png")
-			defense_bench.visible = true
+			stand_texture = preload("res://assets/backgrounds/defense-bench.png")
+			stand.visible = true
 		3:
 			background_texture = preload("res://assets/backgrounds/cocounselSide.png")
 		4:
 			background_texture = preload("res://assets/backgrounds/witnessSide.jpg")
-			witness_stand.visible = true
+			stand_texture = preload("res://assets/backgrounds/witness-stand.png")
+			stand.visible = true
 			# Default background if needed
 	
 	background_sprite.texture = background_texture
+	stand.texture = stand_texture
+	
