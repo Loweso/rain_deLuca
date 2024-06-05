@@ -13,7 +13,8 @@ var dialogues = [
 	'And did you see anyone else in the vicinity?',
 	'Not really.',
 	'What time was this?',
-	"It was around 3:00 PM, almost an hour before I discovered the victim's body floating in the pool as well as a handkerchief with Alexa Yala’s name by the poolside.",
+	"It was around 3:00 PM, almost an hour before I discovered the victim's body floating in the pool...",
+	'As well as a handkerchief with Alexa Yala’s name by the poolside.',
 	'So you’re certain that Ms. Yala was the last person seen with the victim before her death?',
 	'Yes, ma’am. I’m sure of it.',
 ]
@@ -31,6 +32,7 @@ var char_names = [
 	"Sunny Flower",
 	"Elay",
 	"Sunny Flower",
+	"Elay",
 	"Elay",
 	"Sunny Flower",
 	"Elay",
@@ -55,7 +57,9 @@ var text_styles = [
 	1,
 	1,
 	1,
-	1
+	1,
+	1,
+	
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -78,9 +82,11 @@ var spriteToDisplay = [
 	0,
 	0,
 	0,
+	0,
 ]
 
 var text_sound = [
+	1,
 	1,
 	1,
 	1,
@@ -118,6 +124,7 @@ var backgrounds = [
 	1,
 	4,
 	1,
+	4,
 	4,
 	1,
 	4,
@@ -158,13 +165,13 @@ func courtRecButton_pressed():
 	inventory.toggle()
 
 func dialogue_button_pressed():
-	dialogueBox.visible = true
-	personNameBox.visible = true
-	courtRecButton.visible = true
-		
-	current_index += 1
+	if current_index == dialogues.size():
+		dialogueBoxButton.visible = false
 	
 	if current_index < dialogues.size():
+		dialogueBox.visible = true
+		personNameBox.visible = true
+		courtRecButton.visible = true
 		if is_typing:
 			complete_dialogue()
 		else:
@@ -184,6 +191,7 @@ func update_dialogue():
 		update_background(backgrounds[current_index])
 	if is_typing:
 		await start_text_update()
+	current_index += 1
 		
 	
 		

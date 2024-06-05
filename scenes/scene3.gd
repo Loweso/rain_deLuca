@@ -18,8 +18,9 @@ var dialogues = [
 	'Well, that doesn’t save you from suspicions. The witness found you rather odd that day',
 	'Of course I was odd! I was having an internal battle',
 	'Oh! And who might this witness be',
-	'It’s none other than the pool cleaner, who saw the defendant enter the pool alone with the victim…',
-	'...Less than an hour after, he once again discovered the victim’s lifeless body floating in the pool, along with a handkerchief embroidered with the name of Ms. Alexa Yala',
+	'It’s none other than the pool cleaner, who saw the defendant enter the pool alone with the victim...',
+	'...Less than an hour after, he once again discovered the victim’s lifeless body floating in the pool...',
+	'long with a handkerchief embroidered with the name of Ms. Alexa Yala',
 	'Ms. Sunny, with that, the prosecution may call its witness',
 	"Yes, Your Honor.",
 ]
@@ -44,6 +45,7 @@ var char_names = [
 	"Judge",
 	"Sunny Flower",
 	"Sunny Flower",
+	"Sunny Flower",
 	"Judge",
 	"Sunny Flower",
 ]
@@ -63,7 +65,8 @@ var text_styles = [
 	1,
 	1,
 	1,
-	2,
+	1,
+	1,
 	1,
 	1,
 	1,
@@ -102,9 +105,11 @@ var spriteToDisplay = [
 	0,
 	0,
 	0,
+	0,
 ]
 
 var text_sound = [
+	1,
 	1,
 	1,
 	1,
@@ -154,6 +159,7 @@ var backgrounds = [
 	0,
 	1,
 	1,
+	1,
 	0,
 	1,
 ]
@@ -193,13 +199,13 @@ func courtRecButton_pressed():
 	inventory.toggle()
 
 func dialogue_button_pressed():
-	dialogueBox.visible = true
-	personNameBox.visible = true
-	courtRecButton.visible = true
-		
-	current_index += 1
+	if current_index == dialogues.size():
+		dialogueBoxButton.visible = false
 	
 	if current_index < dialogues.size():
+		dialogueBox.visible = true
+		personNameBox.visible = true
+		courtRecButton.visible = true
 		if is_typing:
 			complete_dialogue()
 		else:
@@ -219,6 +225,7 @@ func update_dialogue():
 		update_background(backgrounds[current_index])
 	if is_typing:
 		await start_text_update()
+	current_index += 1
 		
 	
 		
