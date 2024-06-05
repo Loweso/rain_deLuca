@@ -1,14 +1,38 @@
-[gd_scene load_steps=31 format=3 uid="uid://blr0n2rb1fale"]
+[gd_scene load_steps=35 format=3 uid="uid://blr0n2rb1fale"]
 
 [ext_resource type="Script" path="res://CrossExamination1.gd" id="1_7cp21"]
 [ext_resource type="Texture2D" uid="uid://cjirdovtydvc4" path="res://assets/backgrounds/witnessSide.jpg" id="2_rreh0"]
+[ext_resource type="Texture2D" uid="uid://by2o0ub8nuclt" path="res://assets/sprites/elay_sprites.png" id="3_gkpl2"]
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="3_jhibb"]
+[ext_resource type="Texture2D" uid="uid://1l03kq0eie04" path="res://assets/backgrounds/witness-stand.png" id="3_pffwd"]
 [ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="4_jx40f"]
 [ext_resource type="Texture2D" uid="uid://ewgh7vd6l7a3" path="res://assets/ui/next-button.png" id="6_dfje0"]
 [ext_resource type="PackedScene" uid="uid://cedc7c312rh8f" path="res://scenes/evidence.tscn" id="7_5l4xb"]
 [ext_resource type="Texture2D" uid="uid://c03wh5m3ojobv" path="res://assets/ui/prev-button.png" id="7_e55hm"]
 [ext_resource type="Texture2D" uid="uid://cnim4d3utyyik" path="res://assets/ui/mistake.png" id="7_x3qo8"]
 [ext_resource type="PackedScene" uid="uid://bftv2b4r6kgpr" path="res://scenes/holdItTransition.tscn" id="8_h7oyc"]
+
+[sub_resource type="Animation" id="Animation_ngffg"]
+resource_name = "blinking"
+length = 1.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.1, 1.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1o6sb"]
+_data = {
+"blinking": SubResource("Animation_ngffg")
+}
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ab7wf"]
 
@@ -87,6 +111,26 @@ offset_right = 1930.0
 offset_bottom = 1091.0
 texture = ExtResource("2_rreh0")
 
+[node name="Sprite2D" type="Sprite2D" parent="CrossExamination1/Background"]
+position = Vector2(955, 560)
+scale = Vector2(1.39123, 1.37455)
+texture = ExtResource("3_gkpl2")
+hframes = 7
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CrossExamination1/Background/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_1o6sb")
+}
+
+[node name="ForegroundItem" type="TextureRect" parent="CrossExamination1/Background"]
+layout_mode = 0
+offset_left = -53.0
+offset_top = -39.0
+offset_right = 1946.0
+offset_bottom = 1098.0
+texture = ExtResource("3_pffwd")
+
 [node name="DialogueBoxButton" type="Button" parent="CrossExamination1"]
 layout_mode = 0
 offset_left = -1932.0
@@ -119,6 +163,7 @@ theme_override_colors/font_color = Color(1, 0.312295, 0.248026, 1)
 theme_override_fonts/font = ExtResource("3_jhibb")
 text = "- Elay's Testimony -"
 horizontal_alignment = 1
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="PersonNameText" type="Label" parent="CrossExamination1"]
@@ -243,3 +288,4 @@ visible = false
 layout_mode = 1
 
 [node name="HoldItTransition" parent="CrossExamination1" instance=ExtResource("8_h7oyc")]
+visible = false
