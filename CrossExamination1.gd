@@ -2,20 +2,20 @@ extends Control
 
 var dialogues = [
 	"- Elay's Testimony -",
-	"Cross examination!",
-	"First testimony.",
-	"Second testimony.",
-	"Third testimony.",
-	"Fourth testimony.",
+	"I was finishing up my last shift of the day near the pool area when I saw Ms. Yala rush to the pool area alone.",
+	"I didn’t think of it as anything suspicious and so I just left.",
+	"After an hour, I returned to the pool area to check if I had emptied the skimmer basket.",
+	"That’s when I saw a body floating.",
+	"Other than she was the last person seen entering the pool area, the handkerchief found has her name on it. Who else would own that?",
 ]
 
 var char_names = [
 	"",
-	"Judge",
-	"Sunny",
-	"Judge",
-	"Serena",
-	"Judge",
+	"Elay",
+	"Elay",
+	"Elay",
+	"Elay",
+	"Elay",
 ]
 
 var text_sound = [
@@ -70,6 +70,18 @@ var backgrounds = [
 	4,
 ]
 
+# witness_anim 0 = witness blinking
+# witness_anim 1 = witness talking
+
+var witness_anim = [
+	0,
+	1,
+	1,
+	1,
+	1,
+	1,
+]
+
 var current_index = 0
 var current_crossExam = 0
 var current_no_mistakes = 0
@@ -81,6 +93,7 @@ var is_typing = false
 var char_index = 0
 var current_text = ""
 var text_speed = 0.05
+var dialoguetime = 0
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -89,6 +102,8 @@ var text_speed = 0.05
 @onready var dialogueBox = $DialogueBox as Polygon2D
 @onready var dialogueBoxButton = $DialogueBoxButton as Button
 @onready var courtRecButton = $CourtRecordButton as Button
+@onready var witness_sprite = $Background/WitnessSprite
+@onready var witness_animation = $Background/WitnessSprite/AnimationPlayer
 
 @onready var evidenceBox = $Evidence
 @onready var inv: Inv
@@ -104,9 +119,12 @@ var text_speed = 0.05
 @onready var typewrite = $typewrite
 
 func _ready():
-	
+	dialogueBoxButton.visible = false
 	load_current_index()
 	update_dialogue()
+	
+	if current_index == 0:
+		dialogueBoxButton.visible = true
 	
 	var mistakesFile = FileAccess.open(no_of_mistakes_path, FileAccess.READ)
 	if mistakesFile:
@@ -122,6 +140,7 @@ func _ready():
 		prevButton.visible = false
 		pressButton.visible = false
 		mistakesContainer.visible = false
+		witness_sprite.visible = true
 		mistakesContainer.layout_direction = 2
 		
 	for i in range(current_no_mistakes):
@@ -151,8 +170,6 @@ func courtRecButton_pressed():
 	evidenceBox.toggle(current_crossExam, current_index)
 
 func dialogue_button_pressed():
-	if current_index == dialogues.size():
-		dialogueBoxButton.visible = false
 	dialogueBoxButton.visible = false
 	dialogueBox.visible = true
 	personNameBox.visible = true
@@ -169,19 +186,19 @@ func prev_button_pressed():
 	update_dialogue()
 
 func update_dialogue():
-	
 	is_typing = true
 	if current_index >= dialogues.size():
-		current_index = 1
-	current_text = dialogues[current_index]
-	dialogue_label.text = ""
-	name_label.text = char_names[current_index]
-	apply_text_sound(text_sound[current_index])
-	apply_text_style(text_styles[current_index])
-	update_background(backgrounds[current_index])
-	update_buttons_visibility()
-	if is_typing:
-		await start_text_update()
+		save_num(1, save_file_path)
+		get_tree().change_scene_to_file("res://scenes/convoScene1.tscn")
+	else:
+		current_text = dialogues[current_index]
+		dialogue_label.text = ""
+		name_label.text = char_names[current_index]
+		apply_text_sound(text_sound[current_index])
+		apply_text_style(text_styles[current_index])
+		update_background(backgrounds[current_index])
+		update_sprites(witness_anim[current_index])
+		update_buttons_visibility()
 	
 	
 func start_text_update():
@@ -237,6 +254,19 @@ func update_background(background_index: int):
 	
 	background_sprite.texture = background_texture
 	
+func update_sprites(sprite: int):
+	match sprite:
+		0:
+			witness_animation.play("blinking")
+			if is_typing:
+				await start_text_update()
+		1:
+			witness_animation.play("talking")
+			if is_typing:
+				await start_text_update()
+			witness_animation.play("blinking")
+		_:
+			pass
 
 func apply_text_sound(text_value:int):
 	match text_value:
@@ -244,7 +274,6 @@ func apply_text_sound(text_value:int):
 			current_audio = blip
 		2:
 			current_audio = typewrite
-
 
 func update_buttons_visibility():
 	if current_index <= 1:
@@ -256,7 +285,19 @@ func press_button_pressed():
 	match current_index:
 		1:	
 			# Put the next index of the current index in save_current_index
-			save_num(0, save_file_path)
+			save_num(2, save_file_path)
 			holdItTransition.load_scene("res://scenes/pressScene1_1.tscn")
+		2:	
+			save_num(3, save_file_path)
+			holdItTransition.load_scene("res://scenes/pressScene1_2.tscn")
+		3:	
+			save_num(4, save_file_path)
+			holdItTransition.load_scene("res://scenes/pressScene1_3.tscn")
+		4:	
+			save_num(5, save_file_path)
+			holdItTransition.load_scene("res://scenes/pressScene1_4.tscn")
+		5:	
+			save_num(1, save_file_path)
+			holdItTransition.load_scene("res://scenes/pressScene1_5.tscn")
 		_:
 			pass

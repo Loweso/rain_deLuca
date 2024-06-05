@@ -1,27 +1,27 @@
 extends Control
 
 var dialogues = [
-	'Elay, you said you saw Ms. Yala rush to the pool area alone. How far were you from the pool when you saw this?',
-	'I was about 5 meters away, near the back gate of the pool area.',
-	'Did you observe her behavior closely? Did she seem anxious, hurried, or anything unusual?',
-	'She did seem a bit hurried, but I didn’t think much of it at the time.',
-	'So you didn’t see her enter the restroom as she said?',
-	'No, I didn’t.',
-	'And Ms. Sirina Thirsty was still alive as you left?',
-	'Yes, she was having her time alone.',
-	'Hmm... I see. What happened next?'
+	"Hah! You’re barking up the wrong tree... and with such vigor, de Luca!",
+	"You chose to be a pathetic lying dog this time, not a lawyer? Save your breath.",
+	"I thought we’re obliged to tell the truth AND only the truth, Atty. de Luca?",
+	'Rain, pay attention! Let’s focus on the present matters about what Elay saw in the pool area.',
+	'If our defendant Ms. Yala really is saying the truth, and was having flare ups during the time...',
+	'There must be evidence at the crime scene that should not have been connected to her.',
+	'(Something... at the crime scene...?)',
+	"Are you okay over there, de Luca? You look like you're about to cry.",
+	"(Alright, let’s give this a try... Focus, de Luca! More energy!)"
 ]
 
 var char_names = [
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain'
+	"Sunny",
+	"Sunny",
+	"Judge",
+	"Ms. Cris",
+	"Ms. Cris",
+	"Ms. Cris",
+	"Rain",
+	"Sunny",
+	"Rain"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -30,29 +30,30 @@ var char_names = [
 
 var text_styles = [
 	1,
+	1, 
 	1,
 	1,
+	1, 
 	1,
+	2,
 	1,
-	1,
-	1,
-	1,
-	1
+	2
 ]
 
 # spriteToDisplay 0 = No sprite to display
-# spriteToDisplay 1 = Elay, talking and then blinking
+# spriteToDisplay 1 = Maya, looking forward
+# spriteToDisplay 2 = Maya, talking
 
 var spriteToDisplay = [
 	0,
-	1,
+	0, 
 	0,
-	1,
 	0,
-	1,
 	0,
-	1,
 	0,
+	0, 
+	0,
+	0
 ]
 
 var text_sound = [
@@ -64,7 +65,7 @@ var text_sound = [
 	1,
 	1,
 	1,
-	1,
+	1
 ]
 
 # background 0 = Judge Side
@@ -74,14 +75,14 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
+	1,
+	1,
+	0,
+	3,
+	3,
+	3,
 	2,
-	4,
-	2,
-	4,
-	2,
-	4,
-	2,
-	4,
+	1,
 	2
 ]
 
@@ -92,6 +93,9 @@ var text_speed = 0.05
 var current_text = ""
 var current_audio
 
+var current_no_mistakes = 0
+var no_of_mistakes_path = "user://mistakes_num.txt"
+
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
 @onready var name_label = $PersonNameText as Label
@@ -101,6 +105,7 @@ var current_audio
 @onready var courtRecButton = $CourtRecordButton as Button
 
 @onready var inventory = $Inventory_UI
+@onready var inv: Inv
 
 @onready var defense_bench = $"defense-bench"
 @onready var prosecutor_bench = $"prosecutor-bench"
@@ -117,6 +122,20 @@ func _ready():
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
+	
+	var mistakesFile = FileAccess.open(no_of_mistakes_path, FileAccess.READ)
+	if mistakesFile:
+		current_no_mistakes = mistakesFile.get_var()
+		current_no_mistakes += 1
+		mistakesFile.close()
+		save_num(current_no_mistakes, no_of_mistakes_path)
+	else:
+		save_num(0, no_of_mistakes_path)
+
+func save_num(num: int, filePath: String):
+	var file = FileAccess.open(filePath, FileAccess.WRITE)
+	file.store_var(num)
+	file.close()
 
 func courtRecButton_pressed():
 	inventory.toggle()

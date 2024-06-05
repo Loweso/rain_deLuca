@@ -1,16 +1,25 @@
 extends Control
 
 var dialogues = [
-	"Error!",
-	"Error!",
-	"Error!",
-	"Error!",
+	"Hah! You’re barking up the wrong tree…and with such vigor, de Luca!",
+	"You chose to be a pathetic lying dog this time, not a lawyer? Save your breath.",
+	"I thought we’re obliged to tell the truth AND only the truth, Atty. de Luca?",
+	'Rain, pay attention! Let’s focus on the present matters about what Elay saw in the pool area.',
+	'If our defendant Ms. Yala really is saying the truth, and was having flare ups during the time...',
+	'There must be evidence at the crime scene that should not have been connected to her.',
+	'(Something... at the crime scene...?)',
+	"Are you okay over there, de Luca? You look like you're about to cry.",
+	"(Alright, let’s give this a try… Focus, de Luca! More energy!)"
 ]
 
 var char_names = [
+	"Sunny",
+	"Sunny",
+	"Judge",
+	"Ms. Cris",
+	"Ms. Cris",
 	"Rain",
-	"Elay",
-	"Elay",
+	"Sunny",
 	"Rain"
 ]
 
@@ -22,6 +31,10 @@ var text_styles = [
 	1,
 	1, 
 	1,
+	1,
+	1, 
+	2,
+	1,
 	2
 ]
 
@@ -30,9 +43,13 @@ var text_styles = [
 # spriteToDisplay 2 = Maya, talking
 
 var spriteToDisplay = [
-	2,
-	1, 
-	2,
+	0,
+	0, 
+	0,
+	0,
+	0,
+	0, 
+	0,
 	0
 ]
 
@@ -43,9 +60,13 @@ var spriteToDisplay = [
 # background 4 = Witness Side
 
 var backgrounds = [
+	1,
+	1,
+	0,
+	3,
+	3,
 	2,
-	4, 
-	4,
+	1,
 	2
 ]
 

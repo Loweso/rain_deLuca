@@ -1,24 +1,12 @@
 extends Control
 
 var dialogues = [
-	'Elay, you said you saw Ms. Yala rush to the pool area alone. How far were you from the pool when you saw this?',
-	'I was about 5 meters away, near the back gate of the pool area.',
-	'Did you observe her behavior closely? Did she seem anxious, hurried, or anything unusual?',
-	'She did seem a bit hurried, but I didn’t think much of it at the time.',
-	'So you didn’t see her enter the restroom as she said?',
-	'No, I didn’t.',
-	'And Ms. Sirina Thirsty was still alive as you left?',
-	'Yes, she was having her time alone.',
-	'Hmm... I see. What happened next?'
+	'Did you notice if anyone else had been there or if anything was out of place?',
+	'No, it was just me and... well, the body.',
+	"If there's no direct evidence linking Ms. Yala to the drowning, what exactly made you suspect her in the first place?",
 ]
 
 var char_names = [
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
 	'Rain',
 	'Elay',
 	'Rain'
@@ -32,12 +20,6 @@ var text_styles = [
 	1,
 	1,
 	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -47,21 +29,9 @@ var spriteToDisplay = [
 	0,
 	1,
 	0,
-	1,
-	0,
-	1,
-	0,
-	1,
-	0,
 ]
 
 var text_sound = [
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
 	1,
 	1,
 	1,
@@ -77,12 +47,6 @@ var backgrounds = [
 	2,
 	4,
 	2,
-	4,
-	2,
-	4,
-	2,
-	4,
-	2
 ]
 
 var current_index = 0
@@ -101,6 +65,7 @@ var current_audio
 @onready var courtRecButton = $CourtRecordButton as Button
 
 @onready var inventory = $Inventory_UI
+@onready var inv: Inv
 
 @onready var defense_bench = $"defense-bench"
 @onready var prosecutor_bench = $"prosecutor-bench"
