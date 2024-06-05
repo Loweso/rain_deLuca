@@ -104,6 +104,7 @@ var text_speed = 0.05
 @onready var typewrite = $typewrite
 
 func _ready():
+	
 	load_current_index()
 	update_dialogue()
 	
@@ -150,6 +151,8 @@ func courtRecButton_pressed():
 	evidenceBox.toggle(current_crossExam, current_index)
 
 func dialogue_button_pressed():
+	if current_index == dialogues.size():
+		dialogueBoxButton.visible = false
 	dialogueBoxButton.visible = false
 	dialogueBox.visible = true
 	personNameBox.visible = true
@@ -166,6 +169,7 @@ func prev_button_pressed():
 	update_dialogue()
 
 func update_dialogue():
+	
 	is_typing = true
 	if current_index >= dialogues.size():
 		current_index = 1

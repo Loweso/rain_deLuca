@@ -287,11 +287,9 @@ func _ready():
 	Poisoned.visible = false
 	Strangled.visible = false
 	Drowned.visible = false
-	dialogueBoxButton.visible = false
-
+	
 	
 	await update_dialogue()
-	dialogueBoxButton.visible = true
 	
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
@@ -548,6 +546,8 @@ func courtRecButton_pressed():
 	inventory.toggle()
 
 func dialogue_button_pressed():
+	if current_index == dialogues.size():
+		dialogueBoxButton.visible = false
 	if current_index < dialogues.size():
 		name_label.visible = true
 		dialogueBox.visible = true
@@ -592,7 +592,6 @@ func dialogue_button_pressed():
 		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
 
 func update_dialogue():
-	
 	is_typing = true
 	if current_index < dialogues.size():
 		current_text = dialogues[current_index]

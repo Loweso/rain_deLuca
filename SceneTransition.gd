@@ -13,6 +13,7 @@ func load_scene(target_scene: String):
 	black_rect.visible = true
 	animation_player.play("Fade")
 	await animation_player.animation_finished
+	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file(target_scene)
 	animation_player.play("Fade_Backwards")
 	await animation_player.animation_finished

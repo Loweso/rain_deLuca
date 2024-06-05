@@ -178,6 +178,8 @@ func courtRecButton_pressed():
 	inventory.toggle()
 
 func dialogue_button_pressed():
+	if current_index == dialogues.size():
+		dialogueBoxButton.visible = false
 	if current_index < dialogues.size():
 		name_label.visible = true
 		dialogueBox.visible = true
