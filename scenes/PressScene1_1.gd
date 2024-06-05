@@ -1,17 +1,27 @@
 extends Control
 
 var dialogues = [
-	"Are you sure about that?!",
-	"I am surer than sure.",
-	"I think...",
-	"(That's not helpful...)"
+	'Elay, you said you saw Ms. Yala rush to the pool area alone. How far were you from the pool when you saw this?',
+	'I was about 5 meters away, near the back gate of the pool area.',
+	'Did you observe her behavior closely? Did she seem anxious, hurried, or anything unusual?',
+	'She did seem a bit hurried, but I didn’t think much of it at the time.',
+	'So you didn’t see her enter the restroom as she said?',
+	'No, I didn’t.',
+	'And Ms. Sirina Thirsty was still alive as you left?',
+	'Yes, she was having her time alone.',
+	'Hmm... I see. What happened next?'
 ]
 
 var char_names = [
-	"Rain",
-	"Elay",
-	"Elay",
-	"Rain"
+	'Rain',
+	'Elay',
+	'Rain',
+	'Elay',
+	'Rain',
+	'Elay',
+	'Rain',
+	'Elay',
+	'Rain'
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -20,20 +30,41 @@ var char_names = [
 
 var text_styles = [
 	1,
-	1, 
 	1,
-	2
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1
 ]
 
 # spriteToDisplay 0 = No sprite to display
-# spriteToDisplay 1 = Maya, looking forward
-# spriteToDisplay 2 = Maya, talking
+# spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	2,
-	1, 
-	2,
-	0
+	0,
+	1,
+	0,
+	1,
+	0,
+	1,
+	0,
+	1,
+	0,
+]
+
+var text_sound = [
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
 ]
 
 # background 0 = Judge Side
@@ -44,12 +75,22 @@ var spriteToDisplay = [
 
 var backgrounds = [
 	2,
-	4, 
+	4,
+	2,
+	4,
+	2,
+	4,
+	2,
 	4,
 	2
 ]
 
 var current_index = 0
+var char_index = 0
+var is_typing = false
+var text_speed = 0.05
+var current_text = ""
+var current_audio
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -60,7 +101,16 @@ var current_index = 0
 @onready var courtRecButton = $CourtRecordButton as Button
 
 @onready var inventory = $Inventory_UI
-@onready var inv: Inv
+
+@onready var defense_bench = $"defense-bench"
+@onready var prosecutor_bench = $"prosecutor-bench"
+@onready var witness_stand = $"witness-stand"
+
+@onready var blip = $blip
+@onready var typewrite = $typewrite
+
+@onready var elay_sprite = $Background/ElaySprite
+@onready var elay_animation = $Background/ElaySprite/AnimationPlayer
 
 func _ready():
 	update_dialogue()
@@ -72,25 +122,60 @@ func courtRecButton_pressed():
 	inventory.toggle()
 
 func dialogue_button_pressed():
-	dialogueBox.visible = true
-	personNameBox.visible = true
-	courtRecButton.visible = true
-		
-	current_index += 1
+	if current_index == dialogues.size():
+		dialogueBoxButton.visible = false
 	
 	if current_index < dialogues.size():
-		update_dialogue()
+		dialogueBox.visible = true
+		personNameBox.visible = true
+		courtRecButton.visible = true
+		if is_typing:
+			complete_dialogue()
+		else:
+			update_dialogue()
 	else:
+		complete_dialogue()
 		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
 
 func update_dialogue():
+	is_typing = true
 	if current_index < dialogues.size():
-		dialogue_label.text = dialogues[current_index]
+		current_text = dialogues[current_index]
+		dialogue_label.text = ""
 		name_label.text = char_names[current_index]
+		apply_text_sound(text_sound[current_index]) 
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
-	else:
-		dialogue_label.text = "End of dialogues."
+		update_sprites(spriteToDisplay[current_index])
+	current_index += 1
+		
+func start_text_update():
+	char_index = 0
+	while char_index < current_text.length():
+		if not is_typing:
+			return
+		if current_audio == typewrite:
+			if char_index % 3 == 0:
+				current_audio.play()
+		else:
+			current_audio.play()
+		dialogue_label.text += current_text[char_index]
+		char_index += 1
+		await get_tree().create_timer(text_speed).timeout
+	dialogue_label.text = current_text
+	is_typing = false
+
+func complete_dialogue():
+	dialogue_label.text = current_text
+	is_typing = false
+	current_audio.stop() 
+
+func apply_text_sound(text_value:int):
+	match text_value:
+		1: 
+			current_audio = blip
+		2:
+			current_audio = typewrite
 		
 func apply_text_style(style_value: int):
 	var color := Color(1, 1, 1)
@@ -109,16 +194,38 @@ func apply_text_style(style_value: int):
 	
 func update_background(background_index: int):
 	var background_texture: Texture
+	defense_bench.visible = false
+	prosecutor_bench.visible = false
+	witness_stand.visible = false
 	match background_index:
 		0:
 			background_texture = preload("res://assets/backgrounds/judgesSide.png")
 		1:
 			background_texture = preload("res://assets/backgrounds/prosecutorSide.jpg")
+			prosecutor_bench.visible = true
 		2:
 			background_texture = preload("res://assets/backgrounds/defenseSide.png")
+			defense_bench.visible = true
 		3:
 			background_texture = preload("res://assets/backgrounds/cocounselSide.png")
 		4:
-			background_texture = preload("res://assets/backgrounds/witnessSide.jpg") # Default background if needed
+			background_texture = preload("res://assets/backgrounds/witnessSide.jpg")
+			witness_stand.visible = true
 	
 	background_sprite.texture = background_texture
+	
+func update_sprites(sprite: int):
+	elay_sprite.visible = false
+	match sprite:
+		0:
+			if is_typing:
+				await start_text_update()
+		1:
+			elay_sprite.visible = true
+			elay_animation.play("talking")
+			if is_typing:
+				await start_text_update()
+			elay_animation.play("blinking")
+		_:
+			if is_typing:
+				await start_text_update()

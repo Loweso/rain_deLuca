@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://bsfgxc6046cs"]
+
+[ext_resource type="Script" path="res://inventory_item.gd" id="1_cc8dg"]
+[ext_resource type="Texture2D" uid="uid://d1mbtodwhe2u" path="res://assets/inventory/items/handkerchief.png" id="2_3q1vi"]
+
+[resource]
+script = ExtResource("1_cc8dg")
+name = "Handkerchief"
+description = "Handkerchief found near the crime scene. As Alexa Yala's merchandise, it sports her first name."
+texture = ExtResource("2_3q1vi")

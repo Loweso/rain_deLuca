@@ -308,7 +308,6 @@ visible = false
 layout_mode = 1
 
 [node name="HoldItTransition" parent="CrossExamination1" instance=ExtResource("8_h7oyc")]
-visible = false
 
 [node name="blip" type="AudioStreamPlayer2D" parent="CrossExamination1"]
 stream = ExtResource("10_a2c5u")

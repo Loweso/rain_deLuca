@@ -1,41 +1,21 @@
 extends Control
 
 var dialogues = [
-	'(This is bad...)',
-	'Our witness was a pool cleaner finishing his last shift of the day at the pool.',
-	'I’d like to call our witness Elay to the stand.',
-	'...',
-	'Thank you, Your Honor. Elay, please state your name and occupation for the court.',
-	'My name is Elay, and I work as a pool cleaner at the venue where the incident occurred.',
-	'Elay, could you tell the court what you witnessed on the day of the crime?',
-	'Yes, ma’am. I was finishing up my last shift of the day near the pool area when I saw Ms. Yala rushing to the pool area alone.',
-	'I didn’t think of it as anything suspicious, so I just left.',
-	'And did you see anyone else in the vicinity?',
-	'Not really.',
-	'What time was this?',
-	"It was around 3:00 PM, almost an hour before I discovered the victim's body floating in the pool...",
-	'As well as a handkerchief with Alexa Yala’s name by the poolside.',
-	'So you’re certain that Ms. Yala was the last person seen with the victim before her death?',
-	'Yes, ma’am. I’m sure of it.',
+	'Wait, a handkerchief with her name on it?',
+	'Yes. She probably wrote it on to show ownership of the hanky.',
+	'(Wait... Not necessarily..!)',
+	'Doesn’t this contradict something that we know about the handkerchief?',
+	'Yes!',
+	'(I just have to present that evidence now!)'
 ]
 
 var char_names = [
-	"Rain de Luca",
-	"Sunny Flower",
-	"Sunny Flower",
-	"Judge",
-	"Sunny Flower",
-	"Elay",
-	"Sunny Flower",
-	"Elay",
-	"Elay",
-	"Sunny Flower",
-	"Elay",
-	"Sunny Flower",
-	"Elay",
-	"Elay",
-	"Sunny Flower",
-	"Elay",
+	'Rain',
+	'Elay',
+	'Rain',
+	'Ms. Cris',
+	'Rain',
+	'Rain',
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -43,42 +23,20 @@ var char_names = [
 # Text style 3 = Green, centered, Current setting (time and place)
 
 var text_styles = [
+	1,
+	1,
 	2,
 	1,
 	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	
+	2,
 ]
 
 # spriteToDisplay 0 = No sprite to display
-# spriteToDisplay 1 = Maya, looking forward
-# spriteToDisplay 2 = Maya, talking
+# spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
 	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
+	1,
 	0,
 	0,
 	0,
@@ -86,17 +44,6 @@ var spriteToDisplay = [
 ]
 
 var text_sound = [
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
 	1,
 	1,
 	1,
@@ -113,21 +60,11 @@ var text_sound = [
 
 var backgrounds = [
 	2,
-	1,
-	1,
-	0,
-	1,
 	4,
-	1,
-	4,
-	4,
-	1,
-	4,
-	1,
-	4,
-	4,
-	1,
-	4,
+	2,
+	3,
+	3,
+	2,
 ]
 
 var current_index = 0
@@ -154,6 +91,9 @@ var current_audio
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
+
+@onready var elay_sprite = $Background/ElaySprite
+@onready var elay_animation = $Background/ElaySprite/AnimationPlayer
 
 func _ready():
 	update_dialogue()
@@ -189,11 +129,8 @@ func update_dialogue():
 		apply_text_sound(text_sound[current_index]) 
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
-	if is_typing:
-		await start_text_update()
+		update_sprites(spriteToDisplay[current_index])
 	current_index += 1
-		
-	
 		
 func start_text_update():
 	char_index = 0
@@ -259,3 +196,19 @@ func update_background(background_index: int):
 			witness_stand.visible = true
 	
 	background_sprite.texture = background_texture
+	
+func update_sprites(sprite: int):
+	elay_sprite.visible = false
+	match sprite:
+		0:
+			if is_typing:
+				await start_text_update()
+		1:
+			elay_sprite.visible = true
+			elay_animation.play("talking")
+			if is_typing:
+				await start_text_update()
+			elay_animation.play("blinking")
+		_:
+			if is_typing:
+				await start_text_update()

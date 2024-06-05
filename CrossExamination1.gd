@@ -6,7 +6,7 @@ var dialogues = [
 	"I didn’t think of it as anything suspicious and so I just left.",
 	"After an hour, I returned to the pool area to check if I had emptied the skimmer basket.",
 	"That’s when I saw a body floating.",
-	"Other than she was the last person seen entering the pool area, the handkerchief found has her name on it, who else would own that?",
+	"Other than she was the last person seen entering the pool area, the handkerchief found has her name on it. Who else would own that?",
 ]
 
 var char_names = [
@@ -119,9 +119,12 @@ var dialoguetime = 0
 @onready var typewrite = $typewrite
 
 func _ready():
-	
+	dialogueBoxButton.visible = false
 	load_current_index()
 	update_dialogue()
+	
+	if current_index == 0:
+		dialogueBoxButton.visible = true
 	
 	var mistakesFile = FileAccess.open(no_of_mistakes_path, FileAccess.READ)
 	if mistakesFile:
@@ -167,8 +170,6 @@ func courtRecButton_pressed():
 	evidenceBox.toggle(current_crossExam, current_index)
 
 func dialogue_button_pressed():
-	if current_index == dialogues.size():
-		dialogueBoxButton.visible = false
 	dialogueBoxButton.visible = false
 	dialogueBox.visible = true
 	personNameBox.visible = true
@@ -185,18 +186,19 @@ func prev_button_pressed():
 	update_dialogue()
 
 func update_dialogue():
-	
 	is_typing = true
 	if current_index >= dialogues.size():
-		current_index = 1
-	current_text = dialogues[current_index]
-	dialogue_label.text = ""
-	name_label.text = char_names[current_index]
-	apply_text_sound(text_sound[current_index])
-	apply_text_style(text_styles[current_index])
-	update_background(backgrounds[current_index])
-	update_sprites(witness_anim[current_index])
-	update_buttons_visibility()
+		save_num(1, save_file_path)
+		get_tree().change_scene_to_file("res://scenes/convoScene1.tscn")
+	else:
+		current_text = dialogues[current_index]
+		dialogue_label.text = ""
+		name_label.text = char_names[current_index]
+		apply_text_sound(text_sound[current_index])
+		apply_text_style(text_styles[current_index])
+		update_background(backgrounds[current_index])
+		update_sprites(witness_anim[current_index])
+		update_buttons_visibility()
 	
 	
 func start_text_update():
@@ -252,7 +254,6 @@ func update_background(background_index: int):
 	
 	background_sprite.texture = background_texture
 	
-
 func update_sprites(sprite: int):
 	match sprite:
 		0:
@@ -284,7 +285,19 @@ func press_button_pressed():
 	match current_index:
 		1:	
 			# Put the next index of the current index in save_current_index
-			save_num(0, save_file_path)
+			save_num(2, save_file_path)
 			holdItTransition.load_scene("res://scenes/pressScene1_1.tscn")
+		2:	
+			save_num(3, save_file_path)
+			holdItTransition.load_scene("res://scenes/pressScene1_2.tscn")
+		3:	
+			save_num(4, save_file_path)
+			holdItTransition.load_scene("res://scenes/pressScene1_3.tscn")
+		4:	
+			save_num(5, save_file_path)
+			holdItTransition.load_scene("res://scenes/pressScene1_4.tscn")
+		5:	
+			save_num(1, save_file_path)
+			holdItTransition.load_scene("res://scenes/pressScene1_5.tscn")
 		_:
 			pass
