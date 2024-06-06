@@ -244,6 +244,7 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 func update_sprites(sprite: int):
+	witness_animation.stop()
 	match sprite:
 		0:
 			witness_animation.play("blink")
@@ -275,18 +276,18 @@ func press_button_pressed():
 		1:	
 			# Put the next index of the current index in save_current_index
 			save_num(2, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene1_1.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene3_1.tscn")
 		2:	
 			save_num(3, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene1_2.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene3_2.tscn")
 		3:	
 			save_num(4, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene1_3.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene3_3.tscn")
 		4:	
 			save_num(5, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene1_4.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene3_4.tscn")
 		5:	
 			save_num(1, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene1_5.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene3_5.tscn")
 		_:
 			pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cbkm47uuy7j1b"]
+[gd_scene load_steps=38 format=3 uid="uid://cbkm47uuy7j1b"]
 
 [ext_resource type="Texture2D" uid="uid://cjirdovtydvc4" path="res://assets/backgrounds/witnessSide.jpg" id="1_diuly"]
 [ext_resource type="Script" path="res://scenes/crossExam3.gd" id="1_m5bm8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ewgh7vd6l7a3" path="res://assets/ui/next-button.png" id="6_cy0m5"]
 [ext_resource type="Texture2D" uid="uid://c03wh5m3ojobv" path="res://assets/ui/prev-button.png" id="7_6s0as"]
 [ext_resource type="Texture2D" uid="uid://cnim4d3utyyik" path="res://assets/ui/mistake.png" id="8_xpqet"]
+[ext_resource type="PackedScene" uid="uid://cedc7c312rh8f" path="res://scenes/evidence.tscn" id="9_ibg1y"]
 [ext_resource type="PackedScene" uid="uid://bftv2b4r6kgpr" path="res://scenes/holdItTransition.tscn" id="10_rf8pu"]
 [ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="11_04eb2"]
 [ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="12_ucoye"]
@@ -30,10 +31,9 @@ tracks/0/keys = {
 "values": [4, 5, 6, 1, 2, 3, 4]
 }
 
-[sub_resource type="Animation" id="Animation_xohpg"]
+[sub_resource type="Animation" id="Animation_6vik3"]
 resource_name = "blink"
 length = 0.5
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -41,15 +41,15 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [7, 4, 13]
+"values": [4, 7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4r8cx"]
 _data = {
-"blink": SubResource("Animation_xohpg"),
+"blink": SubResource("Animation_6vik3"),
 "talk": SubResource("Animation_a6o8o")
 }
 
@@ -136,7 +136,7 @@ scale = Vector2(1.40612, 1.39698)
 texture = ExtResource("3_ypj38")
 hframes = 4
 vframes = 3
-frame = 7
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="crossExam3/Background/WitnessSprite"]
 libraries = {
@@ -305,6 +305,9 @@ texture = ExtResource("8_xpqet")
 
 [node name="HoldItTransition" parent="crossExam3" instance=ExtResource("10_rf8pu")]
 visible = false
+
+[node name="Evidence" parent="crossExam3" instance=ExtResource("9_ibg1y")]
+layout_mode = 1
 
 [node name="blip" type="AudioStreamPlayer2D" parent="crossExam3"]
 stream = ExtResource("11_04eb2")
