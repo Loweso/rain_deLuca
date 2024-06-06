@@ -1,37 +1,46 @@
 extends Control
 
 var dialogues = [
-	"Can you tell us how exactly you determined this time?",
-	"I didn’t check the clock exactly at that moment, but it was roughly around 3:00 PM.",
-	'(I need to shake him up a bit...)',
-	"So, you base your entire testimony on a rough estimate?",
-	'No precise timekeeping, no verifiable evidence, just your memory?',
-	"Isn’t it possible, Mr. Elay, that your memory could be flawed, especially in such a tense and chaotic situation?",
-	"Well, I...",
-	"Answer the question, Mr. Elay. Isn’t it possible?",
-	"I suppose... but...",
-	'Objection, Your Honor! Mr. de Luca is badgering the witness.',
-	'Mr. de Luca, please rephrase your question and tone down your approach.',
-	"My apologies, Your Honor. Let me rephrase. Mr. Elay can you confirm your estimation of the time Ms. Yala was seen...",
-	"...is not based on any concrete evidence but rather on your memory?",
-	"Yes, that’s correct. It’s just an estimate based on my recollection.",
+	"The prosecution may now call the suspect to the stand.",
+	"Thank you, Your Honor. Mr. de Luca, can you explain your relationship with Ms. Yala?",
+	"Ms. Yala and I are friends, but that doesn’t mean I had anything to do with this crime!",
+	"Then why would your DNA be on the handkerchief?",
+	"I… I don’t know how my DNA got there. It must be a mistake!",
+	"Are you denying that you had any contact with the handkerchief in question?",
+	"I wouldn’t know as I have nothing to do with Ms. Thirsty’s death.",
+	"(Uh oh… what do I do?)",
+	"Rain, it’s crucial that you answer truthfully. We need to address this head-on.",
+	"You’re right. I was at the venue that day to support Alexa Yala.",
+	"There were so many people at the time, specifically fans who were also there to support Yala.",
+	"Much like most fans. I purchased merchandise at the event. A handkerchief, similar to the one found near the pool",
+	"I’ve never been to the pool area which is impossible to reason out how my handkerchief got there.",
+	"And you expect us to believe that your handkerchief magically appeared near the body of the victim?",
+	"Objection, Your Honor. My client has already stated that he doesn’t know how it got there",
+	"Further badgering him on this matter is unnecessary and constitutes harassment.",
+	"Sustained. Ms. Flower, please refrain from badgering the witness.",
+	"Apologies, Your Honor. No Further questions at this time."
+	
 ]
 
 var char_names = [
+	"Judge",
+	"Sunny",
 	"Rain",
-	"Elay",
+	"Sunny",
 	"Rain",
+	"Sunny",
 	"Rain",
-	"Rain",
-	"Rain",
-	"Elay",
-	"Rain",
-	"Elay",
-	'Sunny',
-	'Judge',
+	"Ms. Cris",
+	"Ms. Cris",
 	"Rain",
 	"Rain",
-	"Elay",
+	"Rain",
+	"Rain",
+	"Sunny",
+	"Ms. Cris",
+	"Ms. Cris",
+	"Judge",
+	"Sunny"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -41,8 +50,12 @@ var char_names = [
 var text_styles = [
 	1,
 	1,
-	2,
 	1,
+	1,
+	1,
+	1,
+	1,
+	2,
 	1,
 	1,
 	1,
@@ -60,19 +73,23 @@ var text_styles = [
 
 var spriteToDisplay = [
 	0,
-	1,
 	0,
 	0,
 	0,
 	0,
-	1,
-	0,
-	1,
 	0,
 	0,
 	0,
 	0,
-	1,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0
 ]
 
 var text_sound = [
@@ -90,6 +107,10 @@ var text_sound = [
 	1,
 	1,
 	1,
+	1,
+	1,
+	1,
+	1
 ]
 
 # background 0 = Judge Side
@@ -99,20 +120,24 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
-	2,
-	4,
-	2,
-	2,
-	2,
-	2,
-	4,
-	2,
+	0,
+	1,
 	4,
 	1,
-	0,
+	4,
+	1,
+	4,
 	2,
 	2,
 	4,
+	4,
+	4,
+	4,
+	1,
+	2,
+	2,
+	0,
+	1
 ]
 
 var current_index = 0
@@ -144,6 +169,10 @@ var current_audio
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
 
 func _ready():
+	var file = FileAccess.open("user://current_index.txt", FileAccess.WRITE)
+	file.store_var(0)
+	file.close()
+	
 	update_dialogue()
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
@@ -165,20 +194,8 @@ func dialogue_button_pressed():
 		else:
 			update_dialogue()
 	else:
-		var press_states_path = "user://press_states.txt"
-		var press_states
-		var file = FileAccess.open(press_states_path, FileAccess.READ)
-		if file:
-			press_states = file.get_var()
-			file.close()
-		else:
-			press_states = [false, false, false, false]
-			
-		if press_states[0] and press_states[1] and press_states[2] and press_states[3]:
-			get_tree().change_scene_to_file("res://scenes/scene6.tscn")
-		else:
-			complete_dialogue()
-			SceneTransition.load_scene("res://scenes/crossExam2.tscn")
+		complete_dialogue()
+		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
 
 func update_dialogue():
 	is_typing = true

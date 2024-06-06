@@ -1,37 +1,39 @@
 extends Control
 
 var dialogues = [
-	"Can you tell us how exactly you determined this time?",
-	"I didn’t check the clock exactly at that moment, but it was roughly around 3:00 PM.",
-	'(I need to shake him up a bit...)',
-	"So, you base your entire testimony on a rough estimate?",
-	'No precise timekeeping, no verifiable evidence, just your memory?',
-	"Isn’t it possible, Mr. Elay, that your memory could be flawed, especially in such a tense and chaotic situation?",
-	"Well, I...",
-	"Answer the question, Mr. Elay. Isn’t it possible?",
-	"I suppose... but...",
-	'Objection, Your Honor! Mr. de Luca is badgering the witness.',
-	'Mr. de Luca, please rephrase your question and tone down your approach.',
-	"My apologies, Your Honor. Let me rephrase. Mr. Elay can you confirm your estimation of the time Ms. Yala was seen...",
-	"...is not based on any concrete evidence but rather on your memory?",
-	"Yes, that’s correct. It’s just an estimate based on my recollection.",
+	"Are you absolutely certain Ms. Yala entered the pool alone? Could someone else have been there?",
+	"I’m... certain, sir. There was no one else around at 3:00 PM.",
+	'Did you see Ms. Yala leave the pool area at any point?',
+	"No, I didn’t see her leave.",
+	'Are you certain that Ms. Alexa Yala had interaction with the victim?',
+	"No, sir... I’m not sure. But there was CCTV footage available from the pool area that could prove that.",
+	"CCTV footage?",
+	"That CCTV footage is currently going through a forensic analysis, Rain.",
+	"Hmm... and where is this CCTV footage, Elay?",
+	"(...where is this heading?!)",
+	"There was a problem with the footage making the recordings irrelevant to the case.",
+	"Sorry, but I am cross-examining the witness, not you.",
+	"(He’s really getting under my skin!)",
+	"I assure you Mr. de Luca, the investigation team has already handled that.",
+	"I wasn't asking you, but thank you for sharing, I guess."
 ]
 
 var char_names = [
 	"Rain",
 	"Elay",
 	"Rain",
-	"Rain",
-	"Rain",
-	"Rain",
 	"Elay",
 	"Rain",
 	"Elay",
-	'Sunny',
-	'Judge',
 	"Rain",
+	"Ms. Cris",
 	"Rain",
-	"Elay",
+	"Sunny",
+	"Sunny",
+	"Rain",
+	"Sunny",
+	"Sunny",
+	"Rain",
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -41,18 +43,19 @@ var char_names = [
 var text_styles = [
 	1,
 	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
 	2,
 	1,
 	1,
+	2,
 	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
+	1
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -62,9 +65,6 @@ var spriteToDisplay = [
 	0,
 	1,
 	0,
-	0,
-	0,
-	0,
 	1,
 	0,
 	1,
@@ -72,7 +72,11 @@ var spriteToDisplay = [
 	0,
 	0,
 	0,
-	1,
+	0,
+	0,
+	0,
+	0,
+	0,
 ]
 
 var text_sound = [
@@ -90,6 +94,7 @@ var text_sound = [
 	1,
 	1,
 	1,
+	1
 ]
 
 # background 0 = Judge Side
@@ -102,17 +107,18 @@ var backgrounds = [
 	2,
 	4,
 	2,
-	2,
-	2,
-	2,
 	4,
 	2,
 	4,
+	2,
+	3,
+	2,
 	1,
-	0,
+	1,
 	2,
+	1,
+	1,
 	2,
-	4,
 ]
 
 var current_index = 0

@@ -1,37 +1,71 @@
 extends Control
 
 var dialogues = [
-	"Can you tell us how exactly you determined this time?",
-	"I didn’t check the clock exactly at that moment, but it was roughly around 3:00 PM.",
-	'(I need to shake him up a bit...)',
-	"So, you base your entire testimony on a rough estimate?",
-	'No precise timekeeping, no verifiable evidence, just your memory?',
-	"Isn’t it possible, Mr. Elay, that your memory could be flawed, especially in such a tense and chaotic situation?",
-	"Well, I...",
-	"Answer the question, Mr. Elay. Isn’t it possible?",
-	"I suppose... but...",
-	'Objection, Your Honor! Mr. de Luca is badgering the witness.',
-	'Mr. de Luca, please rephrase your question and tone down your approach.',
-	"My apologies, Your Honor. Let me rephrase. Mr. Elay can you confirm your estimation of the time Ms. Yala was seen...",
-	"...is not based on any concrete evidence but rather on your memory?",
-	"Yes, that’s correct. It’s just an estimate based on my recollection.",
+	'The court is now back in session. Ms. Flower, do you have the results of the DNA test?',
+	"Yes, Your Honor. Let me brief you on the case again.",
+	"At first, it seemed to be an open-and-shut case against Ms. Yala, which is why we are here today.",
+	"Objection, Your Honor. The presence of a handkerchief alone does not prove my client’s guilt.",
+	"Well, I am not finished, Mr. de Luca.",
+	"Overruled. Continue, Prosecutor.",
+	"As I was saying before I was interrupted, the handkerchief pointed to Ms. Yala because of the embroidery on it.",
+	"However... after conducting a DNA test...",
+	"The results appear to be quite revealing.",
+	"(This doesn’t sound so good...)",
+	"The handkerchief had traces of DNA from none other than Rain de Luca, the so-called loyal friend of Alexa Yala.",
+	"That’s preposterous!",
+	"I am pretty, and I am sure that this is a setup!!",
+	"Order! Order in the court!",
+	"Perhaps Mr. de Luca would like to explain how his DNA was found on an item directly linked to the defendant.",
+	"Don’t fret, Rain. She probably had this all planned.",
+	"(What is she going on about?)",
+	"I... I don’t know!",
+	"Think this through Rain! You probably have ideas as to how this came to be.",
+	"Order! Mr. de Luca, you will have your chance to speak.",
+	"Given the new evidence, Mr. de Luca, you need legal representation. I appoint you a new defense attorney.",
+	"Your Honor, this is outrageous! I am innocent!",
+	"Regardless, Mr. de Luca, you have the right to legal counsel.",
+	"Ms. Flower, you will continue as the prosecutor in this case.",
+	"Of course, Your Honor. I am ready to proceed.",
+	"But who will represent me?",
+	"I will, Rain. I believe in your innocence, and I will fight for you.",
+	"Ms. Cris, are you sure about this? It’s a huge risk...",
+	"I am sure. Trust me, Rain. We’ll get through this together.",
+	"Very well. Ms. Cris, you are hereby appointed as the defense attorney for Mr. de Luca.",
+	"Court will reconvene in fifteen minutes."
 ]
 
 var char_names = [
-	"Rain",
-	"Elay",
-	"Rain",
-	"Rain",
-	"Rain",
-	"Rain",
-	"Elay",
-	"Rain",
-	"Elay",
-	'Sunny',
 	'Judge',
+	"Sunny",
+	"Sunny",
+	"Rain",
+	"Sunny",
+	"Judge",
+	"Sunny",
+	"Sunny",
+	"Sunny",
+	"Rain",
+	"Sunny",
 	"Rain",
 	"Rain",
-	"Elay",
+	"Judge",
+	"Sunny",
+	"Ms. Cris",
+	"Rain",
+	"Rain",
+	"Ms. Cris",
+	"Judge",
+	"Judge",
+	"Rain",
+	"Judge",
+	"Judge",
+	"Sunny",
+	"Rain",
+	"Ms. Cris",
+	"Rain",
+	"Ms. Cris",
+	"Judge",
+	"Judge"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -41,6 +75,13 @@ var char_names = [
 var text_styles = [
 	1,
 	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
 	2,
 	1,
 	1,
@@ -48,11 +89,21 @@ var text_styles = [
 	1,
 	1,
 	1,
+	2,
+	1,
+	1,
+	1,
+	1, 
 	1,
 	1,
 	1,
 	1,
+	1, 
+	1, 
 	1,
+	1,
+	1,
+	1
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -60,19 +111,36 @@ var text_styles = [
 
 var spriteToDisplay = [
 	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
 	1,
 	0,
 	0,
 	0,
 	0,
-	1,
-	0,
-	1,
 	0,
 	0,
 	0,
 	0,
-	1,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0
 ]
 
 var text_sound = [
@@ -90,6 +158,23 @@ var text_sound = [
 	1,
 	1,
 	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1
 ]
 
 # background 0 = Judge Side
@@ -99,20 +184,37 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
+	0,
+	1,
+	1,
 	2,
-	4,
-	2,
-	2,
-	2,
-	2,
-	4,
-	2,
-	4,
 	1,
 	0,
+	1,
+	1,
+	1,
+	2,
+	1,
 	2,
 	2,
-	4,
+	0,
+	1,
+	3,
+	2,
+	2,
+	3,
+	0,
+	0,
+	2,
+	0,
+	0,
+	1,
+	2,
+	3,
+	3,
+	3,
+	0,
+	0
 ]
 
 var current_index = 0
@@ -144,6 +246,10 @@ var current_audio
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
 
 func _ready():
+	var file = FileAccess.open("user://current_index.txt", FileAccess.WRITE)
+	file.store_var(0)
+	file.close()
+	
 	update_dialogue()
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
@@ -165,20 +271,8 @@ func dialogue_button_pressed():
 		else:
 			update_dialogue()
 	else:
-		var press_states_path = "user://press_states.txt"
-		var press_states
-		var file = FileAccess.open(press_states_path, FileAccess.READ)
-		if file:
-			press_states = file.get_var()
-			file.close()
-		else:
-			press_states = [false, false, false, false]
-			
-		if press_states[0] and press_states[1] and press_states[2] and press_states[3]:
-			get_tree().change_scene_to_file("res://scenes/scene6.tscn")
-		else:
-			complete_dialogue()
-			SceneTransition.load_scene("res://scenes/crossExam2.tscn")
+		complete_dialogue()
+		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
 
 func update_dialogue():
 	is_typing = true
