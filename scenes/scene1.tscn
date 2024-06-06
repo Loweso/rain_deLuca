@@ -202,6 +202,6 @@ visible = false
 stream = ExtResource("8_72o5s")
 volume_db = 2.972
 
-[node name="blip2" type="AudioStreamPlayer2D" parent="Scene1"]
+[node name="typewriter" type="AudioStreamPlayer2D" parent="Scene1"]
 stream = ExtResource("9_eg0ev")
-volume_db = 10.133
+volume_db = 24.0

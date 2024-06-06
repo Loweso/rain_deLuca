@@ -74,17 +74,17 @@ var spriteToDisplay = [
 	2,
 	1,
 	2,
-	0,
+	5,
 	2,
 	0,
 	0,
 	5,
 	0,
 	3,
-	0,
-	0,
+	5,
+	5,
 	3,
-	0,
+	5,
 ]
 
 var text_sound = [
@@ -165,9 +165,6 @@ var current_audio
 @onready var sunny_sprite_animation2 = $sunny_sprite/sunny_sprite_animation2
 
 func _ready():
-	judge_sprite.visible = false
-	sunny_sprite.visible = false
-	rain_sprite.visible = false
 	update_dialogue()
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
@@ -253,6 +250,7 @@ func apply_text_style(style_value: int):
 	dialogue_label.add_theme_color_override("font_color", color)
 	
 func update_sprites(sprite: int):
+	elay_sprite.visible = false
 	judge_sprite.visible = false
 	sunny_sprite.visible = false
 	rain_sprite.visible = false
@@ -296,6 +294,12 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			sunny_sprite_animation2.play("Blinking")
+		6:
+			elay_sprite.visible = true
+			elay_animation.play("talking")
+			if is_typing:
+				await start_text_update()
+			elay_animation.play("blinking")
 	
 func update_background(background_index: int):
 	var background_texture: Texture

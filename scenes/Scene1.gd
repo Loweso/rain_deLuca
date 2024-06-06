@@ -1,7 +1,7 @@
 extends Control
 
 var dialogues = [
-	"April 26, 10:30 AM\nDistrict Court\nDefendant Lobby No. 1",
+	"June 7, 10:30 AM\nDistrict Court\nDefendant Lobby No. 1",
 	"(…)",
 	"(*sigh*)",
 	'What’s wrong, Rain?',
@@ -158,7 +158,7 @@ var current_audio
 @onready var mscris_sprite_animation = $MsCris/MsCrisTalking
 
 @onready var blip = $blip
-@onready var typewrite = $blip2
+@onready var typewrite = $typewriter
 
 
 
