@@ -1,71 +1,25 @@
 extends Control
 
 var dialogues = [
-	'The court is now back in session. Ms. Flower, do you have the results of the DNA test?',
-	"Yes, Your Honor. Let me brief you on the case again.",
-	"At first, it seemed to be an open-and-shut case against Ms. Yala, which is why we are here today.",
-	"Objection, Your Honor. The presence of a handkerchief alone does not prove my client’s guilt.",
-	"Well, I am not finished, Mr. de Luca.",
-	"Overruled. Continue, Prosecutor.",
-	"As I was saying before I was interrupted, the handkerchief pointed to Ms. Yala because of the embroidery on it.",
-	"However... after conducting a DNA test...",
-	"The results appear to be quite revealing.",
-	"(This doesn’t sound so good...)",
-	"The handkerchief had traces of DNA from none other than Rain de Luca, the so-called loyal friend of Alexa Yala.",
-	"That’s preposterous!",
-	"I am pretty, and I am sure that this is a setup!!",
-	"Order! Order in the court!",
-	"Perhaps Mr. de Luca would like to explain how his DNA was found on an item directly linked to the defendant.",
-	"Don’t fret, Rain. She probably had this all planned.",
-	"(What is she going on about?)",
-	"I... I don’t know!",
-	"Think this through Rain! You probably have ideas as to how this came to be.",
-	"Order! Mr. de Luca, you will have your chance to speak.",
-	"Given the new evidence, Mr. de Luca, you need legal representation. I appoint you a new defense attorney.",
-	"Your Honor, this is outrageous! I am innocent!",
-	"Regardless, Mr. de Luca, you have the right to legal counsel.",
-	"Ms. Flower, you will continue as the prosecutor in this case.",
-	"Of course, Your Honor. I am ready to proceed.",
-	"But who will represent me?",
-	"I will, Rain. I believe in your innocence, and I will fight for you.",
-	"Ms. Cris, are you sure about this? It’s a huge risk...",
-	"I am sure. Trust me, Rain. We’ll get through this together.",
-	"Very well. Ms. Cris, you are hereby appointed as the defense attorney for Mr. de Luca.",
-	"Court will reconvene in fifteen minutes."
+	"S-Sunny?",
+	"W-what? I-I can like tennis, too, you know?",
+	'You even greeted me. That was a first for me, probably even for you. It was weird.',
+	"A-and why would you think that was out of the ordinary?!",
+	'...',
+	"We don’t exactly see eye to eye, you know.",
+	"If you weren’t so stupid, maybe we would’ve. Besides, why are you including me in your little story?!",
+	"You’re quite the angry person, aren’t you?"
 ]
 
 var char_names = [
-	'Judge',
-	"Sunny",
-	"Sunny",
-	"Rain",
-	"Sunny",
-	"Judge",
-	"Sunny",
-	"Sunny",
-	"Sunny",
-	"Rain",
-	"Sunny",
-	"Rain",
-	"Rain",
-	"Judge",
-	"Sunny",
 	"Ms. Cris",
-	"Rain",
-	"Rain",
-	"Ms. Cris",
-	"Judge",
-	"Judge",
-	"Rain",
-	"Judge",
-	"Judge",
 	"Sunny",
+	'Rain',
+	"Sunny",
+	'Rain',
 	"Rain",
-	"Ms. Cris",
-	"Rain",
-	"Ms. Cris",
-	"Judge",
-	"Judge"
+	"Sunny",
+	"Ms. Cris"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -80,29 +34,6 @@ var text_styles = [
 	1,
 	1,
 	1,
-	1,
-	1,
-	2,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	2,
-	1,
-	1,
-	1,
-	1, 
-	1,
-	1,
-	1,
-	1,
-	1, 
-	1, 
-	1,
-	1,
-	1,
 	1
 ]
 
@@ -110,29 +41,6 @@ var text_styles = [
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
 	0,
 	0,
 	0,
@@ -151,29 +59,6 @@ var text_sound = [
 	1,
 	1,
 	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
 	1
 ]
 
@@ -184,37 +69,14 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
-	0,
-	1,
-	1,
 	2,
 	1,
-	0,
+	4,
 	1,
+	4,
+	4,
 	1,
-	1,
-	2,
-	1,
-	2,
-	2,
-	0,
-	1,
-	3,
-	2,
-	2,
-	3,
-	0,
-	0,
-	2,
-	0,
-	0,
-	1,
-	2,
-	3,
-	3,
-	3,
-	0,
-	0
+	2
 ]
 
 var current_index = 0
@@ -246,10 +108,6 @@ var current_audio
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
 
 func _ready():
-	var file = FileAccess.open("user://current_index.txt", FileAccess.WRITE)
-	file.store_var(0)
-	file.close()
-	
 	update_dialogue()
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
@@ -271,8 +129,20 @@ func dialogue_button_pressed():
 		else:
 			update_dialogue()
 	else:
-		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam3.tscn")
+		var press_states_path = "user://press_states.txt"
+		var press_states
+		var file = FileAccess.open(press_states_path, FileAccess.READ)
+		if file:
+			press_states = file.get_var()
+			file.close()
+		else:
+			press_states = [false, false, false, false]
+			
+		if press_states[0] and press_states[1] and press_states[2] and press_states[3]:
+			get_tree().change_scene_to_file("res://scenes/scene6.tscn")
+		else:
+			complete_dialogue()
+			SceneTransition.load_scene("res://scenes/crossExam2.tscn")
 
 func update_dialogue():
 	is_typing = true

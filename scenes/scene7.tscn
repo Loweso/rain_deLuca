@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cs56fwxunvsxx"]
+[gd_scene load_steps=21 format=3 uid="uid://cfoyud4gpk208"]
 
 [ext_resource type="Script" path="res://scenes/scene7.gd" id="1_3hpmi"]
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="2_jfn78"]

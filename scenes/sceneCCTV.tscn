@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://d3o6x0x2jthlf"]
 
-[ext_resource type="Script" path="res://scenes/sceneCCTV.gd" id="1_2gbwr"]
+[ext_resource type="Script" path="res://sceneCCTV.gd" id="1_72gsh"]
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="1_nspo7"]
 [ext_resource type="Texture2D" uid="uid://dvu0vh0ulmn3u" path="res://assets/sprites/elay_sprites.png" id="2_orr42"]
 [ext_resource type="Texture2D" uid="uid://b5dwq1rgckqxk" path="res://assets/backgrounds/prosecutor-bench.png" id="3_1g2ky"]
@@ -76,7 +76,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_2gbwr")
+script = ExtResource("1_72gsh")
 
 [node name="Background" type="TextureRect" parent="sceneCCTV"]
 offset_right = 1930.0
