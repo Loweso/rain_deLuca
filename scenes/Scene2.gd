@@ -543,6 +543,7 @@ func courtRecButton_pressed():
 	inventory.toggle()
 
 func dialogue_button_pressed():
+	
 	if current_index == dialogues.size():
 		dialogueBoxButton.visible = false
 	if current_index < dialogues.size():
@@ -576,7 +577,7 @@ func dialogue_button_pressed():
 				Poisoned.visible = true
 				Strangled.visible = true
 				Drowned.visible = true
-		
+			
 	else:
 		complete_dialogue()
 		await get_tree().create_timer(1).timeout
@@ -601,8 +602,6 @@ func update_dialogue():
 		await update_sprites(spriteToDisplay[current_index])
 		if current_index == 0 && is_typing:
 			await start_text_update()
-	else:
-		dialogue_label.text = "End of dialogues."
 	
 	
 func start_text_update():
@@ -661,8 +660,6 @@ func update_sprites(sprite: int):
 			rain_sprite_animation.play("Embarassed")
 			if is_typing:
 				await start_text_update()
-		_:
-			pass
 	
 			
 		
