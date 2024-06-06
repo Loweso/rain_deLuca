@@ -7,7 +7,7 @@ var dialogues = [
 	"Yes. It was probably mine since a DNA test was conducted.",
 	"But you don’t know how it got there, correct?",
 	"Correct.",
-	"Hmm… have you ever visited the pool area that day?"
+	"Hmm... have you ever visited the pool area that day?"
 ]
 
 var char_names = [

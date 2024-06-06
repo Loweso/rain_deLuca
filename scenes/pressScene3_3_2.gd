@@ -1,23 +1,15 @@
 extends Control
 
 var dialogues = [
-	"How could you conclusively say that you really were at the tennis court at the time?",
-	"True. Do you have any proof?",
-	'If you don’t, you might as well have had the chance of sneaking into the pool area, did the deed as quick as you can, and no one would know the better?',
-	"Ah! Someone can prove that for all of us here in the court!",
-	"(There is someone...?!)",
-	"Oh, really, you oaf?",
-	"..!"
+	"Oh, really? I don’t quite see what you’re talking about.",
+	"I hope the defense would try to reflect and recollect their marbles before making claims like that.",
+	'(Did I really choose wrong? I know someone had said that Rain really was at the tennis court at the time of the crime...)'
 ]
 
 var char_names = [
-	"Ms. Cris",
 	"Sunny",
-	'Sunny',
-	"Rain",
-	"Ms. Cris",
-	"Sunny?",
-	"Ms. Cris"
+	"Judge",
+	'Ms. Cris'
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -27,11 +19,7 @@ var char_names = [
 var text_styles = [
 	1,
 	1,
-	1,
-	1,
-	2,
-	1,
-	1
+	2
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -40,18 +28,10 @@ var text_styles = [
 var spriteToDisplay = [
 	0,
 	0,
-	0,
-	0,
-	0,
-	0,
 	0
 ]
 
 var text_sound = [
-	1,
-	1,
-	1,
-	1,
 	1,
 	1,
 	1
@@ -64,12 +44,8 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
-	2,
 	1,
-	1,
-	4,
-	2,
-	1,
+	0,
 	2
 ]
 
@@ -124,7 +100,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		get_tree().change_scene_to_file("res://scenes/pressScene3_3_1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam3.tscn")
 
 func update_dialogue():
 	is_typing = true

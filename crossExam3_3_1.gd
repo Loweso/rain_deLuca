@@ -1,23 +1,11 @@
 extends Control
 
 var dialogues = [
-	"How could you conclusively say that you really were at the tennis court at the time?",
-	"True. Do you have any proof?",
-	'If you don’t, you might as well have had the chance of sneaking into the pool area, did the deed as quick as you can, and no one would know the better?',
-	"Ah! Someone can prove that for all of us here in the court!",
-	"(There is someone...?!)",
-	"Oh, really, you oaf?",
-	"..!"
+	"There really is someone that can prove that Rain de Luca really was in the tennis court the entire time, not at the crime scene at the time of the murder!"
 ]
 
 var char_names = [
-	"Ms. Cris",
-	"Sunny",
-	'Sunny',
-	"Rain",
-	"Ms. Cris",
-	"Sunny?",
-	"Ms. Cris"
+	"Judge"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -25,12 +13,6 @@ var char_names = [
 # Text style 3 = Green, centered, Current setting (time and place)
 
 var text_styles = [
-	1,
-	1,
-	1,
-	1,
-	2,
-	1,
 	1
 ]
 
@@ -38,22 +20,10 @@ var text_styles = [
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
 	0
 ]
 
 var text_sound = [
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
 	1
 ]
 
@@ -64,13 +34,7 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
-	2,
-	1,
-	1,
-	4,
-	2,
-	1,
-	2
+	0
 ]
 
 var current_index = 0
@@ -95,6 +59,10 @@ var current_audio
 @onready var prosecutor_bench = $"prosecutor-bench"
 @onready var witness_stand = $"witness-stand"
 
+@onready var elay_button = $Elay as Button
+@onready var sunny_button = $SunnyFlower as Button
+@onready var judge_button = $Judge as Button
+
 @onready var blip = $blip
 @onready var typewrite = $typewrite
 
@@ -103,9 +71,23 @@ var current_audio
 
 func _ready():
 	update_dialogue()
+	elay_button.visible = false
+	sunny_button.visible = false
+	judge_button.visible = false
+	
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
+	
+	elay_button.pressed.connect(go_next_scene)
+	sunny_button.pressed.connect(crossExamReturn)
+	judge_button.pressed.connect(crossExamReturn)
+
+func crossExamReturn():
+	get_tree().change_scene_to_file("res://scenes/pressScene3_3_2.tscn")
+	
+func go_next_scene():
+	get_tree().change_scene_to_file("res://scenes/sceneElayBack.tscn")
 
 func courtRecButton_pressed():
 	inventory.toggle()
@@ -124,7 +106,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		get_tree().change_scene_to_file("res://scenes/pressScene3_3_1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam3.tscn")
 
 func update_dialogue():
 	is_typing = true
@@ -136,7 +118,6 @@ func update_dialogue():
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
 		update_sprites(spriteToDisplay[current_index])
-	current_index += 1
 		
 func start_text_update():
 	char_index = 0
@@ -152,10 +133,18 @@ func start_text_update():
 		char_index += 1
 		await get_tree().create_timer(text_speed).timeout
 	dialogue_label.text = current_text
+	dialogueBoxButton.visible = false
+	elay_button.visible = true
+	sunny_button.visible = true
+	judge_button.visible = true
 	is_typing = false
 
 func complete_dialogue():
 	dialogue_label.text = current_text
+	dialogueBoxButton.visible = false
+	elay_button.visible = true
+	sunny_button.visible = true
+	judge_button.visible = true
 	is_typing = false
 	current_audio.stop() 
 
