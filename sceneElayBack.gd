@@ -4,7 +4,7 @@ var dialogues = [
 	'Elay, please return to the witness stand for further questions.',
 	"Of course, Your Honor.",
 	"Let’s get this straight.",
-	"Mr. de Luca claims you can confirm his alibi – that he was at the tennis venue the entire time the crime took place. Is this true?",
+	"Ms. Cris claims you can confirm Mr. Rain's alibi – that he was at the tennis venue the entire time the crime took place. Is this true?",
 	"Yes, Your Honor. I did see Mr. de Luca at the venue during the known time that the crime took place.",
 	"Please elaborate.",
 	"Sure. As I mentioned during the cross-examination, after finishing my duties at around 3:00 PM, I headed to the match venue.",
@@ -224,7 +224,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
+		SceneTransition.load_scene("res://scenes/sceneCCTV.tscn")
 
 func update_dialogue():
 	is_typing = true

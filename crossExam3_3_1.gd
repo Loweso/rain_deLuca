@@ -43,6 +43,7 @@ var is_typing = false
 var text_speed = 0.05
 var current_text = ""
 var current_audio
+var save_file_path = "user://current_index.txt"
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -87,6 +88,7 @@ func crossExamReturn():
 	get_tree().change_scene_to_file("res://scenes/pressScene3_3_2.tscn")
 	
 func go_next_scene():
+	save_num(0, save_file_path)
 	get_tree().change_scene_to_file("res://scenes/sceneElayBack.tscn")
 
 func courtRecButton_pressed():
@@ -207,3 +209,8 @@ func update_sprites(sprite: int):
 		_:
 			if is_typing:
 				await start_text_update()
+
+func save_num(num: int, filePath: String):
+	var file = FileAccess.open(filePath, FileAccess.WRITE)
+	file.store_var(num)
+	file.close()
