@@ -24,7 +24,7 @@ var dialogues = [
 	'Mr. de Luca, who is the victim in this case?',
 	'Uhm... the victim’s name is Sirina Thirsty.',
 	'Very well... and why was she killed?',
-	'She died of drowning, Your Honor',
+	'She died of drowning, Your Honor.',
 	'Correct. You seem fairly confident, Mr. de Luca.',
 	'Of course, I always am.',
 	'Now, Ms. Sunny Flower...',

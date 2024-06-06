@@ -35,9 +35,8 @@ tracks/0/keys = {
 "values": [0, 3, 2, 3]
 }
 
-[sub_resource type="Animation" id="Animation_olobw"]
-resource_name = "Talking"
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_3m1ap"]
+resource_name = "Suspicious_Blinking"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,25 +44,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.2001, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 1, 4, 0, 1]
-}
-
-[sub_resource type="Animation" id="Animation_b2ai6"]
-resource_name = "Table_Whip"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [24, 25, 26, 27, 28, 29, 30]
+"values": [60]
 }
 
 [sub_resource type="Animation" id="Animation_qlcie"]
@@ -82,8 +66,49 @@ tracks/0/keys = {
 "values": [60, 68, 71, 69, 68, 71]
 }
 
-[sub_resource type="Animation" id="Animation_3m1ap"]
-resource_name = "Suspicious_Blinking"
+[sub_resource type="Animation" id="Animation_b2ai6"]
+resource_name = "Table_Whip"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28, 29, 30]
+}
+
+[sub_resource type="Animation" id="Animation_olobw"]
+resource_name = "Talking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.2001, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 1, 4, 0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pgmlq"]
+_data = {
+"Blinking": SubResource("Animation_sjpap"),
+"Suspicious_Blinking": SubResource("Animation_3m1ap"),
+"Suspicious_Talking": SubResource("Animation_qlcie"),
+"Table_Whip": SubResource("Animation_b2ai6"),
+"Talking": SubResource("Animation_olobw")
+}
+
+[sub_resource type="Animation" id="Animation_ru1pl"]
+resource_name = "Blinking"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -94,16 +119,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [60]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pgmlq"]
-_data = {
-"Blinking": SubResource("Animation_sjpap"),
-"Suspicious_Blinking": SubResource("Animation_3m1ap"),
-"Suspicious_Talking": SubResource("Animation_qlcie"),
-"Table_Whip": SubResource("Animation_b2ai6"),
-"Talking": SubResource("Animation_olobw")
+"values": [12]
 }
 
 [sub_resource type="Animation" id="Animation_qhkb8"]
@@ -123,22 +139,6 @@ tracks/0/keys = {
 "values": [12, 12, 13, 14, 15]
 }
 
-[sub_resource type="Animation" id="Animation_ru1pl"]
-resource_name = "Blinking"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [12]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yfpy1"]
 _data = {
 "Blinking": SubResource("Animation_ru1pl"),
@@ -147,6 +147,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_j3nbx"]
 resource_name = "Blinking"
+length = 1.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -155,10 +156,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [60, 61, 63, 60]
+"values": [60, 61, 63, 61, 60]
 }
 
 [sub_resource type="Animation" id="Animation_6y4bw"]
@@ -178,6 +179,21 @@ tracks/0/keys = {
 "values": [132, 133, 134, 135, 133, 134, 135]
 }
 
+[sub_resource type="Animation" id="Animation_4wirr"]
+resource_name = "Embarassed_Blinking"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [132]
+}
+
 [sub_resource type="Animation" id="Animation_rv8wy"]
 resource_name = "Talking"
 length = 2.0
@@ -193,21 +209,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 2, 1, 4, 5, 6]
-}
-
-[sub_resource type="Animation" id="Animation_4wirr"]
-resource_name = "Embarassed_Blinking"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [132]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_een7e"]
@@ -310,7 +311,7 @@ modulate_color = Color(0.541247, 0.291974, 0.221316, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kg7g6"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="scene2" type="Control" parent="."]
 layout_mode = 3
@@ -647,6 +648,7 @@ visible = false
 [node name="typewriter" type="AudioStreamPlayer2D" parent="scene2"]
 stream = ExtResource("8_3d36b")
 volume_db = 24.0
+
 [node name="whip" type="AudioStreamPlayer2D" parent="scene2"]
 position = Vector2(0, -106)
 stream = ExtResource("17_4nvla")

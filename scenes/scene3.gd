@@ -9,9 +9,9 @@ var dialogues = [
 	'And before that day, didn’t you have a long undefeated streak that you so want to defend?',
 	'Yes. But that doesn’t mean I would go this far just to protect that.',
 	'Oh, really.',
-	'Huh.',
+	'Huh...?',
 	'Moments before the victim’s untimely death, a witness saw you as you entered the scene of the crime.',
-	'..!',
+	'...!',
 	'I was on my way there to have some peace in the restroom.',
 	'I find that hard to believe, you were spotted, coincidentally, around the same time the victim was still alive.',
 	'I have IBS medications to prove the flare ups.',
@@ -55,7 +55,7 @@ var char_names = [
 # Text style 3 = Green, centered, Current setting (time and place)
 
 var text_styles = [
-	2,
+	1,
 	1,
 	1,
 	1,
@@ -266,6 +266,8 @@ func update_sprites(sprite: int):
 	sunny_sprite.visible = false
 	alexa_sprite.visible = false
 	
+	sunny_sprite_animation.stop()
+	sunny_sprite_animation2.stop()
 	match sprite:
 		1:
 			judge_sprite.visible = true

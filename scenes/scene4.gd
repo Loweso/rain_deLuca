@@ -1,5 +1,4 @@
 extends Control
-
 var dialogues = [
 	'(This is bad...)',
 	'Our witness was a pool cleaner finishing his last shift of the day at the pool.',
@@ -18,7 +17,6 @@ var dialogues = [
 	'So you’re certain that Ms. Yala was the last person seen with the victim before her death?',
 	'Yes, ma’am. I’m sure of it.',
 ]
-
 var char_names = [
 	"Rain",
 	"Sunny",
@@ -37,11 +35,9 @@ var char_names = [
 	"Sunny",
 	"Elay",
 ]
-
 # Text style 1 = White, Spoken Dialogue
 # Text style 2 = Blue, Inner Thoughts
 # Text style 3 = Green, centered, Current setting (time and place)
-
 var text_styles = [
 	2,
 	1,
@@ -61,7 +57,6 @@ var text_styles = [
 	1,
 	
 ]
-
 # spriteToDisplay 0 = No sprite to display
 # spriteToDisplay 1 = judge
 # spriteToDisplay 2 = sunny
@@ -74,19 +69,18 @@ var spriteToDisplay = [
 	2,
 	1,
 	2,
-	5,
+	0,
 	2,
 	0,
 	0,
 	5,
 	0,
 	3,
-	5,
-	5,
+	0,
+	0,
 	3,
-	5,
+	0,
 ]
-
 var text_sound = [
 	1,
 	1,
@@ -106,13 +100,11 @@ var text_sound = [
 	1,
 	1,
 ]
-
 # background 0 = Judge Side
 # background 1 = Prosecutor Side
 # background 2 = Defense Side
 # background 3 = Co-Counsel Side
 # background 4 = Witness Side
-
 var backgrounds = [
 	2,
 	1,
@@ -131,14 +123,12 @@ var backgrounds = [
 	1,
 	4,
 ]
-
 var current_index = 0
 var char_index = 0
 var is_typing = false
 var text_speed = 0.05
 var current_text = ""
 var current_audio
-
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
 @onready var name_label = $PersonNameText as Label
@@ -146,10 +136,8 @@ var current_audio
 @onready var dialogueBox = $DialogueBox as Polygon2D
 @onready var dialogueBoxButton = $DialogueBoxButton as Button
 @onready var courtRecButton = $CourtRecordButton as Button
-
 @onready var inventory = $Inventory_UI
 @onready var inv: Inv
-
 @onready var stand = $stand as TextureRect
 
 @onready var blip = $blip
@@ -165,14 +153,15 @@ var current_audio
 @onready var sunny_sprite_animation2 = $sunny_sprite/sunny_sprite_animation2
 
 func _ready():
+	judge_sprite.visible = false
+	sunny_sprite.visible = false
+	rain_sprite.visible = false
 	update_dialogue()
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
-
 func courtRecButton_pressed():
 	inventory.toggle()
-
 func dialogue_button_pressed():
 	if current_index == dialogues.size():
 		dialogueBoxButton.visible = false
@@ -189,7 +178,6 @@ func dialogue_button_pressed():
 	else:
 		complete_dialogue()
 		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
-
 func update_dialogue():
 	is_typing = true
 	if current_index < dialogues.size():
@@ -220,13 +208,11 @@ func start_text_update():
 		await get_tree().create_timer(text_speed).timeout
 	dialogue_label.text = current_text
 	is_typing = false
-
 func complete_dialogue():
 	dialogue_label.text = current_text
 	is_typing = false
 	current_audio.stop() 
 	
-
 func apply_text_sound(text_value:int):
 	match text_value:
 		1: 
@@ -246,15 +232,13 @@ func apply_text_style(style_value: int):
 		3:
 			color = Color(15 / 255.0, 242 / 255.0, 79 / 255.0)
 			dialogue_label.horizontal_alignment = 1
-
 	dialogue_label.add_theme_color_override("font_color", color)
 	
 func update_sprites(sprite: int):
-	elay_sprite.visible = false
 	judge_sprite.visible = false
 	sunny_sprite.visible = false
 	rain_sprite.visible = false
-	
+
 	sunny_sprite_animation.stop()
 	sunny_sprite_animation2.stop()
 	match sprite:
@@ -294,13 +278,7 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			sunny_sprite_animation2.play("Blinking")
-		6:
-			elay_sprite.visible = true
-			elay_animation.play("talking")
-			if is_typing:
-				await start_text_update()
-			elay_animation.play("blinking")
-	
+
 func update_background(background_index: int):
 	var background_texture: Texture
 	var stand_texture: Texture
@@ -326,4 +304,3 @@ func update_background(background_index: int):
 	
 	background_sprite.texture = background_texture
 	stand.texture = stand_texture
-	
