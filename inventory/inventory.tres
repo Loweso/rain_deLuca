@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://pfgnmml5smvv" path="res://inventory/attorneysbadge.tres" id="1_kwulm"]
 [ext_resource type="Script" path="res://inventory.gd" id="2_f44yx"]
 [ext_resource type="Resource" uid="uid://b2vlbyipwhv1q" path="res://inventory/autopsyReport.tres" id="3_hhixj"]
-[ext_resource type="Resource" path="res://inventory/handkerchief.tres" id="3_qk1dd"]
+[ext_resource type="Resource" uid="uid://bsfgxc6046cs" path="res://inventory/handkerchief.tres" id="3_qk1dd"]
 
 [resource]
 script = ExtResource("2_f44yx")
