@@ -65,7 +65,7 @@ var witness_anim = [
 ]
 
 var current_index = 0
-var current_crossExam = 1
+var current_crossExam = 0
 var current_no_mistakes = 0
 var save_file_path = "user://current_index.txt"
 var no_of_mistakes_path = "user://mistakes_num.txt"

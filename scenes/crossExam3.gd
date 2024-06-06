@@ -6,16 +6,11 @@ var dialogues = [
 	"While waiting for the match, I bought Alexa Yala merchandise.",
 	"My focus was primarily on the tennis event, and I didn’t have any reason to visit the pool area.",
 	"There was one individual who caught my attention. It was Sunny Flower, the prosecutor in this case. Why she was there, I don’t know.",
-	"I... I really have nothing else to add. I didn’t do it.",
+	"I… I really have nothing else to add. I didn’t do it.",
 ]
 
 var char_names = [
 	"",
-	"Rain",
-	"Rain",
-	"Rain",
-	"Rain",
-	"Rain",
 	"Rain",
 	"Rain",
 	"Rain",
@@ -47,6 +42,7 @@ var text_styles = [
 	4,
 ]
 
+
 # background 0 = Judge Side
 # background 1 = Prosecutor Side
 # background 2 = Defense Side
@@ -67,15 +63,15 @@ var backgrounds = [
 
 var witness_anim = [
 	0,
-	0,
-	0,
-	0,
-	0,
-	0,
+	1,
+	1,
+	1,
+	1,
+	1,
 ]
 
 var current_index = 0
-var current_crossExam = 2
+var current_crossExam = 0
 var current_no_mistakes = 0
 var save_file_path = "user://current_index.txt"
 var no_of_mistakes_path = "user://mistakes_num.txt"
@@ -181,7 +177,7 @@ func update_dialogue():
 	is_typing = true
 	if current_index >= dialogues.size():
 		save_num(1, save_file_path)
-		get_tree().change_scene_to_file("res://scenes/convoScene3.tscn")
+		get_tree().change_scene_to_file("res://scenes/convoScene1.tscn")
 	else:
 		current_text = dialogues[current_index]
 		dialogue_label.text = ""
@@ -208,6 +204,7 @@ func start_text_update():
 		await get_tree().create_timer(text_speed).timeout
 	dialogue_label.text = current_text
 	is_typing = false
+	
 		
 func apply_text_style(style_value: int):
 	var color := Color(1, 1, 1)
@@ -249,14 +246,14 @@ func update_background(background_index: int):
 func update_sprites(sprite: int):
 	match sprite:
 		0:
-			witness_animation.play("blinking")
+			witness_animation.play("blink")
 			if is_typing:
 				await start_text_update()
 		1:
-			witness_animation.play("talking")
+			witness_animation.play("talk")
 			if is_typing:
 				await start_text_update()
-			witness_animation.play("blinking")
+			witness_animation.play("blink")
 		_:
 			pass
 
@@ -278,18 +275,18 @@ func press_button_pressed():
 		1:	
 			# Put the next index of the current index in save_current_index
 			save_num(2, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene3_1.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene1_1.tscn")
 		2:	
 			save_num(3, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene3_2.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene1_2.tscn")
 		3:	
 			save_num(4, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene3_3.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene1_3.tscn")
 		4:	
 			save_num(5, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene3_4.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene1_4.tscn")
 		5:	
 			save_num(1, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene3_5.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene1_5.tscn")
 		_:
 			pass
