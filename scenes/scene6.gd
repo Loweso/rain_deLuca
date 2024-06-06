@@ -108,6 +108,7 @@ var current_audio
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
 
 func _ready():
+	print("am here")
 	update_dialogue()
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
@@ -130,7 +131,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
+		SceneTransition.load_scene("res://scenes/scene7.tscn")
 
 func update_dialogue():
 	is_typing = true

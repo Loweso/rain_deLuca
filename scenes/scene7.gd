@@ -122,7 +122,7 @@ var spriteToDisplay = [
 	0,
 	0,
 	0,
-	1,
+	0,
 	0,
 	0,
 	0,
@@ -272,7 +272,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam3.tscn")
 
 func update_dialogue():
 	is_typing = true
