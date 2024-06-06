@@ -1,35 +1,39 @@
 extends Control
 
 var dialogues = [
-	"This evidence shows a contradiction in the testimony!",
-	"Hmm... What might this contradiction be?",
-	"...",
-	"I guess there wasn't...",
-	"Hah! You’re barking up the wrong tree... and with such vigor, de Luca!",
-	"You chose to be a pathetic lying dog this time, not a lawyer? Save your breath.",
-	"I thought we’re obliged to tell the truth AND only the truth, Atty. de Luca?",
-	'Rain, pay attention! Let’s focus on the present matters about what Elay saw in the pool area.',
-	'If our defendant Ms. Yala really is saying the truth, and was having flare ups during the time...',
-	'There must be evidence at the crime scene that should not have been connected to her.',
-	'(Something... at the crime scene...?)',
-	"Are you okay over there, de Luca? You look like you're about to cry.",
-	"(Alright, let’s give this a try... Focus, de Luca! More energy!)"
+	"Can you tell us how exactly you determined this time?",
+	"I didn’t check the clock exactly at that moment, but it was roughly around 3:00 PM.",
+	'(I need to shake him up a bit...)',
+	"So, you base your entire testimony on a rough estimate?",
+	'No precise timekeeping, no verifiable evidence, just your memory?',
+	"Isn’t it possible, Mr. Elay, that your memory could be flawed, especially in such a tense and chaotic situation?",
+	"Well, I...",
+	"Answer the question, Mr. Elay. Isn’t it possible?",
+	"I suppose... but...",
+	'Objection, Your Honor! Mr. de Luca is badgering the witness.',
+	'Mr. de Luca, please rephrase your question and tone down your approach.',
+	"My apologies, Your Honor. Let me rephrase. Mr. Elay can you confirm your estimation of the time Ms. Yala was seen...",
+	"...is not based on any concrete evidence but rather on your memory?",
+	"Yes, that’s correct. It’s an estimate based on my recollection.",
+	"Did you see Ms. Yala at the match venue at any point?"
 ]
 
 var char_names = [
 	"Rain",
-	"Judge",
+	"Elay",
 	"Rain",
 	"Rain",
-	"Sunny",
-	"Sunny",
-	"Judge",
-	"Ms. Cris",
-	"Ms. Cris",
-	"Ms. Cris",
 	"Rain",
-	"Sunny",
-	"Rain"
+	"Rain",
+	"Elay",
+	"Rain",
+	"Elay",
+	'Sunny',
+	'Judge',
+	"Rain",
+	"Rain",
+	"Elay",
+	"Rain",
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -39,37 +43,40 @@ var char_names = [
 var text_styles = [
 	1,
 	1,
-	1,
-	1,
-	1,
-	1, 
-	1,
-	1,
-	1, 
-	1,
 	2,
 	1,
-	2
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
 ]
 
 # spriteToDisplay 0 = No sprite to display
-# spriteToDisplay 1 = Maya, looking forward
-# spriteToDisplay 2 = Maya, talking
+# spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
 	0,
+	1,
 	0,
 	0,
 	0,
 	0,
-	0, 
+	1,
+	0,
+	1,
 	0,
 	0,
 	0,
 	0,
-	0, 
+	1,
 	0,
-	0
 ]
 
 var text_sound = [
@@ -85,7 +92,9 @@ var text_sound = [
 	1,
 	1,
 	1,
-	1
+	1,
+	1,
+	1,
 ]
 
 # background 0 = Judge Side
@@ -96,18 +105,20 @@ var text_sound = [
 
 var backgrounds = [
 	2,
+	4,
+	2,
+	2,
+	2,
+	2,
+	4,
+	2,
+	4,
+	1,
 	0,
 	2,
 	2,
-	1,
-	1,
-	0,
-	3,
-	3,
-	3,
+	4,
 	2,
-	1,
-	2
 ]
 
 var current_index = 0
@@ -116,9 +127,6 @@ var is_typing = false
 var text_speed = 0.05
 var current_text = ""
 var current_audio
-
-var current_no_mistakes = 0
-var no_of_mistakes_path = "user://mistakes_num.txt"
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -146,20 +154,6 @@ func _ready():
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
-	
-	var mistakesFile = FileAccess.open(no_of_mistakes_path, FileAccess.READ)
-	if mistakesFile:
-		current_no_mistakes = mistakesFile.get_var()
-		current_no_mistakes += 1
-		mistakesFile.close()
-		save_num(current_no_mistakes, no_of_mistakes_path)
-	else:
-		save_num(0, no_of_mistakes_path)
-
-func save_num(num: int, filePath: String):
-	var file = FileAccess.open(filePath, FileAccess.WRITE)
-	file.store_var(num)
-	file.close()
 
 func courtRecButton_pressed():
 	inventory.toggle()
@@ -178,7 +172,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
 
 func update_dialogue():
 	is_typing = true

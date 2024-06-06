@@ -4,18 +4,23 @@ extends Control
 # For example, correctItems[0] corresponds to the 1st cross-examination scene.
 # Since correctItems[0] = 1, then the item at inv.items[1] is the correct item to present.
 var correctItems = [
-	1,
-	2
+	2,
+	3
 ]
 
 # Same as correctItems, but checks if the evidence is presented at the correct statement.
 var correctStatement = [
-	1,
+	5,
 	1
 ]
 
 var mistakeScenes = [
 	"res://scenes/crossExam1_mistakeScene.tscn",
+	"res://scenes/crossExam1_mistakeScene.tscn",
+]
+
+var correctScenes = [
+	"res://scenes/scene5.tscn",
 	"res://scenes/crossExam1_mistakeScene.tscn",
 ]
 
@@ -99,7 +104,8 @@ func presentEvidence():
 	if hasSelectedItem == 1:
 		if selectedItem == correctItems[currentCrossExam] and currentStatement == correctStatement[currentCrossExam]:
 			print("Correct item!")
+			$takeThat.load_scene(correctScenes[currentCrossExam])
 		else:
 			print("Wrong item!")
-			get_tree().change_scene_to_file(mistakeScenes[currentCrossExam])
+			$takeThat.load_scene(mistakeScenes[currentCrossExam])
 			
