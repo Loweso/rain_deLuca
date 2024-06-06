@@ -1,23 +1,23 @@
 extends Control
 
 var dialogues = [
-	'Where did you go after leaving the pool area?',
-	'Since the venue of the tennis match was near the pool area, I decided to pass by.',
-	'Did you see anything unusual there?',
-	'No, it was just the usual crowd getting ready for the match.',
-	'How long were you at the tennis match venue?',
-	'Probably about an hour? I realized I forgot to check something before leaving the pool area.',
-	'So you returned to the pool area?',
+	"How could you conclusively say that you really were at the tennis court at the time?",
+	"True. Do you have any proof?",
+	'If you don’t, you might as well have had the chance of sneaking into the pool area, did the deed as quick as you can, and no one would know the better?',
+	"Ah! Someone can prove that for all of us here in the court!",
+	"(There is someone...?!)",
+	"Oh, really, you oaf?",
+	"..!"
 ]
 
 var char_names = [
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
+	"Ms. Cris",
+	"Sunny",
+	'Sunny',
+	"Rain",
+	"Ms. Cris",
+	"Sunny?",
+	"Ms. Cris"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -29,9 +29,9 @@ var text_styles = [
 	1,
 	1,
 	1,
+	2,
 	1,
-	1,
-	1,
+	1
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -39,12 +39,12 @@ var text_styles = [
 
 var spriteToDisplay = [
 	0,
-	1,
 	0,
-	1,
 	0,
-	1,
 	0,
+	0,
+	0,
+	0
 ]
 
 var text_sound = [
@@ -54,7 +54,7 @@ var text_sound = [
 	1,
 	1,
 	1,
-	1,
+	1
 ]
 
 # background 0 = Judge Side
@@ -65,12 +65,12 @@ var text_sound = [
 
 var backgrounds = [
 	2,
+	1,
+	1,
 	4,
 	2,
-	4,
-	2,
-	4,
-	2,
+	1,
+	2
 ]
 
 var current_index = 0
@@ -124,7 +124,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
+		get_tree().change_scene_to_file("res://scenes/pressScene3_3_1.tscn")
 
 func update_dialogue():
 	is_typing = true

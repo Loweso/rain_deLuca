@@ -1,23 +1,25 @@
 extends Control
 
 var dialogues = [
-	'Where did you go after leaving the pool area?',
-	'Since the venue of the tennis match was near the pool area, I decided to pass by.',
-	'Did you see anything unusual there?',
-	'No, it was just the usual crowd getting ready for the match.',
-	'How long were you at the tennis match venue?',
-	'Probably about an hour? I realized I forgot to check something before leaving the pool area.',
-	'So you returned to the pool area?',
+	"Now...this will prove his innocence!",
+	"In what way exactly, Ms. Cris?",
+	'...',
+	"Uhh... nevermind... I guess it wouldn't...",
+	"Oh my! And here we thought you’re one of the BEST seasoned lawyers in town, Cris.",
+	"Stop lying and defending your man-baby friend here, and face the truth!",
+	"Attitude,  Atty. Flower.  Atty. Cris, please do tell the truth and ONLY the truth from here on out.",
+	"(Think Cris...Think! There must be something that could get Rain out of this mess!)",
 ]
 
 var char_names = [
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
+	"Ms. Cris",
+	"Judge",
+	'Ms. Cris',
+	"Ms. Cris",
+	"Sunny",
+	"Sunny",
+	"Judge",
+	"Ms. Cris"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -32,6 +34,7 @@ var text_styles = [
 	1,
 	1,
 	1,
+	2
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -39,12 +42,13 @@ var text_styles = [
 
 var spriteToDisplay = [
 	0,
-	1,
 	0,
-	1,
 	0,
-	1,
 	0,
+	0,
+	0,
+	0,
+	0
 ]
 
 var text_sound = [
@@ -55,6 +59,7 @@ var text_sound = [
 	1,
 	1,
 	1,
+	1
 ]
 
 # background 0 = Judge Side
@@ -65,12 +70,13 @@ var text_sound = [
 
 var backgrounds = [
 	2,
-	4,
+	0,
 	2,
-	4,
 	2,
-	4,
-	2,
+	1,
+	1,
+	0,
+	2
 ]
 
 var current_index = 0
@@ -79,6 +85,9 @@ var is_typing = false
 var text_speed = 0.05
 var current_text = ""
 var current_audio
+
+var current_no_mistakes = 0
+var no_of_mistakes_path = "user://mistakes_num.txt"
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -106,6 +115,15 @@ func _ready():
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
+	
+	var mistakesFile = FileAccess.open(no_of_mistakes_path, FileAccess.READ)
+	if mistakesFile:
+		current_no_mistakes = mistakesFile.get_var()
+		current_no_mistakes += 1
+		mistakesFile.close()
+		save_num(current_no_mistakes, no_of_mistakes_path)
+	else:
+		save_num(0, no_of_mistakes_path)
 
 func courtRecButton_pressed():
 	inventory.toggle()
@@ -124,7 +142,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam3.tscn")
 
 func update_dialogue():
 	is_typing = true
@@ -218,3 +236,8 @@ func update_sprites(sprite: int):
 		_:
 			if is_typing:
 				await start_text_update()
+
+func save_num(num: int, filePath: String):
+	var file = FileAccess.open(filePath, FileAccess.WRITE)
+	file.store_var(num)
+	file.close()

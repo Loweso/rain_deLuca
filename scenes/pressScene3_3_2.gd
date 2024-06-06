@@ -1,23 +1,15 @@
 extends Control
 
 var dialogues = [
-	'Where did you go after leaving the pool area?',
-	'Since the venue of the tennis match was near the pool area, I decided to pass by.',
-	'Did you see anything unusual there?',
-	'No, it was just the usual crowd getting ready for the match.',
-	'How long were you at the tennis match venue?',
-	'Probably about an hour? I realized I forgot to check something before leaving the pool area.',
-	'So you returned to the pool area?',
+	"Oh, really? I don’t quite see what you’re talking about.",
+	"I hope the defense would try to reflect and recollect their marbles before making claims like that.",
+	'(Did I really choose wrong? I know someone had said that Rain really was at the tennis court at the time of the crime...)'
 ]
 
 var char_names = [
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
+	"Sunny",
+	"Judge",
+	'Ms. Cris'
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -27,11 +19,7 @@ var char_names = [
 var text_styles = [
 	1,
 	1,
-	1,
-	1,
-	1,
-	1,
-	1,
+	2
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -39,22 +27,14 @@ var text_styles = [
 
 var spriteToDisplay = [
 	0,
-	1,
 	0,
-	1,
-	0,
-	1,
-	0,
+	0
 ]
 
 var text_sound = [
 	1,
 	1,
-	1,
-	1,
-	1,
-	1,
-	1,
+	1
 ]
 
 # background 0 = Judge Side
@@ -64,13 +44,9 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
-	2,
-	4,
-	2,
-	4,
-	2,
-	4,
-	2,
+	1,
+	0,
+	2
 ]
 
 var current_index = 0
@@ -124,7 +100,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam3.tscn")
 
 func update_dialogue():
 	is_typing = true

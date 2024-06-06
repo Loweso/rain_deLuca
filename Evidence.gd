@@ -5,23 +5,27 @@ extends Control
 # Since correctItems[0] = 1, then the item at inv.items[1] is the correct item to present.
 var correctItems = [
 	2,
-	3
+	9,
+	9
 ]
 
 # Same as correctItems, but checks if the evidence is presented at the correct statement.
 var correctStatement = [
 	5,
-	1
+	9,
+	9,
 ]
 
 var mistakeScenes = [
 	"res://scenes/crossExam1_mistakeScene.tscn",
-	"res://scenes/crossExam1_mistakeScene.tscn",
+	"res://scenes/crossExam2_mistakeScene.tscn",
+	"res://scenes/crossExam3_mistakeScene.tscn",
 ]
 
 var correctScenes = [
 	"res://scenes/scene5.tscn",
-	"res://scenes/crossExam1_mistakeScene.tscn",
+	"N/A",
+	"N/A"
 ]
 
 var is_Open = false
