@@ -129,20 +129,8 @@ func dialogue_button_pressed():
 		else:
 			update_dialogue()
 	else:
-		var press_states_path = "user://press_states.txt"
-		var press_states
-		var file = FileAccess.open(press_states_path, FileAccess.READ)
-		if file:
-			press_states = file.get_var()
-			file.close()
-		else:
-			press_states = [false, false, false, false]
-			
-		if press_states[0] and press_states[1] and press_states[2] and press_states[3]:
-			get_tree().change_scene_to_file("res://scenes/scene6.tscn")
-		else:
-			complete_dialogue()
-			SceneTransition.load_scene("res://scenes/crossExam2.tscn")
+		complete_dialogue()
+		SceneTransition.load_scene("res://scenes/crossExam3.tscn")
 
 func update_dialogue():
 	is_typing = true
