@@ -2,8 +2,6 @@ extends Control
 
 var index_path = "user://current_index.txt"
 var no_of_mistakes_path = "user://mistakes_num.txt"
-var press_states_path = "user://press_states.txt"
-var press_states = [false, false, false, false]
 
 @onready var startButton = $StartGameButton as Button
 @onready var quitButton = $QuitButton as Button
@@ -16,7 +14,6 @@ func _ready():
 	
 	save_num(0, index_path)
 	save_num(0, no_of_mistakes_path)
-	save_press_states()
 
 func _on_exit_pressed():
 	buttonBlip.play()
@@ -31,8 +28,3 @@ func save_num(num: int, filePath: String):
 	file.store_var(num)
 	file.close()
 
-func save_press_states():
-	var file = FileAccess.open(press_states_path, FileAccess.WRITE)
-	if file:
-		file.store_var(press_states)
-		file.close()

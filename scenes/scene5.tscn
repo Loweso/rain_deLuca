@@ -550,7 +550,7 @@ scale = Vector2(1.59133, 1.53609)
 texture = ExtResource("4_xm0c4")
 hframes = 12
 vframes = 14
-frame = 72
+frame = 32
 
 [node name="rain_sprite_animation2" type="AnimationPlayer" parent="scene5/rain_sprite"]
 root_node = NodePath("../rain_sprite_animation")

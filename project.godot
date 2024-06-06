@@ -21,4 +21,4 @@ SceneTransition="*res://scenes/scene_transition.tscn"
 
 [display]
 
-window/size/mode=3
+window/stretch/scale=0.6

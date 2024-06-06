@@ -11,11 +11,11 @@ var dialogues = [
 
 var char_names = [
 	"",
-	"Elay",
-	"Elay",
-	"Elay",
-	"Elay",
-	"Elay",
+	"Rain",
+	"Rain",
+	"Rain",
+	"Rain",
+	"Rain",
 ]
 
 var text_sound = [
@@ -42,18 +42,6 @@ var text_styles = [
 	4,
 ]
 
-# spriteToDisplay 0 = No sprite to display
-# spriteToDisplay 1 = Maya, looking forward
-# spriteToDisplay 2 = Maya, talking
-
-var spriteToDisplay = [
-	0,
-	2,
-	1, 
-	2,
-	0,
-	2,
-]
 
 # background 0 = Judge Side
 # background 1 = Prosecutor Side

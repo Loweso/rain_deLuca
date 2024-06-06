@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bnvfkwd0snf0c"]
+[gd_scene load_steps=38 format=3 uid="uid://cbkm47uuy7j1b"]
 
 [ext_resource type="Texture2D" uid="uid://cjirdovtydvc4" path="res://assets/backgrounds/witnessSide.jpg" id="1_diuly"]
 [ext_resource type="Script" path="res://scenes/crossExam3.gd" id="1_m5bm8"]
