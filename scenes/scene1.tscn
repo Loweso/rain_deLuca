@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://du73yjpwprpk3"]
+[gd_scene load_steps=20 format=3 uid="uid://du73yjpwprpk3"]
 
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="1_f662p"]
 [ext_resource type="Script" path="res://scenes/Scene1.gd" id="1_qpuhb"]
@@ -30,6 +30,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_wjxg4"]
 resource_name = "Listening_2"
 length = 3.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,7 +46,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_5qrea"]
 resource_name = "Talking"
-length = 2.0
+length = 0.7
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -57,31 +58,14 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 0, 1, 2, 3, 2, 0]
-}
-
-[sub_resource type="Animation" id="Animation_dlxdi"]
-resource_name = "Talking_3"
-length = 3.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 0, 10, 11, 12, 13, 20, 2, 1, 2, 1, 12, 13, 12, 13, 2, 0]
+"values": [0, 1, 2, 3, 1, 1, 2, 3, 2, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1l11t"]
 _data = {
 "Listening": SubResource("Animation_3h1pr"),
 "Listening_2": SubResource("Animation_wjxg4"),
-"Talking": SubResource("Animation_5qrea"),
-"Talking_3": SubResource("Animation_dlxdi")
+"Talking": SubResource("Animation_5qrea")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vi03j"]
@@ -133,7 +117,7 @@ scale = Vector2(1.51812, 1.62349)
 texture = ExtResource("3_a1fb7")
 hframes = 10
 vframes = 14
-frame = 31
+frame = 3
 
 [node name="MsCrisTalking" type="AnimationPlayer" parent="Scene1/MsCris"]
 libraries = {

@@ -24,7 +24,7 @@ var dialogues = [
 	'Mr. de Luca, who is the victim in this case?',
 	'Uhm... the victim’s name is Sirina Thirsty.',
 	'Very well... and why was she killed?',
-	'She died of drowning, Your Honor',
+	'She died of drowning, Your Honor.',
 	'Correct. You seem fairly confident, Mr. de Luca.',
 	'Of course, I always am.',
 	'Now, Ms. Sunny Flower...',
@@ -253,6 +253,7 @@ var current_audio
 @onready var typewrite = $typewriter
 @onready var gavel = $gavel
 @onready var selected = $selected
+@onready var whip = $whip
 
 @onready var hammer = $hammer
 
@@ -651,6 +652,10 @@ func update_sprites(sprite: int):
 			rain_sprite_animation.play("Blinking")
 		4:
 			sunny_sprite.visible = true
+			if current_index == 15:
+				sunny_sprite_animation.play("Table_Whip")
+				whip.play()
+				await get_tree().create_timer(0.65).timeout
 			sunny_sprite_animation.play("Talking")
 			if is_typing:
 				await start_text_update()
