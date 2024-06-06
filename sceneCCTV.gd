@@ -56,6 +56,7 @@ var text_styles = [
 	1,
 	1,
 	1,
+	1,
 	1
 ]
 
@@ -80,6 +81,7 @@ var spriteToDisplay = [
 ]
 
 var text_sound = [
+	1,
 	1,
 	1,
 	1,
