@@ -375,10 +375,6 @@ metadata/_edit_lock_ = true
 stream = ExtResource("6_skwdo")
 volume_db = 1.981
 
-[node name="typewriter" type="AudioStreamPlayer2D" parent="scene2"]
-position = Vector2(0, -53)
-stream = ExtResource("8_3d36b")
-
 [node name="gavel" type="AudioStreamPlayer2D" parent="scene2"]
 position = Vector2(0, -106)
 stream = ExtResource("9_38r6k")
@@ -535,3 +531,7 @@ text = "Drowned"
 
 [node name="Inventory_UI" parent="scene2" instance=ExtResource("4_raim4")]
 visible = false
+
+[node name="typewriter" type="AudioStreamPlayer2D" parent="scene2"]
+stream = ExtResource("8_3d36b")
+volume_db = 24.0

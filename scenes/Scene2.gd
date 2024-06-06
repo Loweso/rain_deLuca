@@ -1,7 +1,7 @@
 extends Control
 
 var dialogues = [
-	'April 26, 10:45 AM\nDistrict Court\nCourtroom No. 1',
+	'June 7, 10:45 AM\nDistrict Court\nCourtroom No. 1',
 	'Court is now in session for the trial of Alexa Yala.',
 	'Alexa Yala... That must be your client?',
 	'Yeah... that’s her.',
