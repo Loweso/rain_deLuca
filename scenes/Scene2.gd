@@ -117,7 +117,7 @@ var spriteToDisplay = [
 	2,
 	3,
 	2,
-	5,
+	6,
 	1,
 	1,
 	3,
@@ -658,6 +658,12 @@ func update_sprites(sprite: int):
 		5:
 			rain_sprite.visible = true
 			rain_sprite_animation.play("Embarassed")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation.play("Embarassed_Blinking")
+		6:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Embarassed_Blinking")
 			if is_typing:
 				await start_text_update()
 	
