@@ -265,7 +265,7 @@ modulate_color = Color(0.541247, 0.291974, 0.221316, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t6a8b"]
 
-[node name="Node2D2" type="Node2D"]
+[node name="Node2D3" type="Node2D"]
 
 [node name="scene3" type="Control" parent="."]
 layout_mode = 3
