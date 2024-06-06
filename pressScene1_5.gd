@@ -1,27 +1,21 @@
 extends Control
 
 var dialogues = [
-	'Elay, you said you saw Ms. Yala rush to the pool area alone. How far were you from the pool when you saw this?',
-	'I was about 5 meters away, near the back gate of the pool area.',
-	'Did you observe her behavior closely? Did she seem anxious, hurried, or anything unusual?',
-	'She did seem a bit hurried, but I didn’t think much of it at the time.',
-	'So you didn’t see her enter the restroom as she said?',
-	'No, I didn’t.',
-	'And Ms. Sirina Thirsty was still alive as you left?',
-	'Yes, she was having her time alone.',
-	'Hmm... I see. What happened next?'
+	'Wait, a handkerchief with her name on it?',
+	'Yes. She probably wrote it on to show ownership of the hanky.',
+	'(Wait... Not necessarily..!)',
+	'Doesn’t this contradict something that we know about the handkerchief?',
+	'Yes!',
+	'(I just have to present that evidence now!)'
 ]
 
 var char_names = [
 	'Rain',
 	'Elay',
 	'Rain',
-	'Elay',
+	'Ms. Cris',
 	'Rain',
-	'Elay',
 	'Rain',
-	'Elay',
-	'Rain'
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -31,13 +25,10 @@ var char_names = [
 var text_styles = [
 	1,
 	1,
+	2,
 	1,
 	1,
-	1,
-	1,
-	1,
-	1,
-	1
+	2,
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -47,18 +38,12 @@ var spriteToDisplay = [
 	0,
 	1,
 	0,
-	1,
 	0,
-	1,
 	0,
-	1,
 	0,
 ]
 
 var text_sound = [
-	1,
-	1,
-	1,
 	1,
 	1,
 	1,
@@ -77,12 +62,9 @@ var backgrounds = [
 	2,
 	4,
 	2,
-	4,
+	3,
+	3,
 	2,
-	4,
-	2,
-	4,
-	2
 ]
 
 var current_index = 0
@@ -101,6 +83,7 @@ var current_audio
 @onready var courtRecButton = $CourtRecordButton as Button
 
 @onready var inventory = $Inventory_UI
+@onready var inv: Inv
 
 @onready var defense_bench = $"defense-bench"
 @onready var prosecutor_bench = $"prosecutor-bench"
