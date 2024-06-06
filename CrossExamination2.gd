@@ -6,7 +6,6 @@ var dialogues = [
 	"I saw Ms. Yala again at the match venue at around 3:30 PM.",
 	"I discovered the victim’s body at around 4:00 PM.",
 	"There was no one else around that I remembered but Ms. Alexa Yala.",
-	"Though I can not speak for certain if someone else entered the pool venue from 3:00 PM up until the time when I returned, which was 4:00PM.",
 ]
 
 var char_names = [
@@ -15,12 +14,10 @@ var char_names = [
 	"Elay",
 	"Elay",
 	"Elay",
-	"Elay",
 ]
 
 var text_sound = [
 	2,
-	1,
 	1,
 	1,
 	1,
@@ -39,20 +36,6 @@ var text_styles = [
 	4, 
 	4,
 	4,
-	4,
-]
-
-# spriteToDisplay 0 = No sprite to display
-# spriteToDisplay 1 = Maya, looking forward
-# spriteToDisplay 2 = Maya, talking
-
-var spriteToDisplay = [
-	0,
-	2,
-	1, 
-	2,
-	0,
-	2,
 ]
 
 # background 0 = Judge Side
@@ -65,7 +48,6 @@ var backgrounds = [
 	4,
 	4,
 	4, 
-	4,
 	4,
 	4,
 ]
@@ -87,13 +69,14 @@ var current_crossExam = 0
 var current_no_mistakes = 0
 var save_file_path = "user://current_index.txt"
 var no_of_mistakes_path = "user://mistakes_num.txt"
+var press_states_path = "user://press_states.txt"
 
 var current_audio
 var is_typing = false
 var char_index = 0
 var current_text = ""
 var text_speed = 0.05
-var dialoguetime = 0
+var press_states = [false, false, false, false]
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -120,6 +103,7 @@ var dialoguetime = 0
 
 func _ready():
 	dialogueBoxButton.visible = false
+	load_press_states()
 	load_current_index()
 	update_dialogue()
 	
@@ -156,7 +140,6 @@ func load_current_index():
 	var file = FileAccess.open(save_file_path, FileAccess.READ)
 	if file:
 		current_index = file.get_var()
-		print(current_index)
 		file.close()
 	else:
 		save_num(0, save_file_path)
@@ -189,7 +172,7 @@ func update_dialogue():
 	is_typing = true
 	if current_index >= dialogues.size():
 		save_num(1, save_file_path)
-		get_tree().change_scene_to_file("res://scenes/convoScene1.tscn")
+		get_tree().change_scene_to_file("res://scenes/convoScene2.tscn")
 	else:
 		current_text = dialogues[current_index]
 		dialogue_label.text = ""
@@ -199,7 +182,6 @@ func update_dialogue():
 		update_background(backgrounds[current_index])
 		update_sprites(witness_anim[current_index])
 		update_buttons_visibility()
-	
 	
 func start_text_update():
 	char_index = 0
@@ -285,19 +267,43 @@ func press_button_pressed():
 	match current_index:
 		1:	
 			# Put the next index of the current index in save_current_index
+			press_states[0] = true
+			save_press_states()
 			save_num(2, save_file_path)
+			print(str(press_states))
 			holdItTransition.load_scene("res://scenes/pressScene2_1.tscn")
 		2:	
+			press_states[1] = true
+			save_press_states()
 			save_num(3, save_file_path)
+			print(str(press_states))
 			holdItTransition.load_scene("res://scenes/pressScene2_2.tscn")
 		3:	
+			press_states[2] = true
+			save_press_states()
 			save_num(4, save_file_path)
+			print(str(press_states))
 			holdItTransition.load_scene("res://scenes/pressScene2_3.tscn")
 		4:	
-			save_num(5, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene1_4.tscn")
-		5:	
+			press_states[3] = true
+			save_press_states()
 			save_num(1, save_file_path)
-			holdItTransition.load_scene("res://scenes/pressScene1_5.tscn")
+			print(str(press_states))
+			holdItTransition.load_scene("res://scenes/pressScene2_4.tscn")
 		_:
 			pass
+
+func save_press_states():
+	var file = FileAccess.open(press_states_path, FileAccess.WRITE)
+	if file:
+		file.store_var(press_states)
+		file.close()
+
+func load_press_states():
+	var file = FileAccess.open(press_states_path, FileAccess.READ)
+	if file:
+		press_states = file.get_var()
+		file.close()
+	else:
+		print("am here: "+ str(press_states))
+		press_states = [false, false, false, false]

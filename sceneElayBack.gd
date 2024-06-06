@@ -1,37 +1,55 @@
 extends Control
 
 var dialogues = [
-	"Can you tell us how exactly you determined this time?",
-	"I didn’t check the clock exactly at that moment, but it was roughly around 3:00 PM.",
-	'(I need to shake him up a bit...)',
-	"So, you base your entire testimony on a rough estimate?",
-	'No precise timekeeping, no verifiable evidence, just your memory?',
-	"Isn’t it possible, Mr. Elay, that your memory could be flawed, especially in such a tense and chaotic situation?",
-	"Well, I...",
-	"Answer the question, Mr. Elay. Isn’t it possible?",
-	"I suppose... but...",
-	'Objection, Your Honor! Mr. de Luca is badgering the witness.',
-	'Mr. de Luca, please rephrase your question and tone down your approach.',
-	"My apologies, Your Honor. Let me rephrase. Mr. Elay can you confirm your estimation of the time Ms. Yala was seen...",
-	"...is not based on any concrete evidence but rather on your memory?",
-	"Yes, that’s correct. It’s just an estimate based on my recollection.",
+	'Elay, please return to the witness stand for further questions.',
+	"Of course, Your Honor.",
+	"Let’s get this straight.",
+	"Mr. de Luca claims you can confirm his alibi – that he was at the tennis venue the entire time the crime took place. Is this true?",
+	"Yes, Your Honor. I did see Mr. de Luca at the venue during the known time that the crime took place.",
+	"Please elaborate.",
+	"Sure. As I mentioned during the cross-examination, after finishing my duties at around 3:00 PM, I headed to the match venue.",
+	"And there I saw Mr. de Luca. Given that he and Alex Yala were childhood friends and share a passion for tennis, it made sense for him to be there.",
+	"Are you certain about this?",
+	"Yes, Your Honor. I’m certain. I saw him with my own eyes.",
+	"I was at the match venue from around 3:00 PM to 4:00 PM.",
+	"During that time, Mr. de Luca was there as well, watching the preparations and interacting with other tennis fans.",
+	"So you’re confident he didn’t leave the venue during that period?",
+	"Absolutely, Your Honor. He was there the entire time.",
+	"This strengthens Rain’s case. We need to find another angle to identify the true culprit.",
+	"...",
+	"While it strengthens Rain’s case, it doesn’t quite help Ayala’s case – your client’s – does it?",
+	"...!",
+	"If anything, we’ve established one thing… Only Ayala, who is a close friend of Rain’s, could have dropped the merch with her friend’s DNA on the crime scene.",
+	"That’s not conclusive yet, Your Honor!",
+	"Oh, really? How would you explain that handkerchief then?",
+	"...Tsk!",
+	"(...Is this really it? Is this really the truth?)"
 ]
 
 var char_names = [
-	"Rain",
-	"Elay",
-	"Rain",
-	"Rain",
-	"Rain",
-	"Rain",
-	"Elay",
-	"Rain",
-	"Elay",
-	'Sunny',
 	'Judge',
-	"Rain",
-	"Rain",
 	"Elay",
+	"Judge",
+	"Judge",
+	"Elay",
+	"Judge",
+	"Elay",
+	"Elay",
+	"Judge",
+	"Elay",
+	"Elay",
+	"Elay",
+	"Judge",
+	"Elay",
+	"Ms. Cris",
+	"Sunny",
+	"Sunny",
+	"Ms. Cris",
+	"Sunny",
+	"Rain",
+	"Sunny",
+	"Rain",
+	"Ms. Cris"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -41,7 +59,6 @@ var char_names = [
 var text_styles = [
 	1,
 	1,
-	2,
 	1,
 	1,
 	1,
@@ -53,6 +70,16 @@ var text_styles = [
 	1,
 	1,
 	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	2
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -63,8 +90,13 @@ var spriteToDisplay = [
 	1,
 	0,
 	0,
+	1,
 	0,
+	1,
+	1,
 	0,
+	1,
+	1,
 	1,
 	0,
 	1,
@@ -72,7 +104,11 @@ var spriteToDisplay = [
 	0,
 	0,
 	0,
-	1,
+	0,
+	0,
+	0,
+	0,
+	0
 ]
 
 var text_sound = [
@@ -90,6 +126,15 @@ var text_sound = [
 	1,
 	1,
 	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1
 ]
 
 # background 0 = Judge Side
@@ -99,20 +144,29 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
-	2,
-	4,
-	2,
-	2,
-	2,
-	2,
-	4,
-	2,
-	4,
-	1,
 	0,
-	2,
-	2,
 	4,
+	0,
+	0,
+	4,
+	0,
+	4,
+	4,
+	0,
+	4,
+	4,
+	4,
+	0,
+	4,
+	2,
+	1,
+	1,
+	2,
+	1,
+	3,
+	1,
+	3,
+	2
 ]
 
 var current_index = 0
@@ -144,6 +198,10 @@ var current_audio
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
 
 func _ready():
+	var file = FileAccess.open("user://current_index.txt", FileAccess.WRITE)
+	file.store_var(0)
+	file.close()
+	
 	update_dialogue()
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
@@ -165,20 +223,8 @@ func dialogue_button_pressed():
 		else:
 			update_dialogue()
 	else:
-		var press_states_path = "user://press_states.txt"
-		var press_states
-		var file = FileAccess.open(press_states_path, FileAccess.READ)
-		if file:
-			press_states = file.get_var()
-			file.close()
-		else:
-			press_states = [false, false, false, false]
-			
-		if press_states[0] and press_states[1] and press_states[2] and press_states[3]:
-			get_tree().change_scene_to_file("res://scenes/scene6.tscn")
-		else:
-			complete_dialogue()
-			SceneTransition.load_scene("res://scenes/crossExam2.tscn")
+		complete_dialogue()
+		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
 
 func update_dialogue():
 	is_typing = true
