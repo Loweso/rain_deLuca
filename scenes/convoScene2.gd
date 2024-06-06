@@ -1,37 +1,17 @@
 extends Control
 
 var dialogues = [
-	"Can you tell us how exactly you determined this time?",
-	"I didn’t check the clock exactly at that moment, but it was roughly around 3:00 PM.",
-	'(I need to shake him up a bit...)',
-	"So, you base your entire testimony on a rough estimate?",
-	'No precise timekeeping, no verifiable evidence, just your memory?',
-	"Isn’t it possible, Mr. Elay, that your memory could be flawed, especially in such a tense and chaotic situation?",
-	"Well, I...",
-	"Answer the question, Mr. Elay. Isn’t it possible?",
-	"I suppose... but...",
-	'Objection, Your Honor! Mr. de Luca is badgering the witness.',
-	'Mr. de Luca, please rephrase your question and tone down your approach.',
-	"My apologies, Your Honor. Let me rephrase. Mr. Elay can you confirm your estimation of the time Ms. Yala was seen...",
-	"...is not based on any concrete evidence but rather on your memory?",
-	"Yes, that’s correct. It’s just an estimate based on my recollection.",
+	"He doesn't seem to be lying to us...",
+	"If there does not seem to be anything contradictory in his statements...",
+	"Let's just obtain as much information as we can from him. Press him on the most minute details.",
+	"I see... Let's see what we can get from him...",
 ]
 
 var char_names = [
 	"Rain",
-	"Elay",
+	"Ms. Cris",
+	"Ms. Cris",
 	"Rain",
-	"Rain",
-	"Rain",
-	"Rain",
-	"Elay",
-	"Rain",
-	"Elay",
-	'Sunny',
-	'Judge',
-	"Rain",
-	"Rain",
-	"Elay",
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -39,16 +19,6 @@ var char_names = [
 # Text style 3 = Green, centered, Current setting (time and place)
 
 var text_styles = [
-	1,
-	1,
-	2,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
 	1,
 	1,
 	1,
@@ -60,32 +30,12 @@ var text_styles = [
 
 var spriteToDisplay = [
 	0,
-	1,
 	0,
 	0,
 	0,
-	0,
-	1,
-	0,
-	1,
-	0,
-	0,
-	0,
-	0,
-	1,
 ]
 
 var text_sound = [
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
 	1,
 	1,
 	1,
@@ -100,19 +50,9 @@ var text_sound = [
 
 var backgrounds = [
 	2,
-	4,
+	3,
+	3,
 	2,
-	2,
-	2,
-	2,
-	4,
-	2,
-	4,
-	1,
-	0,
-	2,
-	2,
-	4,
 ]
 
 var current_index = 0
@@ -165,20 +105,8 @@ func dialogue_button_pressed():
 		else:
 			update_dialogue()
 	else:
-		var press_states_path = "user://press_states.txt"
-		var press_states
-		var file = FileAccess.open(press_states_path, FileAccess.READ)
-		if file:
-			press_states = file.get_var()
-			file.close()
-		else:
-			press_states = [false, false, false, false]
-			
-		if press_states[0] and press_states[1] and press_states[2] and press_states[3]:
-			get_tree().change_scene_to_file("res://scenes/scene6.tscn")
-		else:
-			complete_dialogue()
-			SceneTransition.load_scene("res://scenes/crossExam2.tscn")
+		complete_dialogue()
+		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
 
 func update_dialogue():
 	is_typing = true

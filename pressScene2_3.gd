@@ -13,7 +13,6 @@ var dialogues = [
 	"So, that would bring us to approximately 4:00 PM since you first came at around 3:00 PM.",
 	"So, during the time you were at the match venue, you didn’t check on the pool area at all?",
 	"Yes, I never left the tennis court during that time.",
-	"Did you notice anything unusual or anyone suspicious around the pool area when you returned?"
 ]
 
 var char_names = [
@@ -29,7 +28,6 @@ var char_names = [
 	"Rain",
 	"Rain",
 	"Elay",
-	"Rain",
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -37,7 +35,6 @@ var char_names = [
 # Text style 3 = Green, centered, Current setting (time and place)
 
 var text_styles = [
-	1,
 	1,
 	1,
 	1,
@@ -68,7 +65,6 @@ var spriteToDisplay = [
 	0,
 	0,
 	1,
-	0,
 ]
 
 var text_sound = [
@@ -84,7 +80,6 @@ var text_sound = [
 	1,
 	1,
 	1,
-	1
 ]
 
 # background 0 = Judge Side
@@ -106,7 +101,6 @@ var backgrounds = [
 	2,
 	2,
 	4,
-	2,
 ]
 
 var current_index = 0
@@ -159,8 +153,20 @@ func dialogue_button_pressed():
 		else:
 			update_dialogue()
 	else:
-		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
+		var press_states_path = "user://press_states.txt"
+		var press_states
+		var file = FileAccess.open(press_states_path, FileAccess.READ)
+		if file:
+			press_states = file.get_var()
+			file.close()
+		else:
+			press_states = [false, false, false, false]
+		
+		if press_states[0] and press_states[1] and press_states[2] and press_states[3]:
+			get_tree().change_scene_to_file("res://scenes/scene6.tscn")
+		else:
+			complete_dialogue()
+			SceneTransition.load_scene("res://scenes/crossExam2.tscn")
 
 func update_dialogue():
 	is_typing = true
