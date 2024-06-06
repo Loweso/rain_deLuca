@@ -1,35 +1,35 @@
 extends Control
 
 var dialogues = [
-	"This evidence shows a contradiction in the testimony!",
-	"Hmm... What might this contradiction be?",
-	"...",
-	"I guess there wasn't...",
-	"Hah! You’re barking up the wrong tree... and with such vigor, de Luca!",
-	"You chose to be a pathetic lying dog this time, not a lawyer? Save your breath.",
-	"I thought we’re obliged to tell the truth AND only the truth, Atty. de Luca?",
-	'Rain, pay attention! Let’s focus on the present matters about what Elay saw in the pool area.',
-	'If our defendant Ms. Yala really is saying the truth, and was having flare ups during the time...',
-	'There must be evidence at the crime scene that should not have been connected to her.',
-	'(Something... at the crime scene...?)',
-	"Are you okay over there, de Luca? You look like you're about to cry.",
-	"(Alright, let’s give this a try... Focus, de Luca! More energy!)"
+	"Let’s go over your activities before that hour. After seeing Ms. Yala at around 3:00 PM, what did you do next?",
+	"I decided to just continue on with my business and headed towards the match venue, which was the tennis court.",
+	'And so, what exactly did you do there?',
+	"I just watched the preparations for the match.",
+	'When I got there, other individuals involved in the event were pretty busy...',
+	"I even saw you, Mr. de Luca.",
+	"Right, I was there. The match was almost starting after all.",
+	"Anyway, how long were you at the match venue?",
+	"I stayed there for about an hour, just... watching.",
+	"So, that would bring us to approximately 4:00 PM since you first came at around 3:00 PM.",
+	"So, during the time you were at the match venue, you didn’t check on the pool area at all?",
+	"Yes, I never left the tennis court during that time.",
+	"Did you notice anything unusual or anyone suspicious around the pool area when you returned?"
 ]
 
 var char_names = [
 	"Rain",
-	"Judge",
+	"Elay",
+	"Rain",
+	"Elay",
+	"Elay",
+	"Elay",
 	"Rain",
 	"Rain",
-	"Sunny",
-	"Sunny",
-	"Judge",
-	"Ms. Cris",
-	"Ms. Cris",
-	"Ms. Cris",
+	"Elay",
 	"Rain",
-	"Sunny",
-	"Rain"
+	"Rain",
+	"Elay",
+	"Rain",
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -42,34 +42,33 @@ var text_styles = [
 	1,
 	1,
 	1,
-	1, 
 	1,
 	1,
-	1, 
 	1,
-	2,
 	1,
-	2
+	1,
+	1,
+	1,
+	1,
 ]
 
 # spriteToDisplay 0 = No sprite to display
-# spriteToDisplay 1 = Maya, looking forward
-# spriteToDisplay 2 = Maya, talking
+# spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
 	0,
+	1,
+	0,
+	1,
+	1,
+	1,
 	0,
 	0,
+	1,
 	0,
 	0,
-	0, 
+	1,
 	0,
-	0,
-	0,
-	0,
-	0, 
-	0,
-	0
 ]
 
 var text_sound = [
@@ -96,18 +95,18 @@ var text_sound = [
 
 var backgrounds = [
 	2,
-	0,
+	4,
+	2,
+	4,
+	4,
+	4,
 	2,
 	2,
-	1,
-	1,
-	0,
-	3,
-	3,
-	3,
+	4,
 	2,
-	1,
-	2
+	2,
+	4,
+	2,
 ]
 
 var current_index = 0
@@ -116,9 +115,6 @@ var is_typing = false
 var text_speed = 0.05
 var current_text = ""
 var current_audio
-
-var current_no_mistakes = 0
-var no_of_mistakes_path = "user://mistakes_num.txt"
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -146,20 +142,6 @@ func _ready():
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
-	
-	var mistakesFile = FileAccess.open(no_of_mistakes_path, FileAccess.READ)
-	if mistakesFile:
-		current_no_mistakes = mistakesFile.get_var()
-		current_no_mistakes += 1
-		mistakesFile.close()
-		save_num(current_no_mistakes, no_of_mistakes_path)
-	else:
-		save_num(0, no_of_mistakes_path)
-
-func save_num(num: int, filePath: String):
-	var file = FileAccess.open(filePath, FileAccess.WRITE)
-	file.store_var(num)
-	file.close()
 
 func courtRecButton_pressed():
 	inventory.toggle()
@@ -178,7 +160,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
 
 func update_dialogue():
 	is_typing = true

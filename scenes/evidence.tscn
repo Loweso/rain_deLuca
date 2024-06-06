@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cedc7c312rh8f"]
+[gd_scene load_steps=18 format=3 uid="uid://cedc7c312rh8f"]
 
 [ext_resource type="Script" path="res://Evidence.gd" id="1_ga1vr"]
 [ext_resource type="Texture2D" uid="uid://pnkcckfosod5" path="res://assets/ui/courtRecord.png" id="2_8h8mu"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="4_2dqwq"]
 [ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="5_iwbre"]
 [ext_resource type="Texture2D" uid="uid://cphiqj8mj3wud" path="res://assets/ui/presentButton.png" id="6_unlxh"]
+[ext_resource type="PackedScene" uid="uid://xaxsfqhiqcuf" path="res://scenes/takeThatTransition.tscn" id="7_b17n5"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dbafu"]
 texture = ExtResource("5_iwbre")
@@ -210,3 +211,5 @@ scale = Vector2(0.0504542, 0.191341)
 theme_override_fonts/font = ExtResource("4_2dqwq")
 text = "Present"
 horizontal_alignment = 1
+
+[node name="takeThat" parent="." instance=ExtResource("7_b17n5")]
