@@ -1,35 +1,29 @@
 extends Control
 
 var dialogues = [
-	"Let’s go over your activities before that hour. After seeing Ms. Yala at around 3:00 PM, what did you do next?",
-	"I decided to just continue on with my business and headed towards the match venue, which was the tennis court.",
-	'And so, what exactly did you do there?',
-	"I just watched the preparations for the match.",
-	'When I got there, other individuals involved in the event were pretty busy...',
-	"I even saw you, Mr. de Luca.",
-	"Right, I was there. The match was almost starting after all.",
-	"Anyway, how long were you at the match venue?",
-	"I stayed there for about an hour, just... watching.",
-	"So, that would bring us to approximately 4:00 PM since you first came at around 3:00 PM.",
-	"So, during the time you were at the match venue, you didn’t check on the pool area at all?",
-	"Yes, I never left the tennis court during that time.",
-	"Did you notice anything unusual or anyone suspicious around the pool area when you returned?"
+	"This will prove inconsistencies in this testimony...",
+	"And how will you prove these said inconsistencies?",
+	'...',
+	"Uhh... my bad... I guess there wasn’t...",
+	"Ah ah aaaah!~ You’re slipping up, de Luca.",
+	"Save your breath on those lies! That’s not getting you anywhere.",
+	"Have you forgotten how to be a lawyer, Atty. de Luca?",
+	"Rain, keep yourself together!",
+	"There must be something fishy about Elay’s timeline. Let’s center ourselves more on the details and see how this turns out.",
+	"(Ugh fine... let’s continue this damned testimony...)"
 ]
 
 var char_names = [
 	"Rain",
-	"Elay",
+	"Judge",
+	'Rain',
 	"Rain",
-	"Elay",
-	"Elay",
-	"Elay",
+	"Sunny",
+	"Sunny",
+	"Judge",
+	"Ms. Cris",
 	"Rain",
-	"Rain",
-	"Elay",
-	"Rain",
-	"Rain",
-	"Elay",
-	"Rain",
+	"Rain"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -46,10 +40,7 @@ var text_styles = [
 	1,
 	1,
 	1,
-	1,
-	1,
-	1,
-	1,
+	2
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -57,24 +48,18 @@ var text_styles = [
 
 var spriteToDisplay = [
 	0,
-	1,
-	0,
-	1,
-	1,
-	1,
 	0,
 	0,
-	1,
 	0,
 	0,
-	1,
 	0,
+	0,
+	0,
+	0,
+	0
 ]
 
 var text_sound = [
-	1,
-	1,
-	1,
 	1,
 	1,
 	1,
@@ -95,18 +80,15 @@ var text_sound = [
 
 var backgrounds = [
 	2,
-	4,
-	2,
-	4,
-	4,
-	4,
+	0,
 	2,
 	2,
-	4,
+	1,
+	1,
+	0,
+	3,
 	2,
-	2,
-	4,
-	2,
+	2
 ]
 
 var current_index = 0

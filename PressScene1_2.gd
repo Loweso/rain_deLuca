@@ -38,13 +38,13 @@ var text_styles = [
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	4,
+	0,
 	1,
-	3,
+	0,
 	1,
-	3,
+	0,
 	1,
-	2,
+	0,
 ]
 
 var text_sound = [
@@ -97,14 +97,9 @@ var current_audio
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
-@onready var bang = $bang
 
 @onready var elay_sprite = $Background/ElaySprite
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
-@onready var rain_sprite = $rain_sprite
-@onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
-@onready var rain_sprite_animation2 = $rain_sprite/rain_sprite_animation2
-@onready var rain_sprite_animation3 = $rain_sprite/AnimationPlayer
 
 func _ready():
 	update_dialogue()
@@ -126,7 +121,6 @@ func dialogue_button_pressed():
 		if is_typing:
 			complete_dialogue()
 		else:
-			current_index += 1
 			update_dialogue()
 	else:
 		complete_dialogue()
@@ -142,7 +136,7 @@ func update_dialogue():
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
 		update_sprites(spriteToDisplay[current_index])
-	
+	current_index += 1
 		
 func start_text_update():
 	char_index = 0
@@ -211,10 +205,6 @@ func update_background(background_index: int):
 	
 func update_sprites(sprite: int):
 	elay_sprite.visible = false
-	rain_sprite.visible = false
-	rain_sprite_animation.stop()
-	rain_sprite_animation2.stop()
-	rain_sprite_animation3.stop()
 	match sprite:
 		0:
 			if is_typing:
@@ -225,31 +215,6 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			elay_animation.play("blinking")
-		
-		2:
-			rain_sprite.visible = true
-			rain_sprite_animation.play("Talking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation.play("Blinking")
-		3:
-			rain_sprite.visible = true
-			rain_sprite_animation2.play("Talking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation2.play("Blinking")
-		
-		4:
-			rain_sprite.visible = true
-			if current_index == 0:
-				rain_sprite_animation3.play("TakeThat")
-				bang.play()
-				await get_tree().create_timer(0.9).timeout
-			rain_sprite_animation3.play("TakeThatTalking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation3.play("TakeThatBlinking")
-			
 		_:
 			if is_typing:
 				await start_text_update()
