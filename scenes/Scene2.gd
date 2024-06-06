@@ -64,7 +64,6 @@ var char_names = [
 	'Sunny',
 	"Judge",
 	'Sunny',
-	
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -108,27 +107,28 @@ var text_styles = [
 # spriteToDisplay 1 = Judge, talking
 # spriteToDisplay 2 = Ms Cris, talking
 # spriteToDisplay 3 = Rain de Luca
-# 4 = ms cris, talking longer
-# 5 = sunny,
+# 4 = sunny
+# 5 = embarassed rain
+
 
 var spriteToDisplay = [
 	0,
 	1,
 	2,
 	3,
+	2,
+	5,
+	1,
+	1,
+	3,
+	1,
+	1,
 	4,
 	3,
 	1,
-	1,
-	3,
-	1,
-	1,
-	5,
-	3,
-	1,
-	5,
-	5,
-	5,
+	4,
+	4,
+	4,
 	1,
 	2,
 	2,
@@ -139,9 +139,9 @@ var spriteToDisplay = [
 	1,
 	3,
 	1,
-	5,
+	4,
 	1,
-	5,
+	4,
 ]
 
 # background 0 = Judge Side
@@ -286,8 +286,9 @@ func _ready():
 	Strangled.visible = false
 	Drowned.visible = false
 	
-	
 	await update_dialogue()
+	
+	
 	
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
@@ -542,6 +543,7 @@ func courtRecButton_pressed():
 	inventory.toggle()
 
 func dialogue_button_pressed():
+	
 	if current_index == dialogues.size():
 		dialogueBoxButton.visible = false
 	if current_index < dialogues.size():
@@ -553,16 +555,10 @@ func dialogue_button_pressed():
 		if is_typing:
 			complete_dialogue()
 		else:
-			update_dialogue()
-			
-			
-		if current_index == 1 && is_typing:
-			hammer.visible = true
-			hammer.play()
-			gavel.play()
-			await hammer.finished
-			hammer.visible = false
-		if dialogue_label.text == current_text:
+			current_index += 1
+			await update_dialogue()
+		
+		if !is_typing:
 			if current_index == 7:
 				dialogueBoxButton.visible = false
 				AlexaYalaButton.visible = true
@@ -581,7 +577,7 @@ func dialogue_button_pressed():
 				Poisoned.visible = true
 				Strangled.visible = true
 				Drowned.visible = true
-		
+			
 	else:
 		complete_dialogue()
 		await get_tree().create_timer(1).timeout
@@ -589,6 +585,12 @@ func dialogue_button_pressed():
 
 func update_dialogue():
 	is_typing = true
+	if current_index == 1 && is_typing:
+		hammer.visible = true
+		hammer.play()
+		gavel.play()
+		await hammer.finished
+		hammer.visible = false
 	if current_index < dialogues.size():
 		current_text = dialogues[current_index]
 		current_name = char_names[current_index]
@@ -597,16 +599,13 @@ func update_dialogue():
 		apply_text_sound(text_sound[current_index])
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
-		update_sprites(spriteToDisplay[current_index])
-		if is_typing:
+		await update_sprites(spriteToDisplay[current_index])
+		if current_index == 0 && is_typing:
 			await start_text_update()
-	else:
-		dialogue_label.text = "End of dialogues."
-	current_index += 1	
+	
+	
 func start_text_update():
 	char_index = 0
-	if current_index == 1:
-		await get_tree().create_timer(1).timeout
 	while char_index < current_text.length():
 		if not is_typing:
 			return
@@ -631,21 +630,37 @@ func update_sprites(sprite: int):
 	mscris_sprite.visible = false
 	rain_sprite.visible = false
 	sunny_sprite.visible = false
-	
 	match sprite:
 		1:
 			judge_sprite.visible = true
 			judge_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			judge_sprite_animation.play("Blinking")
 		2:
 			mscris_sprite.visible = true
 			mscris_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			mscris_sprite_animation.play("Blinking")
 		3:
 			rain_sprite.visible = true
-		4: 
-			mscris_sprite.visible = true
-			mscris_sprite_animation.play("Talking_2")
-		5:
+			rain_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation.play("Blinking")
+		4:
 			sunny_sprite.visible = true
+			sunny_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			sunny_sprite_animation.play("Blinking")
+		5:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Embarassed")
+			if is_typing:
+				await start_text_update()
+	
 			
 		
 func apply_text_style(style_value: int):

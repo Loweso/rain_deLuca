@@ -20,21 +20,21 @@ var dialogues = [
 ]
 
 var char_names = [
-	"Rain de Luca",
-	"Sunny Flower",
-	"Sunny Flower",
+	"Rain",
+	"Sunny",
+	"Sunny",
 	"Judge",
-	"Sunny Flower",
+	"Sunny",
 	"Elay",
-	"Sunny Flower",
-	"Elay",
-	"Elay",
-	"Sunny Flower",
-	"Elay",
-	"Sunny Flower",
+	"Sunny",
 	"Elay",
 	"Elay",
-	"Sunny Flower",
+	"Sunny",
+	"Elay",
+	"Sunny",
+	"Elay",
+	"Elay",
+	"Sunny",
 	"Elay",
 ]
 
@@ -63,25 +63,27 @@ var text_styles = [
 ]
 
 # spriteToDisplay 0 = No sprite to display
-# spriteToDisplay 1 = Maya, looking forward
-# spriteToDisplay 2 = Maya, talking
+# spriteToDisplay 1 = judge
+# spriteToDisplay 2 = sunny
+# 4 rain
+# 3 sunny
 
 var spriteToDisplay = [
+	4,
+	2,
+	2,
+	1,
+	2,
+	0,
+	2,
 	0,
 	0,
+	2,
+	0,
+	3,
 	0,
 	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
+	3,
 	0,
 ]
 
@@ -153,7 +155,17 @@ var current_audio
 @onready var blip = $blip
 @onready var typewrite = $typewrite
 
+@onready var rain_sprite = $rain_sprite
+@onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
+@onready var sunny_sprite = $sunny_sprite
+@onready var sunny_sprite_animation = $sunny_sprite/sunny_sprite_animation
+@onready var judge_sprite = $judge_sprite
+@onready var judge_sprite_animation = $judge_sprite/judge_sprite_animation
+
 func _ready():
+	judge_sprite.visible = false
+	sunny_sprite.visible = false
+	rain_sprite.visible = false
 	update_dialogue()
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
@@ -173,6 +185,7 @@ func dialogue_button_pressed():
 		if is_typing:
 			complete_dialogue()
 		else:
+			current_index += 1
 			update_dialogue()
 	else:
 		complete_dialogue()
@@ -181,15 +194,15 @@ func dialogue_button_pressed():
 func update_dialogue():
 	is_typing = true
 	if current_index < dialogues.size():
+		
 		current_text = dialogues[current_index]
+		print(current_text)
 		dialogue_label.text = ""
 		name_label.text = char_names[current_index]
 		apply_text_sound(text_sound[current_index]) 
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
-	if is_typing:
-		await start_text_update()
-	current_index += 1
+		update_sprites(spriteToDisplay[current_index])
 		
 	
 		
@@ -213,6 +226,7 @@ func complete_dialogue():
 	dialogue_label.text = current_text
 	is_typing = false
 	current_audio.stop() 
+	
 
 func apply_text_sound(text_value:int):
 	match text_value:
@@ -235,6 +249,38 @@ func apply_text_style(style_value: int):
 			dialogue_label.horizontal_alignment = 1
 
 	dialogue_label.add_theme_color_override("font_color", color)
+	
+func update_sprites(sprite: int):
+	judge_sprite.visible = false
+	sunny_sprite.visible = false
+	rain_sprite.visible = false
+	match sprite:
+		0:
+			if is_typing:
+				await start_text_update()
+		1:
+			judge_sprite.visible = true
+			judge_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			judge_sprite_animation.play("Blinking")
+		2:
+			sunny_sprite.visible = true
+			sunny_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			sunny_sprite_animation.play("Blinking")
+		3:
+			sunny_sprite.visible = true
+			sunny_sprite_animation.play("Suspicious_Talking")
+			if is_typing:
+				await start_text_update()
+			sunny_sprite_animation.play("Suspicious_Blinking")
+		4: 
+			rain_sprite.visible = true
+			rain_sprite_animation.play("worried")
+			if is_typing:
+				await start_text_update()
 	
 func update_background(background_index: int):
 	var background_texture: Texture

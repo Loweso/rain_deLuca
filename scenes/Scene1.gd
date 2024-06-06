@@ -76,20 +76,20 @@ var spriteToDisplay = [
 	0,
 	1,
 	1, 
-	2,
+	1,
 	1,
 	3,
 	4,
 	1,
-	5,
+	2,
 	4,
 	1,
-	5,
+	2,
 	1, 
-	5,
+	2,
 	1,
 	1, 
-	5
+	2
 ]
 
 var text_sound = [
@@ -255,18 +255,15 @@ func update_sprites(sprite: int):
 		1:
 			mscris_sprite.visible = true
 			mscris_sprite_animation.play("Listening")
-		2:
+		2: 
 			mscris_sprite.visible = true
-			mscris_sprite_animation.play("Talking")
+			mscris_sprite_animation.play("Listening_2")
 		3:
 			mscris_sprite.visible = true
-			mscris_sprite_animation.play("Talking_2")
+			mscris_sprite_animation.play("Talking")
 		4:
 			mscris_sprite.visible = true
 			mscris_sprite_animation.play("Talking_3")
-		5: 
-			mscris_sprite.visible = true
-			mscris_sprite_animation.play("Listening_2")
 			
 func apply_text_sound(text_value:int):
 	match text_value:
