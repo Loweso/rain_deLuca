@@ -69,17 +69,17 @@ var spriteToDisplay = [
 	2,
 	1,
 	2,
-	0,
+	6,
 	2,
-	0,
-	0,
+	6,
+	6,
 	5,
-	0,
+	6,
 	3,
-	0,
-	0,
+	6,
+	6,
 	3,
-	0,
+	6,
 ]
 var text_sound = [
 	1,
@@ -146,6 +146,8 @@ var current_audio
 
 @onready var rain_sprite = $rain_sprite
 @onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
+@onready var elay_sprite = $ElaySprite
+@onready var elay_sprite_animation = $ElaySprite/AnimationPlayer
 @onready var sunny_sprite = $sunny_sprite
 @onready var sunny_sprite_animation = $sunny_sprite/sunny_sprite_animation
 @onready var judge_sprite = $judge_sprite
@@ -238,7 +240,7 @@ func update_sprites(sprite: int):
 	judge_sprite.visible = false
 	sunny_sprite.visible = false
 	rain_sprite.visible = false
-
+	elay_sprite.visible = false
 	sunny_sprite_animation.stop()
 	sunny_sprite_animation2.stop()
 	match sprite:
@@ -278,6 +280,14 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			sunny_sprite_animation2.play("Blinking")
+		
+		6: 
+			elay_sprite.visible = true
+			elay_sprite_animation.play("talking")
+			if is_typing:
+				await start_text_update()
+			elay_sprite_animation.play("blinking")
+			
 
 func update_background(background_index: int):
 	var background_texture: Texture
