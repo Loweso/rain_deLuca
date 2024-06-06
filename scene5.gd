@@ -184,6 +184,7 @@ func dialogue_button_pressed():
 		if is_typing:
 			complete_dialogue()
 		else:
+			current_index += 1
 			update_dialogue()
 	else:
 		complete_dialogue()
@@ -199,7 +200,6 @@ func update_dialogue():
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
 		update_sprites(spriteToDisplay[current_index])
-	current_index += 1
 		
 func start_text_update():
 	char_index = 0

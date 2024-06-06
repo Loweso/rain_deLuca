@@ -201,22 +201,6 @@ tracks/0/keys = {
 "values": [72, 73, 74, 75, 76, 77]
 }
 
-[sub_resource type="Animation" id="Animation_uny42"]
-resource_name = "TakeThatTalking"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [78, 79, 80, 81, 82]
-}
-
 [sub_resource type="Animation" id="Animation_aw0fg"]
 resource_name = "TakeThatBlinking"
 length = 0.7
@@ -232,6 +216,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [77, 75]
+}
+
+[sub_resource type="Animation" id="Animation_uny42"]
+resource_name = "TakeThatTalking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [78, 79, 80, 81, 82]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_687i6"]
