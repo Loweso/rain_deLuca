@@ -57,19 +57,19 @@ var text_styles = [
 # spriteToDisplay 2 = Maya, talking
 
 var spriteToDisplay = [
-	0,
-	0,
-	0,
-	0,
-	0,
-	0, 
-	0,
-	0,
-	0,
-	0,
-	0, 
-	0,
-	0
+	3,
+	5,
+	3,
+	7,
+	4,
+	4,
+	5,
+	6,
+	6,
+	6,
+	7,
+	4,
+	8
 ]
 
 var text_sound = [
@@ -137,9 +137,22 @@ var no_of_mistakes_path = "user://mistakes_num.txt"
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
+@onready var bang = $bang
 
 @onready var elay_sprite = $Background/ElaySprite
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
+@onready var rain_sprite = $rain_sprite
+@onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
+@onready var rain_sprite_animation2 = $rain_sprite/rain_sprite_animation2
+@onready var rain_sprite_animation3 = $rain_sprite/AnimationPlayer
+@onready var sunny_sprite = $sunny_sprite
+@onready var sunny_sprite_animation = $sunny_sprite/sunny_sprite_animation
+@onready var judge_sprite = $judge_sprite
+@onready var judge_sprite_animation = $judge_sprite/judge_sprite_animation
+@onready var mscris_sprite = $mscris_sprite
+@onready var mscris_sprite_animation = $mscris_sprite/AnimationPlayer
+
+
 
 func _ready():
 	update_dialogue()
@@ -258,7 +271,14 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 func update_sprites(sprite: int):
+	judge_sprite.visible = false
 	elay_sprite.visible = false
+	rain_sprite.visible = false
+	sunny_sprite.visible = false
+	mscris_sprite.visible = false
+	rain_sprite_animation.stop()
+	rain_sprite_animation2.stop()
+	rain_sprite_animation3.stop()
 	match sprite:
 		0:
 			if is_typing:
@@ -269,6 +289,58 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			elay_animation.play("blinking")
+		
+		2:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation.play("Blinking")
+		
+		3: 
+			rain_sprite.visible = true
+			if current_index == 0:
+				rain_sprite_animation3.play("TakeThat")
+				bang.play()
+				await get_tree().create_timer(0.9).timeout
+			rain_sprite_animation3.play("TakeThatTalking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation3.play("TakeThatBlinking")
+					
+		4: 
+			sunny_sprite.visible = true
+			sunny_sprite_animation.play("Suspicious_Talking")
+			if is_typing:
+				await start_text_update()
+			sunny_sprite_animation.play("Suspicious_Blinking")
+		
+		5: 
+			judge_sprite.visible = true
+			judge_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			judge_sprite_animation.play("Blinking")
+		
+		6:
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("WorriedTalk")
+			if is_typing:
+				await start_text_update()
+			mscris_sprite_animation.play("WorriedStare")
+		
+		7: 
+			rain_sprite.visible = true
+			rain_sprite_animation2.play("Blinking")
+			if is_typing:
+				await start_text_update()
+		
+		8: 
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Embarassed_Blinking")
+			if is_typing:
+				await start_text_update()
+			
 		_:
 			if is_typing:
 				await start_text_update()
