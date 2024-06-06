@@ -1,23 +1,71 @@
 extends Control
 
 var dialogues = [
-	'Where did you go after leaving the pool area?',
-	'Since the venue of the tennis match was near the pool area, I decided to pass by.',
-	'Did you see anything unusual there?',
-	'No, it was just the usual crowd getting ready for the match.',
-	'How long were you at the tennis match venue?',
-	'Probably about an hour? I realized I forgot to check something before leaving the pool area.',
-	'So you returned to the pool area?',
+	'The court is now back in session. Ms. Flower, do you have the results of the DNA test?',
+	"Yes, Your Honor. Let me brief you on the case again.",
+	"At first, it seemed to be an open-and-shut case against Ms. Yala, which is why we are here today.",
+	"Objection, Your Honor. The presence of a handkerchief alone does not prove my client’s guilt.",
+	"Well, I am not finished, Mr. de Luca.",
+	"Overruled. Continue, Prosecutor.",
+	"As I was saying before I was interrupted, the handkerchief pointed to Ms. Yala because of the embroidery on it.",
+	"However... after conducting a DNA test...",
+	"The results appear to be quite revealing.",
+	"(This doesn’t sound so good...)",
+	"The handkerchief had traces of DNA from none other than Rain de Luca, the so-called loyal friend of Alexa Yala.",
+	"That’s preposterous!",
+	"I am pretty, and I am sure that this is a setup!!",
+	"Order! Order in the court!",
+	"Perhaps Mr. de Luca would like to explain how his DNA was found on an item directly linked to the defendant.",
+	"Don’t fret, Rain. She probably had this all planned.",
+	"(What is she going on about?)",
+	"I... I don’t know!",
+	"Think this through Rain! You probably have ideas as to how this came to be.",
+	"Order! Mr. de Luca, you will have your chance to speak.",
+	"Given the new evidence, Mr. de Luca, you need legal representation. I appoint you a new defense attorney.",
+	"Your Honor, this is outrageous! I am innocent!",
+	"Regardless, Mr. de Luca, you have the right to legal counsel.",
+	"Ms. Flower, you will continue as the prosecutor in this case.",
+	"Of course, Your Honor. I am ready to proceed.",
+	"But who will represent me?",
+	"I will, Rain. I believe in your innocence, and I will fight for you.",
+	"Ms. Cris, are you sure about this? It’s a huge risk...",
+	"I am sure. Trust me, Rain. We’ll get through this together.",
+	"Very well. Ms. Cris, you are hereby appointed as the defense attorney for Mr. de Luca.",
+	"Court will reconvene in fifteen minutes."
 ]
 
 var char_names = [
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
+	'Judge',
+	"Sunny",
+	"Sunny",
+	"Rain",
+	"Sunny",
+	"Judge",
+	"Sunny",
+	"Sunny",
+	"Sunny",
+	"Rain",
+	"Sunny",
+	"Rain",
+	"Rain",
+	"Judge",
+	"Sunny",
+	"Ms. Cris",
+	"Rain",
+	"Rain",
+	"Ms. Cris",
+	"Judge",
+	"Judge",
+	"Rain",
+	"Judge",
+	"Judge",
+	"Sunny",
+	"Rain",
+	"Ms. Cris",
+	"Rain",
+	"Ms. Cris",
+	"Judge",
+	"Judge"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -32,19 +80,67 @@ var text_styles = [
 	1,
 	1,
 	1,
+	1,
+	1,
+	2,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	2,
+	1,
+	1,
+	1,
+	1, 
+	1,
+	1,
+	1,
+	1,
+	1, 
+	1, 
+	1,
+	1,
+	1,
+	1
 ]
 
 # spriteToDisplay 0 = No sprite to display
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	4,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
 	1,
-	3,
-	1,
-	3,
-	1,
-	2,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0
 ]
 
 var text_sound = [
@@ -55,6 +151,30 @@ var text_sound = [
 	1,
 	1,
 	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1
 ]
 
 # background 0 = Judge Side
@@ -64,13 +184,37 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
+	0,
+	1,
+	1,
 	2,
-	4,
+	1,
+	0,
+	1,
+	1,
+	1,
 	2,
-	4,
+	1,
 	2,
-	4,
 	2,
+	0,
+	1,
+	3,
+	2,
+	2,
+	3,
+	0,
+	0,
+	2,
+	0,
+	0,
+	1,
+	2,
+	3,
+	3,
+	3,
+	0,
+	0
 ]
 
 var current_index = 0
@@ -97,16 +241,15 @@ var current_audio
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
-@onready var bang = $bang
 
 @onready var elay_sprite = $Background/ElaySprite
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
-@onready var rain_sprite = $rain_sprite
-@onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
-@onready var rain_sprite_animation2 = $rain_sprite/rain_sprite_animation2
-@onready var rain_sprite_animation3 = $rain_sprite/AnimationPlayer
 
 func _ready():
+	var file = FileAccess.open("user://current_index.txt", FileAccess.WRITE)
+	file.store_var(0)
+	file.close()
+	
 	update_dialogue()
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
@@ -126,11 +269,10 @@ func dialogue_button_pressed():
 		if is_typing:
 			complete_dialogue()
 		else:
-			current_index += 1
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
 
 func update_dialogue():
 	is_typing = true
@@ -142,7 +284,7 @@ func update_dialogue():
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
 		update_sprites(spriteToDisplay[current_index])
-	
+	current_index += 1
 		
 func start_text_update():
 	char_index = 0
@@ -211,10 +353,6 @@ func update_background(background_index: int):
 	
 func update_sprites(sprite: int):
 	elay_sprite.visible = false
-	rain_sprite.visible = false
-	rain_sprite_animation.stop()
-	rain_sprite_animation2.stop()
-	rain_sprite_animation3.stop()
 	match sprite:
 		0:
 			if is_typing:
@@ -225,31 +363,6 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			elay_animation.play("blinking")
-		
-		2:
-			rain_sprite.visible = true
-			rain_sprite_animation.play("Talking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation.play("Blinking")
-		3:
-			rain_sprite.visible = true
-			rain_sprite_animation2.play("Talking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation2.play("Blinking")
-		
-		4:
-			rain_sprite.visible = true
-			if current_index == 0:
-				rain_sprite_animation3.play("TakeThat")
-				bang.play()
-				await get_tree().create_timer(0.9).timeout
-			rain_sprite_animation3.play("TakeThatTalking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation3.play("TakeThatBlinking")
-			
 		_:
 			if is_typing:
 				await start_text_update()

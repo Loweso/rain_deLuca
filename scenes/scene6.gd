@@ -1,23 +1,25 @@
 extends Control
 
 var dialogues = [
-	'Where did you go after leaving the pool area?',
-	'Since the venue of the tennis match was near the pool area, I decided to pass by.',
-	'Did you see anything unusual there?',
-	'No, it was just the usual crowd getting ready for the match.',
-	'How long were you at the tennis match venue?',
-	'Probably about an hour? I realized I forgot to check something before leaving the pool area.',
-	'So you returned to the pool area?',
+	"I think we now have a clear timeline of what happened during that one hour.",
+	"No other person has been placed on the crime scene other than the victim Ms. Sirina Thirsty...",
+	"...and, unfortunately, the defendant, Ms. Alexa Yala.",
+	"Your inference is as sharp as ever, Your Honor.",
+	"(Oh, don't you patronize him... Ugh...)",
+	"Well then. Thank you, Elay. No further questions, Your Honor.",
+	"Pleasure to be of help.",
+	"Thank you, Mr. de Luca. The court will take a short recess before continuing."
 ]
 
 var char_names = [
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
+	"Judge",
+	"Judge",
+	"Judge",
+	"Sunny",
+	"Rain",
+	"Rain",
+	"Elay",
+	"Judge"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -29,25 +31,28 @@ var text_styles = [
 	1,
 	1,
 	1,
+	2,
 	1,
 	1,
-	1,
+	1
 ]
 
 # spriteToDisplay 0 = No sprite to display
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	4,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
 	1,
-	3,
-	1,
-	3,
-	1,
-	2,
+	0
 ]
 
 var text_sound = [
+	1,
 	1,
 	1,
 	1,
@@ -64,13 +69,14 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
+	0,
+	0,
+	0,
+	1,
+	2,
 	2,
 	4,
-	2,
-	4,
-	2,
-	4,
-	2,
+	0
 ]
 
 var current_index = 0
@@ -97,14 +103,9 @@ var current_audio
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
-@onready var bang = $bang
 
 @onready var elay_sprite = $Background/ElaySprite
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
-@onready var rain_sprite = $rain_sprite
-@onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
-@onready var rain_sprite_animation2 = $rain_sprite/rain_sprite_animation2
-@onready var rain_sprite_animation3 = $rain_sprite/AnimationPlayer
 
 func _ready():
 	update_dialogue()
@@ -126,11 +127,10 @@ func dialogue_button_pressed():
 		if is_typing:
 			complete_dialogue()
 		else:
-			current_index += 1
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
 
 func update_dialogue():
 	is_typing = true
@@ -142,7 +142,7 @@ func update_dialogue():
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
 		update_sprites(spriteToDisplay[current_index])
-	
+	current_index += 1
 		
 func start_text_update():
 	char_index = 0
@@ -211,10 +211,6 @@ func update_background(background_index: int):
 	
 func update_sprites(sprite: int):
 	elay_sprite.visible = false
-	rain_sprite.visible = false
-	rain_sprite_animation.stop()
-	rain_sprite_animation2.stop()
-	rain_sprite_animation3.stop()
 	match sprite:
 		0:
 			if is_typing:
@@ -225,31 +221,6 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			elay_animation.play("blinking")
-		
-		2:
-			rain_sprite.visible = true
-			rain_sprite_animation.play("Talking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation.play("Blinking")
-		3:
-			rain_sprite.visible = true
-			rain_sprite_animation2.play("Talking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation2.play("Blinking")
-		
-		4:
-			rain_sprite.visible = true
-			if current_index == 0:
-				rain_sprite_animation3.play("TakeThat")
-				bang.play()
-				await get_tree().create_timer(0.9).timeout
-			rain_sprite_animation3.play("TakeThatTalking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation3.play("TakeThatBlinking")
-			
 		_:
 			if is_typing:
 				await start_text_update()

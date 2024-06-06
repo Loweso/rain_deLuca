@@ -1,23 +1,37 @@
 extends Control
 
 var dialogues = [
-	'Where did you go after leaving the pool area?',
-	'Since the venue of the tennis match was near the pool area, I decided to pass by.',
-	'Did you see anything unusual there?',
-	'No, it was just the usual crowd getting ready for the match.',
-	'How long were you at the tennis match venue?',
-	'Probably about an hour? I realized I forgot to check something before leaving the pool area.',
-	'So you returned to the pool area?',
+	'...!',
+	"Rain!",
+	"Yes, Ms. Cris?",
+	"I just got the results from forensic analysis of the CCTV footage from the crime scene.",
+	"I can’t believe I almost forgot we have that! That will finally clear things up. Let’s present it immediately!",
+	"Excuse me, Your Honor.",
+	"What is it Ms. Cris?",
+	"I just received news from our forensics laboratory.",
+	"A thorough forensic analysis of the CCTV footage previously thought to be unreliable.",
+	"This critical evidence! Please elaborate.",
+	"The corrected footage reveals Sunny Flower entering the pool area just before the crime.",
+	"She quickly left the scene, constantly looking around to make sure she wasn't noticed.",
+	"And if you examine closely as she went, you can see she's holding a handkerchief identical to the one discovered at the crime scene.",
+	"And as she left, she was slightly drenched, with her gloves torn apart."
 ]
 
 var char_names = [
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
-	'Elay',
-	'Rain',
+	'Ms. Cris',
+	"Ms. Cris",
+	"Rain",
+	"Ms. Cris",
+	"Rain",
+	"Ms. Cris",
+	"Judge",
+	"Ms. Cris",
+	"Ms. Cris",
+	"Judge",
+	"Ms. Cris",
+	"Ms. Cris",
+	"Ms. Cris",
+	"Ms. Cris"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -32,19 +46,37 @@ var text_styles = [
 	1,
 	1,
 	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1
 ]
 
 # spriteToDisplay 0 = No sprite to display
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	4,
-	1,
-	3,
-	1,
-	3,
-	1,
-	2,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0
 ]
 
 var text_sound = [
@@ -55,6 +87,12 @@ var text_sound = [
 	1,
 	1,
 	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1
 ]
 
 # background 0 = Judge Side
@@ -64,13 +102,20 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
+	3,
+	3,
 	2,
-	4,
+	3,
 	2,
-	4,
-	2,
-	4,
-	2,
+	3,
+	0,
+	3,
+	3,
+	0,
+	3,
+	3,
+	3,
+	3
 ]
 
 var current_index = 0
@@ -97,16 +142,15 @@ var current_audio
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
-@onready var bang = $bang
 
 @onready var elay_sprite = $Background/ElaySprite
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
-@onready var rain_sprite = $rain_sprite
-@onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
-@onready var rain_sprite_animation2 = $rain_sprite/rain_sprite_animation2
-@onready var rain_sprite_animation3 = $rain_sprite/AnimationPlayer
 
 func _ready():
+	var file = FileAccess.open("user://current_index.txt", FileAccess.WRITE)
+	file.store_var(0)
+	file.close()
+	
 	update_dialogue()
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
@@ -126,11 +170,10 @@ func dialogue_button_pressed():
 		if is_typing:
 			complete_dialogue()
 		else:
-			current_index += 1
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
 
 func update_dialogue():
 	is_typing = true
@@ -142,7 +185,7 @@ func update_dialogue():
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
 		update_sprites(spriteToDisplay[current_index])
-	
+	current_index += 1
 		
 func start_text_update():
 	char_index = 0
@@ -211,10 +254,6 @@ func update_background(background_index: int):
 	
 func update_sprites(sprite: int):
 	elay_sprite.visible = false
-	rain_sprite.visible = false
-	rain_sprite_animation.stop()
-	rain_sprite_animation2.stop()
-	rain_sprite_animation3.stop()
 	match sprite:
 		0:
 			if is_typing:
@@ -225,31 +264,6 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			elay_animation.play("blinking")
-		
-		2:
-			rain_sprite.visible = true
-			rain_sprite_animation.play("Talking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation.play("Blinking")
-		3:
-			rain_sprite.visible = true
-			rain_sprite_animation2.play("Talking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation2.play("Blinking")
-		
-		4:
-			rain_sprite.visible = true
-			if current_index == 0:
-				rain_sprite_animation3.play("TakeThat")
-				bang.play()
-				await get_tree().create_timer(0.9).timeout
-			rain_sprite_animation3.play("TakeThatTalking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation3.play("TakeThatBlinking")
-			
 		_:
 			if is_typing:
 				await start_text_update()

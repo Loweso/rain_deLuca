@@ -1,9 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://r7o4ihr4kshy"]
+[gd_scene load_steps=41 format=3 uid="uid://r7o4ihr4kshy"]
 
 [ext_resource type="Script" path="res://pressScene1_5.gd" id="1_seatm"]
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="2_x67br"]
 [ext_resource type="Texture2D" uid="uid://dvu0vh0ulmn3u" path="res://assets/sprites/elay_sprites.png" id="3_fsq1f"]
+[ext_resource type="Texture2D" uid="uid://rij6pq1l6equ" path="res://assets/sprites/rain-sprite.png" id="4_anr6u"]
 [ext_resource type="Texture2D" uid="uid://b5dwq1rgckqxk" path="res://assets/backgrounds/prosecutor-bench.png" id="4_suhct"]
+[ext_resource type="Texture2D" uid="uid://bhxjqckw54ita" path="res://assets/sprites/Ms. Cris (Mia Fey) (1).png" id="5_ldhg2"]
 [ext_resource type="Texture2D" uid="uid://c786m4q5scs3b" path="res://assets/backgrounds/defense-bench.png" id="5_yfr7e"]
 [ext_resource type="Texture2D" uid="uid://1l03kq0eie04" path="res://assets/backgrounds/witness-stand.png" id="6_yg2sw"]
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="7_f8dp5"]
@@ -11,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bwo7hmrw6dsbj" path="res://inventory/inventory_ui.tscn" id="9_8l5n8"]
 [ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="10_2f7fd"]
 [ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="11_oqexp"]
+[ext_resource type="AudioStream" uid="uid://wubxj0f2f408" path="res://assets/music/tablebang.mp3" id="14_weswl"]
 
 [sub_resource type="Animation" id="Animation_a6o8o"]
 resource_name = "blinking"
@@ -50,6 +53,229 @@ tracks/0/keys = {
 _data = {
 "blinking": SubResource("Animation_a6o8o"),
 "talking": SubResource("Animation_xohpg")
+}
+
+[sub_resource type="Animation" id="Animation_rmmav"]
+resource_name = "Blinking"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [32]
+}
+
+[sub_resource type="Animation" id="Animation_2hvhp"]
+resource_name = "Talking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [32, 30, 28, 29, 30]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hbsvx"]
+_data = {
+"Blinking": SubResource("Animation_rmmav"),
+"Talking": SubResource("Animation_2hvhp")
+}
+
+[sub_resource type="Animation" id="Animation_j3nbx"]
+resource_name = "Blinking"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [60, 61, 63, 61, 60]
+}
+
+[sub_resource type="Animation" id="Animation_6y4bw"]
+resource_name = "Embarassed"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [132, 133, 134, 135, 133, 134, 135]
+}
+
+[sub_resource type="Animation" id="Animation_4wirr"]
+resource_name = "Embarassed_Blinking"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [132]
+}
+
+[sub_resource type="Animation" id="Animation_rv8wy"]
+resource_name = "Talking"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.3, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_een7e"]
+_data = {
+"Blinking": SubResource("Animation_j3nbx"),
+"Embarassed": SubResource("Animation_6y4bw"),
+"Embarassed_Blinking": SubResource("Animation_4wirr"),
+"Talking": SubResource("Animation_rv8wy")
+}
+
+[sub_resource type="Animation" id="Animation_vf4mm"]
+resource_name = "Knows"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k2ijs"]
+_data = {
+"Knows": SubResource("Animation_vf4mm")
+}
+
+[sub_resource type="Animation" id="Animation_y4nc8"]
+resource_name = "TakeThat"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.6, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [72, 73, 74, 75, 76, 77]
+}
+
+[sub_resource type="Animation" id="Animation_aw0fg"]
+resource_name = "TakeThatBlinking"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [77, 75]
+}
+
+[sub_resource type="Animation" id="Animation_uny42"]
+resource_name = "TakeThatTalking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [78, 79, 80, 81, 82]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_687i6"]
+_data = {
+"TakeThat": SubResource("Animation_y4nc8"),
+"TakeThatBlinking": SubResource("Animation_aw0fg"),
+"TakeThatTalking": SubResource("Animation_uny42")
+}
+
+[sub_resource type="Animation" id="Animation_gvkvd"]
+resource_name = "Blinking"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [54]
+}
+
+[sub_resource type="Animation" id="Animation_x8q54"]
+resource_name = "Talking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [50, 51, 52, 53, 54]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rc0nm"]
+_data = {
+"Blinking": SubResource("Animation_gvkvd"),
+"Talking": SubResource("Animation_x8q54")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cg5p6"]
@@ -94,6 +320,48 @@ vframes = 4
 [node name="AnimationPlayer" type="AnimationPlayer" parent="pressScene1_5/Background/ElaySprite"]
 libraries = {
 "": SubResource("AnimationLibrary_4r8cx")
+}
+
+[node name="rain_sprite" type="Sprite2D" parent="pressScene1_5"]
+position = Vector2(676.25, 584.302)
+scale = Vector2(1.59133, 1.53609)
+texture = ExtResource("4_anr6u")
+hframes = 12
+vframes = 14
+frame = 72
+
+[node name="rain_sprite_animation2" type="AnimationPlayer" parent="pressScene1_5/rain_sprite"]
+root_node = NodePath("../rain_sprite_animation")
+libraries = {
+"": SubResource("AnimationLibrary_hbsvx")
+}
+
+[node name="rain_sprite_animation" type="AnimationPlayer" parent="pressScene1_5/rain_sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_een7e")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="pressScene1_5/rain_sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_k2ijs")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="pressScene1_5/rain_sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_687i6")
+}
+
+[node name="mscris_sprite" type="Sprite2D" parent="pressScene1_5"]
+position = Vector2(952, 619)
+scale = Vector2(1.51966, 1.48716)
+texture = ExtResource("5_ldhg2")
+hframes = 10
+vframes = 14
+frame = 54
+
+[node name="mscris_sprite_animation" type="AnimationPlayer" parent="pressScene1_5/mscris_sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_rc0nm")
 }
 
 [node name="prosecutor-bench" type="TextureRect" parent="pressScene1_5"]
@@ -202,3 +470,7 @@ volume_db = 6.559
 [node name="typewrite" type="AudioStreamPlayer2D" parent="pressScene1_5"]
 stream = ExtResource("11_oqexp")
 volume_db = 5.943
+
+[node name="bang" type="AudioStreamPlayer2D" parent="pressScene1_5"]
+stream = ExtResource("14_weswl")
+volume_db = 19.86
