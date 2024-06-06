@@ -76,13 +76,13 @@ var spriteToDisplay = [
 	0,
 	1,
 	1, 
-	1,
+	3,
 	1,
 	3,
-	4,
+	3,
 	1,
 	2,
-	4,
+	3,
 	1,
 	2,
 	1, 
@@ -139,6 +139,7 @@ var current_text = ""
 var current_name = ""
 var text_speed = 0.05
 var is_typing = false
+var current_audio
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -159,7 +160,6 @@ var is_typing = false
 @onready var blip = $blip
 @onready var typewrite = $blip2
 
-var current_audio: AudioStreamPlayer2D = blip
 
 
 func _ready():
@@ -169,7 +169,7 @@ func _ready():
 	courtRecButton.visible = false
 	name_label.visible = false
 	await update_dialogue()
-	current_index += 1
+
 	
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
@@ -181,36 +181,38 @@ func dialogue_button_pressed():
 	if current_index == dialogues.size():
 		dialogueBoxButton.visible = false
 	if current_index < dialogues.size():
-		name_label.visible = true
-		dialogueBox.visible = true
-		personNameBox.visible = true
-		courtRecButton.visible = true
-		
 		if is_typing:
 			complete_dialogue()
 		else:
-			update_dialogue()
 			current_index += 1
+			update_dialogue()
+			
+		if current_index > 0:
+			name_label.visible = true
+			dialogueBox.visible = true
+			personNameBox.visible = true
+			courtRecButton.visible = true
+		
+			
 	else:
 		complete_dialogue()
 		await get_tree().create_timer(1).timeout
 		SceneTransition.load_scene("res://scenes/scene2.tscn")
 
 func update_dialogue():
+	is_typing = true
 	if current_index < dialogues.size():
 		current_text = dialogues[current_index]
 		current_name = char_names[current_index]
 		dialogue_label.text = ""
 		name_label.text = current_name
-		update_background(backgrounds[current_index])
-		apply_text_style(text_styles[current_index])
-		update_sprites(spriteToDisplay[current_index])
 		apply_text_sound(text_sound[current_index])
-		is_typing = true
-		if is_typing:
+		apply_text_style(text_styles[current_index])
+		update_background(backgrounds[current_index])
+		update_sprites(spriteToDisplay[current_index])
+		if current_index == 0 && is_typing:
 			await start_text_update()
-	else:
-		dialogue_label.text = "End of dialogues."
+	
 		
 func start_text_update():
 	char_index = 0
@@ -229,8 +231,8 @@ func start_text_update():
 	dialogue_label.text = current_text
 
 func complete_dialogue():
-	is_typing = false
 	dialogue_label.text = current_text
+	is_typing = false
 	current_audio.stop() 
 		
 func apply_text_style(style_value: int):
@@ -255,15 +257,20 @@ func update_sprites(sprite: int):
 		1:
 			mscris_sprite.visible = true
 			mscris_sprite_animation.play("Listening")
+			if is_typing:
+				await start_text_update()
 		2: 
 			mscris_sprite.visible = true
 			mscris_sprite_animation.play("Listening_2")
+			if is_typing:
+				await start_text_update()
 		3:
 			mscris_sprite.visible = true
 			mscris_sprite_animation.play("Talking")
-		4:
+			if is_typing:
+				await start_text_update()
 			mscris_sprite.visible = true
-			mscris_sprite_animation.play("Talking_3")
+			mscris_sprite_animation.play("Listening")
 			
 func apply_text_sound(text_value:int):
 	match text_value:

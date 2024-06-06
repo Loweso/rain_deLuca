@@ -86,7 +86,7 @@ var text_styles = [
 var spriteToDisplay = [
 	3,
 	3,
-	2,
+	6,
 	4,
 	3,
 	2,
@@ -99,13 +99,13 @@ var spriteToDisplay = [
 	2,
 	3,
 	2,
-	3,
+	5,
 	1,
 	2,
 	2,
 	4,
 	1,
-	2,
+	6,
 ]
 
 var text_sound = [
@@ -193,6 +193,7 @@ var current_audio
 @onready var sunny_sprite_animation = $sunny_sprite/sunny_sprite_animation
 @onready var alexa_sprite = $alexa_sprite
 @onready var alexa_sprite_animation = $alexa_sprite/alexa_sprite_animation
+@onready var sunny_sprite_animation2 = $sunny_sprite/sunny_sprite_animation2
 
 func _ready():
 	judge_sprite.visible = false
@@ -227,7 +228,6 @@ func dialogue_button_pressed():
 func update_dialogue():
 	is_typing = true
 	if current_index < dialogues.size():
-		print("lol")
 		current_text = dialogues[current_index]
 		dialogue_label.text = ""
 		name_label.text = char_names[current_index]
@@ -297,6 +297,12 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			alexa_sprite_animation.play("CryBlinking")
+		6:
+			sunny_sprite.visible = true
+			sunny_sprite_animation2.play("NormalTalk")
+			if is_typing:
+				await start_text_update()
+			sunny_sprite_animation2.play("Blinking")
 
 func apply_text_sound(text_value:int):
 	match text_value:

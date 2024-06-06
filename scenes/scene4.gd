@@ -4,7 +4,7 @@ var dialogues = [
 	'(This is bad...)',
 	'Our witness was a pool cleaner finishing his last shift of the day at the pool.',
 	'I’d like to call our witness Elay to the stand.',
-	'...',
+	'Witness, come to the stand please.',
 	'Thank you, Your Honor. Elay, please state your name and occupation for the court.',
 	'My name is Elay, and I work as a pool cleaner at the venue where the incident occurred.',
 	'Elay, could you tell the court what you witnessed on the day of the crime?',
@@ -70,7 +70,7 @@ var text_styles = [
 
 var spriteToDisplay = [
 	4,
-	2,
+	5,
 	2,
 	1,
 	2,
@@ -78,7 +78,7 @@ var spriteToDisplay = [
 	2,
 	0,
 	0,
-	2,
+	5,
 	0,
 	3,
 	0,
@@ -154,6 +154,7 @@ var current_audio
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
+@onready var whip = $whip
 
 @onready var rain_sprite = $rain_sprite
 @onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
@@ -161,6 +162,7 @@ var current_audio
 @onready var sunny_sprite_animation = $sunny_sprite/sunny_sprite_animation
 @onready var judge_sprite = $judge_sprite
 @onready var judge_sprite_animation = $judge_sprite/judge_sprite_animation
+@onready var sunny_sprite_animation2 = $sunny_sprite/sunny_sprite_animation2
 
 func _ready():
 	judge_sprite.visible = false
@@ -254,6 +256,9 @@ func update_sprites(sprite: int):
 	judge_sprite.visible = false
 	sunny_sprite.visible = false
 	rain_sprite.visible = false
+	
+	sunny_sprite_animation.stop()
+	sunny_sprite_animation2.stop()
 	match sprite:
 		0:
 			if is_typing:
@@ -269,6 +274,10 @@ func update_sprites(sprite: int):
 			sunny_sprite_animation.play("Talking")
 			if is_typing:
 				await start_text_update()
+			if current_index == 2:
+				sunny_sprite_animation.play("Table_Whip")
+				whip.play()
+				await get_tree().create_timer(0.65).timeout
 			sunny_sprite_animation.play("Blinking")
 		3:
 			sunny_sprite.visible = true
@@ -281,6 +290,12 @@ func update_sprites(sprite: int):
 			rain_sprite_animation.play("worried")
 			if is_typing:
 				await start_text_update()
+		5: 
+			sunny_sprite.visible = true
+			sunny_sprite_animation2.play("NormalTalk")
+			if is_typing:
+				await start_text_update()
+			sunny_sprite_animation2.play("Blinking")
 	
 func update_background(background_index: int):
 	var background_texture: Texture
