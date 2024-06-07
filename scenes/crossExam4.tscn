@@ -14,22 +14,6 @@
 [ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="12_kg844"]
 [ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="13_ltfsa"]
 
-[sub_resource type="Animation" id="Animation_1ggkh"]
-resource_name = "Talking"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [120, 121, 122, 123, 124, 125]
-}
-
 [sub_resource type="Animation" id="Animation_bdcjs"]
 resource_name = "Blinking"
 length = 0.8
@@ -45,6 +29,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [120, 122]
+}
+
+[sub_resource type="Animation" id="Animation_1ggkh"]
+resource_name = "Talking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [120, 121, 122, 123, 124, 125]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b43im"]

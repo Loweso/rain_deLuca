@@ -16,23 +16,6 @@
 [ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="11_ret3y"]
 [ext_resource type="AudioStream" uid="uid://wubxj0f2f408" path="res://assets/music/tablebang.mp3" id="15_flbfp"]
 
-[sub_resource type="Animation" id="Animation_tg6oo"]
-resource_name = "talk"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.9, 1.1, 1.3, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [4, 5, 6, 1, 2, 3, 4]
-}
-
 [sub_resource type="Animation" id="Animation_6vik3"]
 resource_name = "blink"
 length = 0.5
@@ -48,6 +31,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [4, 7]
+}
+
+[sub_resource type="Animation" id="Animation_tg6oo"]
+resource_name = "talk"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.9, 1.1, 1.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 1, 2, 3, 4]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wwaya"]
@@ -110,6 +110,21 @@ _data = {
 "shocked": SubResource("Animation_sroq2")
 }
 
+[sub_resource type="Animation" id="Animation_ra85v"]
+resource_name = "Blinking"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [80]
+}
+
 [sub_resource type="Animation" id="Animation_6uo0m"]
 resource_name = "Talking"
 loop_mode = 1
@@ -124,21 +139,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [80, 81, 82, 83]
-}
-
-[sub_resource type="Animation" id="Animation_ra85v"]
-resource_name = "Blinking"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [80]
 }
 
 [sub_resource type="Animation" id="Animation_tdpgy"]
