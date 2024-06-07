@@ -90,6 +90,7 @@ var text_styles = [
 	1,
 	1,
 	1,
+	2,
 	1,
 	1,
 	1,
@@ -105,8 +106,7 @@ var text_styles = [
 	1,
 	1,
 	1,
-	1,
-	1,
+	4,
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -332,6 +332,9 @@ func apply_text_style(style_value: int):
 			dialogue_label.horizontal_alignment = 0
 		3:
 			color = Color(15 / 255.0, 242 / 255.0, 79 / 255.0)
+			dialogue_label.horizontal_alignment = 1
+		4:
+			color = Color(255 / 255.0, 80 / 255.0, 63 / 255.0)
 			dialogue_label.horizontal_alignment = 1
 
 	dialogue_label.add_theme_color_override("font_color", color)
