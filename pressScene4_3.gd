@@ -1,7 +1,7 @@
 extends Control
 
 var dialogues = [
-	"Well I sure find that quite odd... I lost my handkerchief after I had shared ‘pleasantries’ with you.",
+	"Well, I sure find that quite odd... I lost my handkerchief after I had shared ‘pleasantries’ with you.",
 	"You can’t just point fingers at people! You have no evidence I took it from you.",
 	"Interesting, Ms. Flower. The timing of the loss and our encounter raises some serious doubts about your claim."
 ]

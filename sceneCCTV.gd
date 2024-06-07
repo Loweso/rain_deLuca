@@ -7,7 +7,7 @@ var dialogues = [
 	"I just got the results from forensic analysis of the CCTV footage from the crime scene.",
 	"I can’t believe I almost forgot we have that! That will finally clear things up. Let’s present it immediately!",
 	"Excuse me, Your Honor.",
-	"What is it Ms. Cris?",
+	"What is it, Ms. Cris?",
 	"I just received news from our forensics laboratory.",
 	"A thorough forensic analysis of the CCTV footage previously thought to be unreliable.",
 	"This critical evidence! Please elaborate.",
@@ -175,7 +175,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
+		get_tree().change_scene_to_file("res://scenes/sceneFallofSunny.tscn")
 
 func update_dialogue():
 	is_typing = true

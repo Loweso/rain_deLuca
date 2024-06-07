@@ -98,6 +98,9 @@ var text_speed = 0.05
 var current_text = ""
 var current_audio
 
+var current_no_mistakes = 0
+var no_of_mistakes_path = "user://mistakes_num.txt"
+
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
 @onready var name_label = $PersonNameText as Label
@@ -124,9 +127,23 @@ func _ready():
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
+	
+	var mistakesFile = FileAccess.open(no_of_mistakes_path, FileAccess.READ)
+	if mistakesFile:
+		current_no_mistakes = mistakesFile.get_var()
+		current_no_mistakes += 1
+		mistakesFile.close()
+		save_num(current_no_mistakes, no_of_mistakes_path)
+	else:
+		save_num(0, no_of_mistakes_path)
 
 func courtRecButton_pressed():
 	inventory.toggle()
+
+func save_num(num: int, filePath: String):
+	var file = FileAccess.open(filePath, FileAccess.WRITE)
+	file.store_var(num)
+	file.close()
 
 func dialogue_button_pressed():
 	if current_index == dialogues.size():

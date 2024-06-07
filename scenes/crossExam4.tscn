@@ -1,0 +1,318 @@
+[gd_scene load_steps=38 format=3 uid="uid://bmbip3oot7kmj"]
+
+[ext_resource type="Script" path="res://crossExam4.gd" id="1_mjav8"]
+[ext_resource type="Texture2D" uid="uid://cjirdovtydvc4" path="res://assets/backgrounds/witnessSide.jpg" id="2_ogwxd"]
+[ext_resource type="Texture2D" uid="uid://dvu0vh0ulmn3u" path="res://assets/sprites/elay_sprites.png" id="3_sj432"]
+[ext_resource type="Texture2D" uid="uid://1l03kq0eie04" path="res://assets/backgrounds/witness-stand.png" id="4_yn1ce"]
+[ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="5_mdgaj"]
+[ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="6_7f8yt"]
+[ext_resource type="Texture2D" uid="uid://ewgh7vd6l7a3" path="res://assets/ui/next-button.png" id="7_eoj0j"]
+[ext_resource type="Texture2D" uid="uid://c03wh5m3ojobv" path="res://assets/ui/prev-button.png" id="8_gyg1h"]
+[ext_resource type="Texture2D" uid="uid://cnim4d3utyyik" path="res://assets/ui/mistake.png" id="9_lxfft"]
+[ext_resource type="PackedScene" uid="uid://cedc7c312rh8f" path="res://scenes/evidence.tscn" id="10_rdfsu"]
+[ext_resource type="PackedScene" uid="uid://bftv2b4r6kgpr" path="res://scenes/holdItTransition.tscn" id="11_54qr5"]
+[ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="12_kg844"]
+[ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="13_ltfsa"]
+
+[sub_resource type="Animation" id="Animation_a6o8o"]
+resource_name = "blinking"
+length = 1.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.1, 1.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_xohpg"]
+resource_name = "talking"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12, 13]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4r8cx"]
+_data = {
+"blinking": SubResource("Animation_a6o8o"),
+"talking": SubResource("Animation_xohpg")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sucri"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oc81u"]
+texture = ExtResource("6_7f8yt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7n02t"]
+texture = ExtResource("6_7f8yt")
+modulate_color = Color(0.836576, 0.711346, 0.605006, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7tmft"]
+texture = ExtResource("6_7f8yt")
+modulate_color = Color(0.541247, 0.291974, 0.221316, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_76ndu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7sipk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8bwsr"]
+texture = ExtResource("7_eoj0j")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x5yda"]
+texture = ExtResource("7_eoj0j")
+modulate_color = Color(1, 0.829, 0.46, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ux700"]
+texture = ExtResource("7_eoj0j")
+modulate_color = Color(0.827451, 0.447059, 0.396078, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dakr6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t0bg6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pfd5o"]
+texture = ExtResource("8_gyg1h")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0xbcv"]
+texture = ExtResource("8_gyg1h")
+modulate_color = Color(1, 0.827451, 0.458824, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c1qr2"]
+texture = ExtResource("8_gyg1h")
+modulate_color = Color(0.827451, 0.447059, 0.396078, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4tqhc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dcb8g"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wgdhw"]
+texture = ExtResource("6_7f8yt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s12dp"]
+texture = ExtResource("6_7f8yt")
+modulate_color = Color(0.835294, 0.709804, 0.603922, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q4oyu"]
+texture = ExtResource("6_7f8yt")
+modulate_color = Color(0.541176, 0.290196, 0.219608, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fvyl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s52wl"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="crossExam4" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_mjav8")
+
+[node name="Background" type="TextureRect" parent="crossExam4"]
+layout_mode = 0
+offset_right = 1930.0
+offset_bottom = 1091.0
+texture = ExtResource("2_ogwxd")
+
+[node name="WitnessSprite" type="Sprite2D" parent="crossExam4/Background"]
+position = Vector2(982, 486)
+scale = Vector2(1.08691, 1.07984)
+texture = ExtResource("3_sj432")
+hframes = 7
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="crossExam4/Background/WitnessSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_4r8cx")
+}
+
+[node name="WitnessStand" type="TextureRect" parent="crossExam4/Background"]
+layout_mode = 0
+offset_left = -138.0
+offset_top = -122.0
+offset_right = 2041.0
+offset_bottom = 1102.0
+texture = ExtResource("4_yn1ce")
+
+[node name="DialogueBoxButton" type="Button" parent="crossExam4"]
+layout_mode = 0
+offset_left = -1932.0
+offset_top = 803.0
+offset_right = -1924.0
+offset_bottom = 811.0
+scale = Vector2(1567.73, 159.941)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_sucri")
+
+[node name="DialogueBox" type="Polygon2D" parent="crossExam4"]
+position = Vector2(-9, 0)
+scale = Vector2(1.02753, 0.99655)
+color = Color(0.168627, 0.168627, 0.168627, 0.470588)
+polygon = PackedVector2Array(3, 803, 1951, 803, 1951, 1123, 3, 1123)
+
+[node name="PersonNameBox" type="Polygon2D" parent="crossExam4"]
+position = Vector2(145, 763)
+scale = Vector2(0.807388, 0.375424)
+color = Color(0.48825, 0.315, 0.7, 0.917647)
+polygon = PackedVector2Array(-0.199969, 1.66217, 1.67047, -2.6637, 310.698, -2.6637, 365.822, 98.5553, 306.562, 188.651, 152.066, 188.651, -0.973211, 188.651, -60.1351, 90.5643)
+
+[node name="DialogueText" type="Label" parent="crossExam4"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 858.0
+offset_right = 667.0
+offset_bottom = 924.0
+scale = Vector2(3.32776, 3.02778)
+theme_override_colors/font_color = Color(1, 0.312295, 0.248026, 1)
+theme_override_fonts/font = ExtResource("5_mdgaj")
+text = "- Elay's Testimony -"
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="PersonNameText" type="Label" parent="crossExam4"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 780.0
+offset_right = 254.0
+offset_bottom = 801.0
+scale = Vector2(2.31653, 2.09949)
+theme_override_fonts/font = ExtResource("5_mdgaj")
+metadata/_edit_use_anchors_ = true
+
+[node name="CourtRecordButton" type="Button" parent="crossExam4"]
+layout_mode = 0
+offset_left = 1478.0
+offset_top = -16.0
+offset_right = 1597.0
+offset_bottom = 9.0
+scale = Vector2(3.82134, 4.93538)
+theme_override_fonts/font = ExtResource("5_mdgaj")
+theme_override_styles/normal = SubResource("StyleBoxTexture_oc81u")
+theme_override_styles/hover = SubResource("StyleBoxTexture_7n02t")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_7tmft")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_76ndu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7sipk")
+
+[node name="CourtRecordText" type="Label" parent="crossExam4/CourtRecordButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.097823
+anchor_top = -0.0529059
+anchor_right = 0.0978255
+anchor_bottom = -0.0529059
+offset_left = 15.8363
+offset_top = 9.22477
+offset_right = 126.836
+offset_bottom = 30.2248
+scale = Vector2(0.689314, 0.523945)
+theme_override_fonts/font = ExtResource("5_mdgaj")
+text = "Present"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="NextButton" type="Button" parent="crossExam4"]
+layout_mode = 0
+offset_left = 1550.0
+offset_top = 288.0
+offset_right = 1924.0
+offset_bottom = 750.0
+scale = Vector2(0.914229, 0.935849)
+theme_override_styles/normal = SubResource("StyleBoxTexture_8bwsr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_x5yda")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ux700")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_dakr6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t0bg6")
+
+[node name="PrevButton" type="Button" parent="crossExam4"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 284.0
+offset_right = 408.0
+offset_bottom = 747.0
+scale = Vector2(0.907557, 0.937458)
+theme_override_styles/normal = SubResource("StyleBoxTexture_pfd5o")
+theme_override_styles/hover = SubResource("StyleBoxTexture_0xbcv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_c1qr2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4tqhc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dcb8g")
+
+[node name="PressButton" type="Button" parent="crossExam4"]
+layout_mode = 0
+offset_left = 393.0
+offset_top = -15.0
+offset_right = 971.0
+offset_bottom = 111.0
+scale = Vector2(-0.786007, 0.946041)
+theme_override_styles/normal = SubResource("StyleBoxTexture_wgdhw")
+theme_override_styles/hover = SubResource("StyleBoxTexture_s12dp")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_q4oyu")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2fvyl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s52wl")
+
+[node name="CourtRecordText" type="Label" parent="crossExam4/PressButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.618645
+anchor_top = 0.21202
+anchor_right = 0.618648
+anchor_bottom = 0.21202
+offset_left = 15.8363
+offset_top = 9.22477
+offset_right = 126.836
+offset_bottom = 30.2248
+scale = Vector2(-3.66162, 2.94265)
+theme_override_fonts/font = ExtResource("5_mdgaj")
+text = "Press"
+metadata/_edit_use_anchors_ = true
+
+[node name="MistakesContainer" type="GridContainer" parent="crossExam4"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 163.0
+offset_right = 1811.0
+offset_bottom = 748.0
+scale = Vector2(0.150628, 0.162304)
+columns = 3
+
+[node name="mistake1" type="TextureRect" parent="crossExam4/MistakesContainer"]
+layout_mode = 2
+texture = ExtResource("9_lxfft")
+
+[node name="mistake2" type="TextureRect" parent="crossExam4/MistakesContainer"]
+layout_mode = 2
+texture = ExtResource("9_lxfft")
+
+[node name="mistake3" type="TextureRect" parent="crossExam4/MistakesContainer"]
+layout_mode = 2
+texture = ExtResource("9_lxfft")
+
+[node name="Evidence" parent="crossExam4" instance=ExtResource("10_rdfsu")]
+visible = false
+layout_mode = 1
+
+[node name="HoldItTransition" parent="crossExam4" instance=ExtResource("11_54qr5")]
+
+[node name="blip" type="AudioStreamPlayer2D" parent="crossExam4"]
+stream = ExtResource("12_kg844")
+volume_db = 6.559
+
+[node name="typewrite" type="AudioStreamPlayer2D" parent="crossExam4"]
+stream = ExtResource("13_ltfsa")
+volume_db = 5.943

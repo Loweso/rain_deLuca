@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="Inv" load_steps=5 format=3 uid="uid://bo6kvh520t2gf"]
+[gd_resource type="Resource" script_class="Inv" load_steps=6 format=3 uid="uid://bo6kvh520t2gf"]
 
 [ext_resource type="Resource" uid="uid://pfgnmml5smvv" path="res://inventory/attorneysbadge.tres" id="1_kwulm"]
 [ext_resource type="Script" path="res://inventory.gd" id="2_f44yx"]
 [ext_resource type="Resource" uid="uid://b2vlbyipwhv1q" path="res://inventory/autopsyReport.tres" id="3_hhixj"]
-[ext_resource type="Resource" path="res://inventory/handkerchief.tres" id="3_qk1dd"]
+[ext_resource type="Resource" uid="uid://bsfgxc6046cs" path="res://inventory/handkerchief.tres" id="3_qk1dd"]
+[ext_resource type="Resource" uid="uid://drtieu8ernw1h" path="res://inventory/cctvFootage.tres" id="4_nebht"]
 
 [resource]
 script = ExtResource("2_f44yx")
-items = Array[Resource("res://inventory_item.gd")]([ExtResource("1_kwulm"), ExtResource("3_hhixj"), ExtResource("3_qk1dd"), null, null, null, null, null])
+items = Array[Resource("res://inventory_item.gd")]([ExtResource("1_kwulm"), ExtResource("3_hhixj"), ExtResource("3_qk1dd"), ExtResource("4_nebht"), null, null, null, null])
