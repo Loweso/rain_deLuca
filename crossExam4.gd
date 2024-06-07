@@ -84,8 +84,8 @@ var press_states = [false, false, false, false]
 @onready var dialogueBox = $DialogueBox as Polygon2D
 @onready var dialogueBoxButton = $DialogueBoxButton as Button
 @onready var courtRecButton = $CourtRecordButton as Button
-@onready var witness_sprite = $Background/WitnessSprite
-@onready var witness_animation = $Background/WitnessSprite/AnimationPlayer
+@onready var witness_sprite = $sunny_sprite
+@onready var witness_animation = $sunny_sprite/AnimationPlayer
 
 @onready var evidenceBox = $Evidence
 @onready var inv: Inv
@@ -99,6 +99,8 @@ var press_states = [false, false, false, false]
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
+
+
 
 func _ready():
 	dialogueBoxButton.visible = false
@@ -236,16 +238,19 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 func update_sprites(sprite: int):
+	witness_sprite.visible = false
 	match sprite:
 		0:
-			witness_animation.play("blinking")
+			witness_sprite.visible = true
+			witness_animation.play("Blinking")
 			if is_typing:
 				await start_text_update()
 		1:
-			witness_animation.play("talking")
+			witness_sprite.visible = true
+			witness_animation.play("Talking")
 			if is_typing:
 				await start_text_update()
-			witness_animation.play("blinking")
+			witness_animation.play("Blinking")
 		_:
 			pass
 

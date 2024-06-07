@@ -213,4 +213,3 @@ text = "Present"
 horizontal_alignment = 1
 
 [node name="takeThat" parent="." instance=ExtResource("7_b17n5")]
-visible = false
