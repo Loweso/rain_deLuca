@@ -1,8 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://1pa2aoco3soq"]
+[gd_scene load_steps=37 format=3 uid="uid://o0ruauosb6lk"]
 
 [ext_resource type="Script" path="res://convoScene4.gd" id="1_x2hpe"]
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="2_o8qh7"]
-[ext_resource type="Texture2D" uid="uid://dvu0vh0ulmn3u" path="res://assets/sprites/elay_sprites.png" id="3_5j2fw"]
 [ext_resource type="Texture2D" uid="uid://rij6pq1l6equ" path="res://assets/sprites/rain-sprite.png" id="4_3do2q"]
 [ext_resource type="Texture2D" uid="uid://bhxjqckw54ita" path="res://assets/sprites/Ms. Cris (Mia Fey) (1).png" id="5_cg53p"]
 [ext_resource type="Texture2D" uid="uid://b5dwq1rgckqxk" path="res://assets/backgrounds/prosecutor-bench.png" id="6_kiwhj"]
@@ -14,44 +13,41 @@
 [ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="12_pb8nw"]
 [ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="13_wid3v"]
 
-[sub_resource type="Animation" id="Animation_a6o8o"]
-resource_name = "blinking"
-length = 1.7
+[sub_resource type="Animation" id="Animation_rmmav"]
+resource_name = "Blinking"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [32]
+}
+
+[sub_resource type="Animation" id="Animation_2hvhp"]
+resource_name = "Talking"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("..:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.1, 1.3, 1.5),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [32, 30, 28, 29, 30]
 }
 
-[sub_resource type="Animation" id="Animation_xohpg"]
-resource_name = "talking"
-length = 1.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [7, 8, 9, 10, 11, 12, 13]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4r8cx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hbsvx"]
 _data = {
-"blinking": SubResource("Animation_a6o8o"),
-"talking": SubResource("Animation_xohpg")
+"Blinking": SubResource("Animation_rmmav"),
+"Talking": SubResource("Animation_2hvhp")
 }
 
 [sub_resource type="Animation" id="Animation_j3nbx"]
@@ -128,6 +124,61 @@ _data = {
 "Talking": SubResource("Animation_rv8wy")
 }
 
+[sub_resource type="Animation" id="Animation_y4nc8"]
+resource_name = "TakeThat"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.6, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [72, 73, 74, 75, 76, 77]
+}
+
+[sub_resource type="Animation" id="Animation_aw0fg"]
+resource_name = "TakeThatBlinking"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [77, 75]
+}
+
+[sub_resource type="Animation" id="Animation_uny42"]
+resource_name = "TakeThatTalking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [78, 79, 80, 81, 82]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_687i6"]
+_data = {
+"TakeThat": SubResource("Animation_y4nc8"),
+"TakeThatBlinking": SubResource("Animation_aw0fg"),
+"TakeThatTalking": SubResource("Animation_uny42")
+}
+
 [sub_resource type="Animation" id="Animation_gvkvd"]
 resource_name = "Blinking"
 tracks/0/type = "value"
@@ -165,6 +216,43 @@ _data = {
 "Talking": SubResource("Animation_x8q54")
 }
 
+[sub_resource type="Animation" id="Animation_gykuo"]
+resource_name = "WorriedStare"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [43]
+}
+
+[sub_resource type="Animation" id="Animation_iv8vu"]
+resource_name = "WorriedTalk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [41, 42, 43, 44]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_31ctw"]
+_data = {
+"WorriedStare": SubResource("Animation_gykuo"),
+"WorriedTalk": SubResource("Animation_iv8vu")
+}
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ktm8m"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4cnwt"]
@@ -192,33 +280,33 @@ offset_bottom = 40.0
 script = ExtResource("1_x2hpe")
 
 [node name="Background" type="TextureRect" parent="convoScene4"]
+layout_mode = 0
 offset_right = 1930.0
 offset_bottom = 1091.0
 texture = ExtResource("2_o8qh7")
 
-[node name="ElaySprite" type="Sprite2D" parent="convoScene4/Background"]
-position = Vector2(982, 486)
-scale = Vector2(1.08691, 1.07984)
-texture = ExtResource("3_5j2fw")
-hframes = 7
-vframes = 4
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="convoScene4/Background/ElaySprite"]
-libraries = {
-"": SubResource("AnimationLibrary_4r8cx")
-}
-
-[node name="rain_sprite" type="Sprite2D" parent="convoScene4"]
+[node name="rain_sprite" type="Sprite2D" parent="convoScene4/Background"]
 position = Vector2(676.25, 584.302)
 scale = Vector2(1.59133, 1.53609)
 texture = ExtResource("4_3do2q")
 hframes = 12
 vframes = 14
-frame = 61
+frame = 32
 
-[node name="rain_sprite_animation" type="AnimationPlayer" parent="convoScene4/rain_sprite"]
+[node name="rain_sprite_animation2" type="AnimationPlayer" parent="convoScene4/Background/rain_sprite"]
+root_node = NodePath("../rain_sprite_animation")
+libraries = {
+"": SubResource("AnimationLibrary_hbsvx")
+}
+
+[node name="rain_sprite_animation" type="AnimationPlayer" parent="convoScene4/Background/rain_sprite"]
 libraries = {
 "": SubResource("AnimationLibrary_een7e")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="convoScene4/Background/rain_sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_687i6")
 }
 
 [node name="mscris_sprite" type="Sprite2D" parent="convoScene4"]
@@ -227,14 +315,20 @@ scale = Vector2(1.51966, 1.48716)
 texture = ExtResource("5_cg53p")
 hframes = 10
 vframes = 14
-frame = 51
+frame = 54
 
 [node name="mscris_sprite_animation" type="AnimationPlayer" parent="convoScene4/mscris_sprite"]
 libraries = {
 "": SubResource("AnimationLibrary_rc0nm")
 }
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="convoScene4/mscris_sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_31ctw")
+}
+
 [node name="prosecutor-bench" type="TextureRect" parent="convoScene4"]
+layout_mode = 0
 offset_left = -279.0
 offset_top = -115.0
 offset_right = 1925.0
@@ -242,6 +336,7 @@ offset_bottom = 1090.0
 texture = ExtResource("6_kiwhj")
 
 [node name="defense-bench" type="TextureRect" parent="convoScene4"]
+layout_mode = 0
 offset_left = 6.0
 offset_top = -93.0
 offset_right = 2146.0
@@ -249,6 +344,7 @@ offset_bottom = 1090.0
 texture = ExtResource("7_ca4ua")
 
 [node name="witness-stand" type="TextureRect" parent="convoScene4"]
+layout_mode = 0
 offset_left = -122.0
 offset_top = -83.0
 offset_right = 2055.0
@@ -256,6 +352,7 @@ offset_bottom = 1088.0
 texture = ExtResource("8_bhcbc")
 
 [node name="DialogueBoxButton" type="Button" parent="convoScene4"]
+layout_mode = 0
 offset_left = -1932.0
 offset_top = 803.0
 offset_right = -1924.0
@@ -276,6 +373,7 @@ color = Color(0.48825, 0.315, 0.7, 0.917647)
 polygon = PackedVector2Array(-0.199969, 1.66217, 1.67047, -2.6637, 310.698, -2.6637, 365.822, 98.5553, 306.562, 188.651, 152.066, 188.651, -0.973211, 188.651, -60.1351, 90.5643)
 
 [node name="DialogueText" type="Label" parent="convoScene4"]
+layout_mode = 0
 offset_left = 219.0
 offset_top = 858.0
 offset_right = 667.0
@@ -286,6 +384,7 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="PersonNameText" type="Label" parent="convoScene4"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 780.0
 offset_right = 254.0
@@ -295,6 +394,7 @@ theme_override_fonts/font = ExtResource("9_4n2nj")
 metadata/_edit_use_anchors_ = true
 
 [node name="CourtRecordButton" type="Button" parent="convoScene4"]
+layout_mode = 0
 offset_left = 1478.0
 offset_top = -16.0
 offset_right = 1597.0

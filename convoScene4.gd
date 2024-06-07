@@ -35,12 +35,12 @@ var text_styles = [
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	0,
-	0,
-	0,
-	0,
-	0,
-	0
+	3,
+	2,
+	1,
+	2,
+	2,
+	3
 ]
 
 var text_sound = [
@@ -92,12 +92,11 @@ var current_audio
 @onready var blip = $blip
 @onready var typewrite = $typewrite
 
-@onready var elay_sprite = $Background/ElaySprite
-@onready var elay_animation = $Background/ElaySprite/AnimationPlayer
-@onready var rain_sprite = $rain_sprite
-@onready var rain_animation = $rain_sprite/rain_sprite_animation
+@onready var rain_sprite = $Background/rain_sprite
+@onready var rain_sprite_animation = $Background/rain_sprite/rain_sprite_animation
 @onready var mscris_sprite = $mscris_sprite
-@onready var mscris_animation = $mscris_sprite/mscris_sprite_animation
+@onready var mscris_sprite_animation = $mscris_sprite/mscris_sprite_animation
+
 
 func _ready():
 	update_dialogue()
@@ -203,39 +202,28 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 func update_sprites(sprite: int):
-	elay_sprite.visible = false
-	mscris_sprite.visible = false
 	rain_sprite.visible = false
+	mscris_sprite.visible = false
 	match sprite:
 		0:
 			if is_typing:
 				await start_text_update()
 		1:
-			elay_sprite.visible = true
-			elay_animation.play("talking")
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Talking")
 			if is_typing:
 				await start_text_update()
-			elay_animation.play("blinking")
+			rain_sprite_animation.play("Blinking")
 			
 		2:
-			rain_sprite.visible = true
-			rain_animation.play("Talking")
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Talking")
 			if is_typing:
 				await start_text_update()
-			rain_animation.play("Blinking")
-			
+			mscris_sprite_animation.play("Blinking")
+		
 		3:
 			rain_sprite.visible = true
-			rain_animation.play("Blinking")
-			if is_typing:
-				await start_text_update()
-		
-		4:
-			mscris_sprite.visible = true
-			mscris_animation.play("Talking")
-			if is_typing:
-				await start_text_update()
-			mscris_animation.play("Blinking")
-		_:
+			rain_sprite_animation.play("Blinking")
 			if is_typing:
 				await start_text_update()
