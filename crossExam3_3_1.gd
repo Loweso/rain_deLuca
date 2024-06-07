@@ -20,7 +20,7 @@ var text_styles = [
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	0
+	1
 ]
 
 var text_sound = [
@@ -43,7 +43,6 @@ var is_typing = false
 var text_speed = 0.05
 var current_text = ""
 var current_audio
-var save_file_path = "user://current_index.txt"
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -67,8 +66,8 @@ var save_file_path = "user://current_index.txt"
 @onready var blip = $blip
 @onready var typewrite = $typewrite
 
-@onready var elay_sprite = $Background/ElaySprite
-@onready var elay_animation = $Background/ElaySprite/AnimationPlayer
+@onready var judge_sprite = $judge_sprite
+@onready var judge_sprite_animation = $judge_sprite/judge_sprite_animation
 
 func _ready():
 	update_dialogue()
@@ -88,7 +87,6 @@ func crossExamReturn():
 	get_tree().change_scene_to_file("res://scenes/pressScene3_3_2.tscn")
 	
 func go_next_scene():
-	save_num(0, save_file_path)
 	get_tree().change_scene_to_file("res://scenes/sceneElayBack.tscn")
 
 func courtRecButton_pressed():
@@ -195,22 +193,20 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 func update_sprites(sprite: int):
-	elay_sprite.visible = false
+	judge_sprite.visible = false
 	match sprite:
 		0:
 			if is_typing:
 				await start_text_update()
 		1:
-			elay_sprite.visible = true
-			elay_animation.play("talking")
+			
+			judge_sprite.visible = true
+			judge_sprite_animation.play("shocked")
+			await get_tree().create_timer(1).timeout
+			judge_sprite_animation.play("Talking")
 			if is_typing:
 				await start_text_update()
-			elay_animation.play("blinking")
+			judge_sprite_animation.play("Blinking")
 		_:
 			if is_typing:
 				await start_text_update()
-
-func save_num(num: int, filePath: String):
-	var file = FileAccess.open(filePath, FileAccess.WRITE)
-	file.store_var(num)
-	file.close()

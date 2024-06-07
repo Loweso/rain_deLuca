@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dojed4vbqr01s"]
+[gd_scene load_steps=54 format=3 uid="uid://dojed4vbqr01s"]
 
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="1_dksug"]
 [ext_resource type="Script" path="res://scenes/scene6.gd" id="1_ki5e2"]
@@ -255,10 +255,26 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
+[sub_resource type="Animation" id="Animation_sroq2"]
+resource_name = "shocked"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43, 44]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pi1fh"]
 _data = {
 "Blinking": SubResource("Animation_xnak8"),
-"Talking": SubResource("Animation_x823a")
+"Talking": SubResource("Animation_x823a"),
+"shocked": SubResource("Animation_sroq2")
 }
 
 [sub_resource type="Animation" id="Animation_sjpap"]

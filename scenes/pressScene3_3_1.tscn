@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://b1bxrq28bjwan"]
+[gd_scene load_steps=23 format=3 uid="uid://b16nikncybvcu"]
 
 [ext_resource type="Script" path="res://crossExam3_3_1.gd" id="1_e7m7f"]
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="2_l221y"]
-[ext_resource type="Texture2D" uid="uid://dvu0vh0ulmn3u" path="res://assets/sprites/elay_sprites.png" id="3_u1ge8"]
+[ext_resource type="Texture2D" uid="uid://bhn534hh0wssh" path="res://assets/sprites/judge-sprite.png" id="3_fq2un"]
 [ext_resource type="Texture2D" uid="uid://b5dwq1rgckqxk" path="res://assets/backgrounds/prosecutor-bench.png" id="4_w2ouf"]
 [ext_resource type="Texture2D" uid="uid://c786m4q5scs3b" path="res://assets/backgrounds/defense-bench.png" id="5_gjwr6"]
 [ext_resource type="Texture2D" uid="uid://1l03kq0eie04" path="res://assets/backgrounds/witness-stand.png" id="6_5n18l"]
@@ -13,9 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="11_prcn8"]
 [ext_resource type="FontFile" uid="uid://dswhbqg8cmy54" path="res://assets/FOT-ModeMinBLargeStd-R.otf" id="12_awspb"]
 
-[sub_resource type="Animation" id="Animation_a6o8o"]
-resource_name = "blinking"
-length = 1.7
+[sub_resource type="Animation" id="Animation_xnak8"]
+resource_name = "Blinking"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -24,16 +23,30 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.1, 1.3, 1.5),
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.7001, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 8, 9, 9, 8]
+}
+
+[sub_resource type="Animation" id="Animation_x823a"]
+resource_name = "Talking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
 }
 
-[sub_resource type="Animation" id="Animation_xohpg"]
-resource_name = "talking"
-length = 1.4
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_sroq2"]
+resource_name = "shocked"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -41,16 +54,17 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [7, 8, 9, 10, 11, 12, 13]
+"values": [40, 41, 42, 43, 44]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4r8cx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pi1fh"]
 _data = {
-"blinking": SubResource("Animation_a6o8o"),
-"talking": SubResource("Animation_xohpg")
+"Blinking": SubResource("Animation_xnak8"),
+"Talking": SubResource("Animation_x823a"),
+"shocked": SubResource("Animation_sroq2")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_76t15"]
@@ -85,16 +99,17 @@ offset_right = 1930.0
 offset_bottom = 1091.0
 texture = ExtResource("2_l221y")
 
-[node name="ElaySprite" type="Sprite2D" parent="crossExam3_3_1/Background"]
-position = Vector2(982, 486)
-scale = Vector2(1.08691, 1.07984)
-texture = ExtResource("3_u1ge8")
-hframes = 7
-vframes = 4
+[node name="judge_sprite" type="Sprite2D" parent="crossExam3_3_1"]
+position = Vector2(982, 432)
+scale = Vector2(1.42768, 1.38911)
+texture = ExtResource("3_fq2un")
+hframes = 10
+vframes = 5
+frame = 44
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="crossExam3_3_1/Background/ElaySprite"]
+[node name="judge_sprite_animation" type="AnimationPlayer" parent="crossExam3_3_1/judge_sprite"]
 libraries = {
-"": SubResource("AnimationLibrary_4r8cx")
+"": SubResource("AnimationLibrary_pi1fh")
 }
 
 [node name="prosecutor-bench" type="TextureRect" parent="crossExam3_3_1"]

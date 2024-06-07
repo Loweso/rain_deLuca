@@ -41,14 +41,14 @@ var text_styles = [
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0
+	2,
+	3,
+	1,
+	3,
+	1,
+	1,
+	4,
+	2
 ]
 
 var text_sound = [
@@ -104,8 +104,14 @@ var current_audio
 @onready var blip = $blip
 @onready var typewrite = $typewrite
 
-@onready var elay_sprite = $Background/ElaySprite
-@onready var elay_animation = $Background/ElaySprite/AnimationPlayer
+@onready var rain_sprite = $Background/WitnessSprite
+@onready var rain_sprite_animation = $Background/WitnessSprite/AnimationPlayer
+@onready var mscris_sprite = $mscris_sprite
+@onready var mscris_sprite_animation = $mscris_sprite/AnimationPlayer
+@onready var sunny_sprite = $sunny_sprite
+@onready var sunny_sprite_animation = $sunny_sprite/AnimationPlayer
+@onready var sunny_sprite_animation2 = $sunny_sprite/sunny_sprite_animation
+@onready var sunny_sprite_animation3 = $sunny_sprite/sunny_sprite_animation2
 
 func _ready():
 	update_dialogue()
@@ -210,17 +216,46 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 func update_sprites(sprite: int):
-	elay_sprite.visible = false
+	rain_sprite.visible = false
+	mscris_sprite.visible = false
+	sunny_sprite.visible = false
+	sunny_sprite_animation.stop()
+	sunny_sprite_animation2.stop()
+	sunny_sprite_animation3.stop()
 	match sprite:
 		0:
 			if is_typing:
 				await start_text_update()
 		1:
-			elay_sprite.visible = true
-			elay_animation.play("talking")
+			rain_sprite.visible = true
+			rain_sprite_animation.play("talk")
 			if is_typing:
 				await start_text_update()
-			elay_animation.play("blinking")
-		_:
+			rain_sprite_animation.play("blink")
+			
+		2:
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			mscris_sprite_animation.play("Blinking")
+			
+		3:
+			sunny_sprite.visible = true
+			sunny_sprite_animation3.play("NormalTalk")
+			if is_typing:
+				await start_text_update()
+			sunny_sprite_animation3.play("Blinking")
+		
+		4:
+			sunny_sprite.visible = true
+			sunny_sprite_animation2.play("Suspicious_Talking")
+			if is_typing:
+				await start_text_update()
+			sunny_sprite_animation2.play("Suspicious_Blinking")
+			
+		5: 
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Thinking")
 			if is_typing:
 				await start_text_update()

@@ -14,7 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://dx6vblsbtd8lw" path="res://audio/blip.mp3" id="11_04eb2"]
 [ext_resource type="AudioStream" uid="uid://co66kk6avp7av" path="res://audio/typewriter.mp3" id="12_ucoye"]
 
-[sub_resource type="Animation" id="Animation_a6o8o"]
+[sub_resource type="Animation" id="Animation_tg6oo"]
 resource_name = "talk"
 length = 0.5
 loop_mode = 1
@@ -34,6 +34,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_6vik3"]
 resource_name = "blink"
 length = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -47,10 +48,10 @@ tracks/0/keys = {
 "values": [4, 7]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4r8cx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwaya"]
 _data = {
 "blink": SubResource("Animation_6vik3"),
-"talk": SubResource("Animation_a6o8o")
+"talk": SubResource("Animation_tg6oo")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mfjxy"]
@@ -140,7 +141,7 @@ frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="crossExam3/Background/WitnessSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_4r8cx")
+"": SubResource("AnimationLibrary_wwaya")
 }
 
 [node name="WitnessStand" type="TextureRect" parent="crossExam3/Background"]
