@@ -1,27 +1,13 @@
 extends Control
 
 var dialogues = [
-	"(...This footage could be the key to exposing Sunny Flower’s true involvement in this crime!)",
-	"Ms. Flower, you seemed very confident earlier. Now you look rather flustered, huh?",
-	'What are you implying, de Loco!?',
-	"Well, that’s childish of you...",
-	"I-well, this is absurd! All evidence gathered perfectly points to you and your stupid friend!",
-	"The handkerchief was planted on Sirina right after I... I mean...! right after the victim was pushed in!",
-	"Ms. Flower, how do you know exactly when the handkerchief was planted?",
-	"I... I...",
-	"Your Honor, I am pretty, and I am definitely sure, we’ve just heard a crucial detail only the true perpetrator would know."
+	"Think again, Rain. It's not even that there might be something...",
+	"There definitely is a reason how she got it in her person!"
 ]
 
 var char_names = [
-	"Rain",
-	"Rain",
-	'Sunny',
-	"Rain",
-	"Sunny",
-	"Sunny",
-	"Judge",
-	"Sunny",
-	"Rain"
+	"Ms. Cris",
+	"Ms. Cris"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -29,15 +15,8 @@ var char_names = [
 # Text style 3 = Green, centered, Current setting (time and place)
 
 var text_styles = [
-	2,
 	1,
 	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -46,25 +25,11 @@ var text_styles = [
 var spriteToDisplay = [
 	0,
 	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0
 ]
 
 var text_sound = [
 	1,
 	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1
 ]
 
 # background 0 = Judge Side
@@ -74,15 +39,8 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
-	2,
-	2,
-	1,
-	2,
-	1,
-	1,
-	0,
-	1,
-	2
+	3,
+	3,
 ]
 
 var current_index = 0
@@ -101,7 +59,6 @@ var current_audio
 @onready var courtRecButton = $CourtRecordButton as Button
 
 @onready var inventory = $Inventory_UI
-@onready var inv: Inv
 
 @onready var defense_bench = $"defense-bench"
 @onready var prosecutor_bench = $"prosecutor-bench"
@@ -109,9 +66,14 @@ var current_audio
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
+@onready var bang = $bang
 
 @onready var elay_sprite = $Background/ElaySprite
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
+@onready var rain_sprite = $rain_sprite
+@onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
+@onready var rain_sprite_animation2 = $rain_sprite/rain_sprite_animation2
+@onready var rain_sprite_animation3 = $rain_sprite/AnimationPlayer
 
 func _ready():
 	update_dialogue()
@@ -133,6 +95,7 @@ func dialogue_button_pressed():
 		if is_typing:
 			complete_dialogue()
 		else:
+			current_index += 1
 			update_dialogue()
 	else:
 		complete_dialogue()
@@ -148,7 +111,7 @@ func update_dialogue():
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
 		update_sprites(spriteToDisplay[current_index])
-	current_index += 1
+	
 		
 func start_text_update():
 	char_index = 0
@@ -217,6 +180,10 @@ func update_background(background_index: int):
 	
 func update_sprites(sprite: int):
 	elay_sprite.visible = false
+	rain_sprite.visible = false
+	rain_sprite_animation.stop()
+	rain_sprite_animation2.stop()
+	rain_sprite_animation3.stop()
 	match sprite:
 		0:
 			if is_typing:
@@ -227,6 +194,31 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			elay_animation.play("blinking")
+		
+		2:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation.play("Blinking")
+		3:
+			rain_sprite.visible = true
+			rain_sprite_animation2.play("Talking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation2.play("Blinking")
+		
+		4:
+			rain_sprite.visible = true
+			if current_index == 0:
+				rain_sprite_animation3.play("TakeThat")
+				bang.play()
+				await get_tree().create_timer(0.9).timeout
+			rain_sprite_animation3.play("TakeThatTalking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation3.play("TakeThatBlinking")
+			
 		_:
 			if is_typing:
 				await start_text_update()

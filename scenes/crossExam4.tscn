@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://s4gyt1kncbbt"]
+[gd_scene load_steps=38 format=3 uid="uid://bmbip3oot7kmj"]
 
 [ext_resource type="Script" path="res://crossExam4.gd" id="1_mjav8"]
 [ext_resource type="Texture2D" uid="uid://cjirdovtydvc4" path="res://assets/backgrounds/witnessSide.jpg" id="2_ogwxd"]
@@ -126,6 +126,7 @@ offset_bottom = 40.0
 script = ExtResource("1_mjav8")
 
 [node name="Background" type="TextureRect" parent="crossExam4"]
+layout_mode = 0
 offset_right = 1930.0
 offset_bottom = 1091.0
 texture = ExtResource("2_ogwxd")
@@ -151,6 +152,7 @@ offset_bottom = 1102.0
 texture = ExtResource("4_yn1ce")
 
 [node name="DialogueBoxButton" type="Button" parent="crossExam4"]
+layout_mode = 0
 offset_left = -1932.0
 offset_top = 803.0
 offset_right = -1924.0
@@ -171,6 +173,7 @@ color = Color(0.48825, 0.315, 0.7, 0.917647)
 polygon = PackedVector2Array(-0.199969, 1.66217, 1.67047, -2.6637, 310.698, -2.6637, 365.822, 98.5553, 306.562, 188.651, 152.066, 188.651, -0.973211, 188.651, -60.1351, 90.5643)
 
 [node name="DialogueText" type="Label" parent="crossExam4"]
+layout_mode = 0
 offset_left = 219.0
 offset_top = 858.0
 offset_right = 667.0
@@ -184,6 +187,7 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="PersonNameText" type="Label" parent="crossExam4"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 780.0
 offset_right = 254.0
@@ -193,6 +197,7 @@ theme_override_fonts/font = ExtResource("5_mdgaj")
 metadata/_edit_use_anchors_ = true
 
 [node name="CourtRecordButton" type="Button" parent="crossExam4"]
+layout_mode = 0
 offset_left = 1478.0
 offset_top = -16.0
 offset_right = 1597.0
@@ -223,6 +228,7 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="NextButton" type="Button" parent="crossExam4"]
+layout_mode = 0
 offset_left = 1550.0
 offset_top = 288.0
 offset_right = 1924.0
@@ -235,6 +241,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_dakr6")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_t0bg6")
 
 [node name="PrevButton" type="Button" parent="crossExam4"]
+layout_mode = 0
 offset_left = 36.0
 offset_top = 284.0
 offset_right = 408.0
@@ -247,6 +254,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_4tqhc")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dcb8g")
 
 [node name="PressButton" type="Button" parent="crossExam4"]
+layout_mode = 0
 offset_left = 393.0
 offset_top = -15.0
 offset_right = 971.0
@@ -275,6 +283,7 @@ text = "Press"
 metadata/_edit_use_anchors_ = true
 
 [node name="MistakesContainer" type="GridContainer" parent="crossExam4"]
+layout_mode = 0
 offset_left = 48.0
 offset_top = 163.0
 offset_right = 1811.0

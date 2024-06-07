@@ -1,19 +1,19 @@
 extends Control
 
 var dialogues = [
-	"- Elay's Timeline of Events -",
-	"It was around 3:00PM when I saw Ms. Yala.",
-	"I saw Ms. Yala again at the match venue at around 3:30 PM.",
-	"I discovered the victim’s body at around 4:00 PM.",
-	"There was no one else around that I remembered but Ms. Alexa Yala.",
+	"- Sunny's Testimony -",
+	"Well... I-I represented Sirina in a high-profile case in the past. Given that history, I decided to watch the infamous match of the season.",
+	"Uhm... I... I recall meeting you at the match that day, Mr. de Luca.",
+	"I never took any hankies.",
+	"My presence on the day of the crime was purely coincidental. I didn't harm anyone or do anything wrong.",
 ]
 
 var char_names = [
 	"",
-	"Elay",
-	"Elay",
-	"Elay",
-	"Elay",
+	"Sunny",
+	"Sunny",
+	"Sunny",
+	"Sunny",
 ]
 
 var text_sound = [
@@ -61,11 +61,10 @@ var witness_anim = [
 	1,
 	1,
 	1,
-	1,
 ]
 
 var current_index = 0
-var current_crossExam = 1
+var current_crossExam = 3
 var current_no_mistakes = 0
 var save_file_path = "user://current_index.txt"
 var no_of_mistakes_path = "user://mistakes_num.txt"
@@ -172,7 +171,7 @@ func update_dialogue():
 	is_typing = true
 	if current_index >= dialogues.size():
 		save_num(1, save_file_path)
-		get_tree().change_scene_to_file("res://scenes/convoScene2.tscn")
+		get_tree().change_scene_to_file("res://scenes/convoScene4.tscn")
 	else:
 		current_text = dialogues[current_index]
 		dialogue_label.text = ""
@@ -271,25 +270,25 @@ func press_button_pressed():
 			save_press_states()
 			save_num(2, save_file_path)
 			print(str(press_states))
-			holdItTransition.load_scene("res://scenes/pressScene2_1.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene4_1.tscn")
 		2:	
 			press_states[1] = true
 			save_press_states()
 			save_num(3, save_file_path)
 			print(str(press_states))
-			holdItTransition.load_scene("res://scenes/pressScene2_2.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene4_2.tscn")
 		3:	
 			press_states[2] = true
 			save_press_states()
 			save_num(4, save_file_path)
 			print(str(press_states))
-			holdItTransition.load_scene("res://scenes/pressScene2_3.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene4_3.tscn")
 		4:	
 			press_states[3] = true
 			save_press_states()
 			save_num(1, save_file_path)
 			print(str(press_states))
-			holdItTransition.load_scene("res://scenes/pressScene2_4.tscn")
+			holdItTransition.load_scene("res://scenes/pressScene4_4.tscn")
 		_:
 			pass
 

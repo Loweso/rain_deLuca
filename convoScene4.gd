@@ -1,27 +1,21 @@
 extends Control
 
 var dialogues = [
-	"(...This footage could be the key to exposing Sunny Flower’s true involvement in this crime!)",
-	"Ms. Flower, you seemed very confident earlier. Now you look rather flustered, huh?",
-	'What are you implying, de Loco!?',
-	"Well, that’s childish of you...",
-	"I-well, this is absurd! All evidence gathered perfectly points to you and your stupid friend!",
-	"The handkerchief was planted on Sirina right after I... I mean...! right after the victim was pushed in!",
-	"Ms. Flower, how do you know exactly when the handkerchief was planted?",
-	"I... I...",
-	"Your Honor, I am pretty, and I am definitely sure, we’ve just heard a crucial detail only the true perpetrator would know."
+	"(I have a feeling we are at the crux of the matter! We're almost there, I can feel it)",
+	'Quick, Rain! I feel like we are at the crux of the matter right now.',
+	'There are a lot of holes to her testimony, how do we blow it all apart?',
+	"Present the best evidence that hits right at the core of her testimony.",
+	"Don't let her escape!",
+	"(Which part of her testimony is it?! ...Also, did she just read my mind?)"
 ]
 
 var char_names = [
-	"Rain",
-	"Rain",
-	'Sunny',
-	"Rain",
-	"Sunny",
-	"Sunny",
-	"Judge",
-	"Sunny",
-	"Rain"
+	'Rain',
+	'Ms. Cris',
+	'Rain',
+	'Ms. Cris',
+	'Ms. Cris',
+	'Rain',
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -34,19 +28,13 @@ var text_styles = [
 	1,
 	1,
 	1,
-	1,
-	1,
-	1,
-	1
+	2
 ]
 
 # spriteToDisplay 0 = No sprite to display
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	0,
-	0,
-	0,
 	0,
 	0,
 	0,
@@ -62,9 +50,6 @@ var text_sound = [
 	1,
 	1,
 	1,
-	1,
-	1,
-	1
 ]
 
 # background 0 = Judge Side
@@ -75,14 +60,11 @@ var text_sound = [
 
 var backgrounds = [
 	2,
+	3,
 	2,
-	1,
+	3,
+	3,
 	2,
-	1,
-	1,
-	0,
-	1,
-	2
 ]
 
 var current_index = 0
@@ -112,6 +94,10 @@ var current_audio
 
 @onready var elay_sprite = $Background/ElaySprite
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
+@onready var rain_sprite = $rain_sprite
+@onready var rain_animation = $rain_sprite/rain_sprite_animation
+@onready var mscris_sprite = $mscris_sprite
+@onready var mscris_animation = $mscris_sprite/mscris_sprite_animation
 
 func _ready():
 	update_dialogue()
@@ -133,10 +119,11 @@ func dialogue_button_pressed():
 		if is_typing:
 			complete_dialogue()
 		else:
+			current_index += 1
 			update_dialogue()
 	else:
 		complete_dialogue()
-		get_tree().change_scene_to_file("res://scenes/sceneFallofSunny_1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam4.tscn")
 
 func update_dialogue():
 	is_typing = true
@@ -148,7 +135,7 @@ func update_dialogue():
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
 		update_sprites(spriteToDisplay[current_index])
-	current_index += 1
+	
 		
 func start_text_update():
 	char_index = 0
@@ -217,6 +204,8 @@ func update_background(background_index: int):
 	
 func update_sprites(sprite: int):
 	elay_sprite.visible = false
+	mscris_sprite.visible = false
+	rain_sprite.visible = false
 	match sprite:
 		0:
 			if is_typing:
@@ -227,6 +216,26 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			elay_animation.play("blinking")
+			
+		2:
+			rain_sprite.visible = true
+			rain_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			rain_animation.play("Blinking")
+			
+		3:
+			rain_sprite.visible = true
+			rain_animation.play("Blinking")
+			if is_typing:
+				await start_text_update()
+		
+		4:
+			mscris_sprite.visible = true
+			mscris_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			mscris_animation.play("Blinking")
 		_:
 			if is_typing:
 				await start_text_update()

@@ -1,27 +1,73 @@
 extends Control
 
 var dialogues = [
-	"(...This footage could be the key to exposing Sunny Flower’s true involvement in this crime!)",
-	"Ms. Flower, you seemed very confident earlier. Now you look rather flustered, huh?",
-	'What are you implying, de Loco!?',
-	"Well, that’s childish of you...",
-	"I-well, this is absurd! All evidence gathered perfectly points to you and your stupid friend!",
-	"The handkerchief was planted on Sirina right after I... I mean...! right after the victim was pushed in!",
-	"Ms. Flower, how do you know exactly when the handkerchief was planted?",
+	"Ms. Flower, let's cut to the chase. Your attempts to dance around the truth are futile.",
+	"You were caught red-handed on CCTV, entering and leaving the scene of the crime.",
+	"I... I don’t know what you’re talking about. You must be sick in the head having all these conclusions…",
+	"Don’t play coy with me, Ms. Flower. We both know you were there, and we both know what you did. The evidence is clear, and your lies won’t hold up in court.",
+	"I didn’t do anything wrong! You can’t prove anything!",
+	"Oh, I beg to differ. The CCTV footage, the stolen handkerchief...",
+	"So why don’t you spare us the charade and admit to what you’ve done?",
 	"I... I...",
-	"Your Honor, I am pretty, and I am definitely sure, we’ve just heard a crucial detail only the true perpetrator would know."
+	"Well, Ms. Flower?",
+	"Oh, to hell with you, you horned beetle-looking louse!",
+	"Wipe that adamant brow off your face! Oh, how I hate your guts!",
+	"To never see that face every again, especially in this courtroom!",
+	"Wow, look at her mad...",
+	"Okay, I admit - I had my hands dirty with Sirina. One push and...",
+	"Just how close I was to never, ever coming across you in life, ever!",
+	"(...What is this... this cruel kind of hatred...)",
+	"This is a serious confession, Ms. Flower. Your actions not only led to a tragic loss of life but also to an elaborate attempt to frame an innocent person.",
+	"The court will now deliberate on your confession and the appropriate charges.",
+	"You can’t do this to me! I had it all perfectly thought out!",
+	"...You were so eager to destroy me?",
+	"Just you wait, de Luca! Just you wait!",
+	"Well, you went too far and look what it got you.",
+	"I hope this way, at least we do not have to face each other for long.",
+	"Alexa, thank God you're going to be alright. We did it.",
+	"Thank you, Rain. I never doubted you for a second.",
+	"Well, all's well that ends well.",
+	"That was quite a ride, wasn't it?",
+	"It was indeed. Thank you, Rain, Ms. Cris.",
+	"Matters on Prosecutor Sunny Flower's trial will be posted ona further date. Related parties, keep posted for further notice.",
+	"For now, at least, one thing's for sure.",
+	"Alexa Yala, this court proclaims you...",
+	"Not guilty."
 ]
 
 var char_names = [
+	'Rain',
+	'Rain',
+	'Sunny',
+	'Rain',
+	'Sunny',
+	'Rain',
+	'Rain',
+	'Sunny',
+	'Rain',
+	'Sunny',
+	'Sunny',
+	'Sunny',
+	"Ms. Cris",
+	'Sunny',
+	'Sunny',
 	"Rain",
+	"Judge",
+	"Judge",
+	"Sunny",
 	"Rain",
 	'Sunny',
 	"Rain",
-	"Sunny",
-	"Sunny",
+	"Rain",
+	"Rain",
+	"Alexa",
+	"Ms. Cris",
+	"Ms. Cris",
+	"Alexa",
 	"Judge",
-	"Sunny",
-	"Rain"
+	"Judge",
+	"Judge",
+	"Judge",
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -29,7 +75,6 @@ var char_names = [
 # Text style 3 = Green, centered, Current setting (time and place)
 
 var text_styles = [
-	2,
 	1,
 	1,
 	1,
@@ -37,7 +82,31 @@ var text_styles = [
 	1,
 	1,
 	1,
-	1
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
 ]
 
 # spriteToDisplay 0 = No sprite to display
@@ -52,7 +121,30 @@ var spriteToDisplay = [
 	0,
 	0,
 	0,
-	0
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
 ]
 
 var text_sound = [
@@ -64,7 +156,30 @@ var text_sound = [
 	1,
 	1,
 	1,
-	1
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
 ]
 
 # background 0 = Judge Side
@@ -76,13 +191,36 @@ var text_sound = [
 var backgrounds = [
 	2,
 	2,
-	1,
+	4,
 	2,
-	1,
-	1,
+	4,
+	2,
+	2,
+	4,
+	2,
+	4,
+	4,
+	4,
+	3,
+	4,
+	4,
+	2,
 	0,
-	1,
-	2
+	0,
+	4,
+	2,
+	4,
+	2,
+	2,
+	2,
+	4,
+	3,
+	3,
+	4,
+	0,
+	0,
+	0,
+	0,
 ]
 
 var current_index = 0
@@ -101,7 +239,6 @@ var current_audio
 @onready var courtRecButton = $CourtRecordButton as Button
 
 @onready var inventory = $Inventory_UI
-@onready var inv: Inv
 
 @onready var defense_bench = $"defense-bench"
 @onready var prosecutor_bench = $"prosecutor-bench"
@@ -109,9 +246,14 @@ var current_audio
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
+@onready var bang = $bang
 
 @onready var elay_sprite = $Background/ElaySprite
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
+@onready var rain_sprite = $rain_sprite
+@onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
+@onready var rain_sprite_animation2 = $rain_sprite/rain_sprite_animation2
+@onready var rain_sprite_animation3 = $rain_sprite/AnimationPlayer
 
 func _ready():
 	update_dialogue()
@@ -133,10 +275,11 @@ func dialogue_button_pressed():
 		if is_typing:
 			complete_dialogue()
 		else:
+			current_index += 1
 			update_dialogue()
 	else:
 		complete_dialogue()
-		get_tree().change_scene_to_file("res://scenes/sceneFallofSunny_1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam4.tscn")
 
 func update_dialogue():
 	is_typing = true
@@ -148,7 +291,7 @@ func update_dialogue():
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
 		update_sprites(spriteToDisplay[current_index])
-	current_index += 1
+	
 		
 func start_text_update():
 	char_index = 0
@@ -217,6 +360,10 @@ func update_background(background_index: int):
 	
 func update_sprites(sprite: int):
 	elay_sprite.visible = false
+	rain_sprite.visible = false
+	rain_sprite_animation.stop()
+	rain_sprite_animation2.stop()
+	rain_sprite_animation3.stop()
 	match sprite:
 		0:
 			if is_typing:
@@ -227,6 +374,31 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			elay_animation.play("blinking")
+		
+		2:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation.play("Blinking")
+		3:
+			rain_sprite.visible = true
+			rain_sprite_animation2.play("Talking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation2.play("Blinking")
+		
+		4:
+			rain_sprite.visible = true
+			if current_index == 0:
+				rain_sprite_animation3.play("TakeThat")
+				bang.play()
+				await get_tree().create_timer(0.9).timeout
+			rain_sprite_animation3.play("TakeThatTalking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation3.play("TakeThatBlinking")
+			
 		_:
 			if is_typing:
 				await start_text_update()

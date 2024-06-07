@@ -1,27 +1,11 @@
 extends Control
 
 var dialogues = [
-	"(...This footage could be the key to exposing Sunny Flower’s true involvement in this crime!)",
-	"Ms. Flower, you seemed very confident earlier. Now you look rather flustered, huh?",
-	'What are you implying, de Loco!?',
-	"Well, that’s childish of you...",
-	"I-well, this is absurd! All evidence gathered perfectly points to you and your stupid friend!",
-	"The handkerchief was planted on Sirina right after I... I mean...! right after the victim was pushed in!",
-	"Ms. Flower, how do you know exactly when the handkerchief was planted?",
-	"I... I...",
-	"Your Honor, I am pretty, and I am definitely sure, we’ve just heard a crucial detail only the true perpetrator would know."
+	"Now, we need to piece this together... Any ideas on how your DNA ended up at the crime scene with the handkerchief?"
 ]
 
 var char_names = [
-	"Rain",
-	"Rain",
-	'Sunny',
-	"Rain",
-	"Sunny",
-	"Sunny",
-	"Judge",
-	"Sunny",
-	"Rain"
+	"Ms. Cris"
 ]
 
 # Text style 1 = White, Spoken Dialogue
@@ -29,14 +13,6 @@ var char_names = [
 # Text style 3 = Green, centered, Current setting (time and place)
 
 var text_styles = [
-	2,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
 	1
 ]
 
@@ -44,26 +20,10 @@ var text_styles = [
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
 	0
 ]
 
 var text_sound = [
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
-	1,
 	1
 ]
 
@@ -74,15 +34,7 @@ var text_sound = [
 # background 4 = Witness Side
 
 var backgrounds = [
-	2,
-	2,
-	1,
-	2,
-	1,
-	1,
-	0,
-	1,
-	2
+	3
 ]
 
 var current_index = 0
@@ -91,6 +43,7 @@ var is_typing = false
 var text_speed = 0.05
 var current_text = ""
 var current_audio
+var save_file_path = "user://current_index.txt"
 
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
@@ -107,6 +60,9 @@ var current_audio
 @onready var prosecutor_bench = $"prosecutor-bench"
 @onready var witness_stand = $"witness-stand"
 
+@onready var yes_button = $Yes as Button
+@onready var no_button = $No as Button
+
 @onready var blip = $blip
 @onready var typewrite = $typewrite
 
@@ -115,9 +71,21 @@ var current_audio
 
 func _ready():
 	update_dialogue()
+	yes_button.visible = false
+	no_button.visible = false
+	
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
+	
+	yes_button.pressed.connect(yes_scene)
+	no_button.pressed.connect(no_scene)
+
+func yes_scene():
+	get_tree().change_scene_to_file("res://scenes/scene_ClosingStart.tscn")
+	
+func no_scene():
+	get_tree().change_scene_to_file("res://scenes/scene_FallOfSunny_2.tscn")
 
 func courtRecButton_pressed():
 	inventory.toggle()
@@ -136,7 +104,7 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		get_tree().change_scene_to_file("res://scenes/sceneFallofSunny_1.tscn")
+		SceneTransition.load_scene("res://scenes/crossExam3.tscn")
 
 func update_dialogue():
 	is_typing = true
@@ -148,7 +116,6 @@ func update_dialogue():
 		apply_text_style(text_styles[current_index])
 		update_background(backgrounds[current_index])
 		update_sprites(spriteToDisplay[current_index])
-	current_index += 1
 		
 func start_text_update():
 	char_index = 0
@@ -164,10 +131,16 @@ func start_text_update():
 		char_index += 1
 		await get_tree().create_timer(text_speed).timeout
 	dialogue_label.text = current_text
+	dialogueBoxButton.visible = false
+	yes_button.visible = true
+	no_button.visible = true
 	is_typing = false
 
 func complete_dialogue():
 	dialogue_label.text = current_text
+	dialogueBoxButton.visible = false
+	yes_button.visible = true
+	no_button.visible = true
 	is_typing = false
 	current_audio.stop() 
 
@@ -230,3 +203,8 @@ func update_sprites(sprite: int):
 		_:
 			if is_typing:
 				await start_text_update()
+
+func save_num(num: int, filePath: String):
+	var file = FileAccess.open(filePath, FileAccess.WRITE)
+	file.store_var(num)
+	file.close()

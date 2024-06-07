@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://drtieu8ernw1h"]
+
+[ext_resource type="Script" path="res://inventory_item.gd" id="1_awqcp"]
+[ext_resource type="Texture2D" uid="uid://dd7j4fljubcmq" path="res://assets/inventory/items/videotape.png" id="2_drg4m"]
+
+[resource]
+script = ExtResource("1_awqcp")
+name = "CCTV Footage"
+description = "Footage from the CCTV outside the pool gate. Seems to have been tampered with, but with forensics, it might open a new truth to the matter."
+texture = ExtResource("2_drg4m")
