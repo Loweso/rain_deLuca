@@ -533,6 +533,7 @@ scale = Vector2(1.64267, 1.58515)
 texture = ExtResource("7_ajehi")
 hframes = 12
 vframes = 15
+frame = 105
 
 [node name="sunny_sprite_animation" type="AnimationPlayer" parent="scene6/sunny_sprite"]
 libraries = {
