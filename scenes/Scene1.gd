@@ -169,7 +169,10 @@ func _ready():
 	courtRecButton.visible = false
 	name_label.visible = false
 	await update_dialogue()
-
+	
+	var file = FileAccess.open("user://mistakes_num.txt", FileAccess.WRITE)
+	file.store_var(0)
+	file.close()
 	
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)

@@ -47,16 +47,16 @@ var text_styles = [
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	3,
-	5,
-	2,
-	2,
-	4,
-	4,
-	5,
-	6,
-	2,
-	7
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0
 ]
 
 var text_sound = [
@@ -118,20 +118,9 @@ var no_of_mistakes_path = "user://mistakes_num.txt"
 
 @onready var blip = $blip
 @onready var typewrite = $typewrite
-@onready var bang = $bang
 
 @onready var elay_sprite = $Background/ElaySprite
 @onready var elay_animation = $Background/ElaySprite/AnimationPlayer
-@onready var rain_sprite = $rain_sprite
-@onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
-@onready var rain_sprite_animation2 = $rain_sprite/rain_sprite_animation2
-@onready var rain_sprite_animation3 = $rain_sprite/AnimationPlayer
-@onready var sunny_sprite = $sunny_sprite
-@onready var sunny_sprite_animation = $sunny_sprite/sunny_sprite_animation
-@onready var judge_sprite = $judge_sprite
-@onready var judge_sprite_animation = $judge_sprite/judge_sprite_animation
-@onready var mscris_sprite = $mscris_sprite
-@onready var mscris_sprite_animation = $mscris_sprite/AnimationPlayer
 
 func _ready():
 	update_dialogue()
@@ -147,6 +136,11 @@ func _ready():
 		save_num(current_no_mistakes, no_of_mistakes_path)
 	else:
 		save_num(0, no_of_mistakes_path)
+
+func save_num(num: int, filePath: String):
+	var file = FileAccess.open(filePath, FileAccess.WRITE)
+	file.store_var(num)
+	file.close()
 
 func courtRecButton_pressed():
 	inventory.toggle()
@@ -164,8 +158,11 @@ func dialogue_button_pressed():
 		else:
 			update_dialogue()
 	else:
-		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam2.tscn")
+		if current_no_mistakes > 3:
+			get_tree().change_scene_to_file("res://scenes/game_Over.tscn")
+		else:
+			complete_dialogue()
+			SceneTransition.load_scene("res://scenes/crossExam4.tscn")
 
 func update_dialogue():
 	is_typing = true
@@ -245,14 +242,7 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 func update_sprites(sprite: int):
-	judge_sprite.visible = false
 	elay_sprite.visible = false
-	rain_sprite.visible = false
-	sunny_sprite.visible = false
-	mscris_sprite.visible = false
-	rain_sprite_animation.stop()
-	rain_sprite_animation2.stop()
-	rain_sprite_animation3.stop()
 	match sprite:
 		0:
 			if is_typing:
@@ -263,63 +253,6 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 			elay_animation.play("blinking")
-		
-		2:
-			rain_sprite.visible = true
-			rain_sprite_animation.play("Talking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation.play("Blinking")
-		
-		3: 
-			rain_sprite.visible = true
-			if current_index == 0:
-				rain_sprite_animation3.play("TakeThat")
-				bang.play()
-				await get_tree().create_timer(0.9).timeout
-			rain_sprite_animation3.play("TakeThatTalking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation3.play("TakeThatBlinking")
-					
-		4: 
-			sunny_sprite.visible = true
-			sunny_sprite_animation.play("Suspicious_Talking")
-			if is_typing:
-				await start_text_update()
-			sunny_sprite_animation.play("Suspicious_Blinking")
-		
-		5: 
-			judge_sprite.visible = true
-			judge_sprite_animation.play("Talking")
-			if is_typing:
-				await start_text_update()
-			judge_sprite_animation.play("Blinking")
-		
-		6:
-			mscris_sprite.visible = true
-			mscris_sprite_animation.play("WorriedTalk")
-			if is_typing:
-				await start_text_update()
-			mscris_sprite_animation.play("WorriedStare")
-		
-		7: 
-			rain_sprite.visible = true
-			rain_sprite_animation2.play("Blinking")
-			if is_typing:
-				await start_text_update()
-		
-		8: 
-			rain_sprite.visible = true
-			rain_sprite_animation.play("Embarassed_Blinking")
-			if is_typing:
-				await start_text_update()
-			
 		_:
 			if is_typing:
 				await start_text_update()
-
-func save_num(num: int, filePath: String):
-	var file = FileAccess.open(filePath, FileAccess.WRITE)
-	file.store_var(num)
-	file.close()
