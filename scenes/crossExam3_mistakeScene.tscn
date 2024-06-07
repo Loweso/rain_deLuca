@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cbonjse0o0f3y"]
+[gd_scene load_steps=48 format=3 uid="uid://cr40xevhjfbv4"]
 
 [ext_resource type="Script" path="res://crossExam3_mistakeScene.gd" id="1_1oaep"]
 [ext_resource type="Texture2D" uid="uid://c2n75ywdx865y" path="res://assets/backgrounds/judgesSide.png" id="2_henh2"]

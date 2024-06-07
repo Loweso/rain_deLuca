@@ -289,8 +289,6 @@ func _ready():
 	
 	await update_dialogue()
 	
-	
-	
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
 	AlexaYalaButton.pressed.connect(AlexaYalaButton_pressed)

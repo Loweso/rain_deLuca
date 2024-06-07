@@ -29,7 +29,7 @@ var dialogues = [
 	"Well, all's well that ends well.",
 	"That was quite a ride, wasn't it?",
 	"It was indeed. Thank you, Rain, Ms. Cris.",
-	"Matters on Prosecutor Sunny Flower's trial will be posted ona further date. Related parties, keep posted for further notice.",
+	"Matters on Prosecutor Sunny Flower's trial will be posted on a further date. Related parties, keep posted for further notice.",
 	"For now, at least, one thing's for sure.",
 	"Alexa Yala, this court proclaims you...",
 	"Not guilty."
@@ -113,38 +113,38 @@ var text_styles = [
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
+	2,
+	8,
+	3,
+	8,
+	3,
+	8,
+	8,
+	3,
+	8,
+	9,
+	9,
+	9,
+	6,
+	3,
+	9,
+	4,
+	5,
+	5,
+	9,
+	1,
+	9,
+	1,
+	1,
+	8,
+	10,
+	6,
+	6,
+	10,
+	5,
+	5,
+	5,
+	5,
 ]
 
 var text_sound = [
@@ -237,6 +237,7 @@ var current_audio
 @onready var dialogueBox = $DialogueBox as Polygon2D
 @onready var dialogueBoxButton = $DialogueBoxButton as Button
 @onready var courtRecButton = $CourtRecordButton as Button
+@onready var blackRect = $blackRect as ColorRect
 
 @onready var inventory = $Inventory_UI
 
@@ -247,16 +248,28 @@ var current_audio
 @onready var blip = $blip
 @onready var typewrite = $typewrite
 @onready var bang = $bang
+@onready var whip = $whip
+@onready var gavel = $gavel
 
-@onready var elay_sprite = $Background/ElaySprite
-@onready var elay_animation = $Background/ElaySprite/AnimationPlayer
+@onready var hammer = $hammer
+
+@onready var judge_sprite = $judge_sprite
+@onready var judge_sprite_animation = $judge_sprite/judge_sprite_animation
 @onready var rain_sprite = $rain_sprite
 @onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
 @onready var rain_sprite_animation2 = $rain_sprite/rain_sprite_animation2
 @onready var rain_sprite_animation3 = $rain_sprite/AnimationPlayer
+@onready var sunny_sprite = $sunny_sprite
+@onready var sunny_sprite_animation = $sunny_sprite/AnimationPlayer
+@onready var mscris_sprite = $mscris_sprite
+@onready var mscris_sprite_animation = $mscris_sprite/mscris_sprite_animation
+@onready var alexa_sprite = $alexa_sprite
+@onready var alexa_sprite_animation = $alexa_sprite/alexa_sprite_animation
 
 func _ready():
 	update_dialogue()
+	hammer.visible = false
+	blackRect.visible = false
 	name_label.horizontal_alignment = 1
 	dialogueBoxButton.pressed.connect(dialogue_button_pressed)
 	courtRecButton.pressed.connect(courtRecButton_pressed)
@@ -267,6 +280,12 @@ func courtRecButton_pressed():
 func dialogue_button_pressed():
 	if current_index == dialogues.size():
 		dialogueBoxButton.visible = false
+		hammer.visible = true
+		blackRect.visible = true
+		hammer.play()
+		gavel.play()
+		await hammer.finished
+		get_tree().quit()
 	
 	if current_index < dialogues.size():
 		dialogueBox.visible = true
@@ -279,7 +298,6 @@ func dialogue_button_pressed():
 			update_dialogue()
 	else:
 		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam4.tscn")
 
 func update_dialogue():
 	is_typing = true
@@ -362,8 +380,11 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 func update_sprites(sprite: int):
-	elay_sprite.visible = false
+	judge_sprite.visible = false
+	mscris_sprite.visible = false
 	rain_sprite.visible = false
+	sunny_sprite.visible = false
+	alexa_sprite.visible = false
 	rain_sprite_animation.stop()
 	rain_sprite_animation2.stop()
 	rain_sprite_animation3.stop()
@@ -372,36 +393,72 @@ func update_sprites(sprite: int):
 			if is_typing:
 				await start_text_update()
 		1:
-			elay_sprite.visible = true
-			elay_animation.play("talking")
-			if is_typing:
-				await start_text_update()
-			elay_animation.play("blinking")
-		
-		2:
 			rain_sprite.visible = true
 			rain_sprite_animation.play("Talking")
 			if is_typing:
 				await start_text_update()
 			rain_sprite_animation.play("Blinking")
-		3:
-			rain_sprite.visible = true
-			rain_sprite_animation2.play("Talking")
-			if is_typing:
-				await start_text_update()
-			rain_sprite_animation2.play("Blinking")
 		
-		4:
+		2: 
 			rain_sprite.visible = true
-			if current_index == 0:
-				rain_sprite_animation3.play("TakeThat")
-				bang.play()
-				await get_tree().create_timer(0.9).timeout
+			rain_sprite_animation3.play("TakeThat")
+			bang.play()
+			await get_tree().create_timer(0.9).timeout
 			rain_sprite_animation3.play("TakeThatTalking")
 			if is_typing:
 				await start_text_update()
 			rain_sprite_animation3.play("TakeThatBlinking")
-			
-		_:
+					
+		3: 
+			sunny_sprite.visible = true
+			sunny_sprite_animation.play("Talking")
 			if is_typing:
 				await start_text_update()
+			sunny_sprite_animation.play("Blinking")
+
+		
+		4: 
+			rain_sprite.visible = true
+			rain_sprite_animation2.play("Blinking")
+			if is_typing:
+				await start_text_update()
+				
+		5:
+			judge_sprite.visible = true
+			judge_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			judge_sprite_animation.play("Blinking")
+
+		6:
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			mscris_sprite_animation.play("Blinking")
+		
+		7: 
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Thinking")
+			if is_typing:
+				await start_text_update()
+		8:
+			rain_sprite.visible = true
+			rain_sprite_animation3.play("TakeThatTalking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation3.play("TakeThatBlinking")
+		9:
+			sunny_sprite.visible = true
+			sunny_sprite_animation.play("Talking_handOut")
+			if is_typing:
+				await start_text_update()
+			sunny_sprite_animation.play("Blinking_handOut")
+		10:
+			alexa_sprite.visible = true
+			alexa_sprite_animation.play("CryTalking")
+			if is_typing:
+				await start_text_update()
+			alexa_sprite_animation.play("CryBlinking")
+		_:
+			pass

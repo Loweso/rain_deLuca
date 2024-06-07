@@ -191,8 +191,11 @@ func dialogue_button_pressed():
 			current_index += 1
 			update_dialogue()
 	else:
-		complete_dialogue()
-		SceneTransition.load_scene("res://scenes/crossExam1.tscn")
+		if current_no_mistakes > 3:
+			get_tree().change_scene_to_file("res://scenes/game_Over.tscn")
+		else:
+			complete_dialogue()
+			SceneTransition.load_scene("res://scenes/crossExam4.tscn")
 
 func update_dialogue():
 	is_typing = true
