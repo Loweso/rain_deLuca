@@ -17,10 +17,10 @@ var text_styles = [
 ]
 
 # spriteToDisplay 0 = No sprite to display
-# spriteToDisplay 1 = Elay, talking and then blinking
+# spriteToDisplay 1 = Ms.Cris
 
 var spriteToDisplay = [
-	0
+	1
 ]
 
 var text_sound = [
@@ -66,8 +66,8 @@ var save_file_path = "user://current_index.txt"
 @onready var blip = $blip
 @onready var typewrite = $typewrite
 
-@onready var elay_sprite = $Background/ElaySprite
-@onready var elay_animation = $Background/ElaySprite/AnimationPlayer
+@onready var mscris_sprite = $mscris_sprite
+@onready var mscris_sprite_animation = $mscris_sprite/mscris_sprite_animation
 
 func _ready():
 	update_dialogue()
@@ -189,17 +189,17 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 func update_sprites(sprite: int):
-	elay_sprite.visible = false
+	mscris_sprite.visible = false
 	match sprite:
 		0:
 			if is_typing:
 				await start_text_update()
 		1:
-			elay_sprite.visible = true
-			elay_animation.play("talking")
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Talking")
 			if is_typing:
 				await start_text_update()
-			elay_animation.play("blinking")
+			mscris_sprite_animation.play("Blinking")
 		_:
 			if is_typing:
 				await start_text_update()
