@@ -4,7 +4,7 @@ var dialogues = [
 	"Ms. Flower, you're clearly nervous. Let's revisit that encounter. What exactly happened when we met at the match?",
 	"Well, we... we exchanged pleasantries. That's all.",
 	"Is that so? You see, I remember something quite specific about our meeting. Something you seem to have forgotten to mention.",
-	"I... I don't know what you're talking about...?",
+	"I... I don't know what you're talking about.?",
 	"Ms. Flower, isn’t it true that during our encounter, you took a handkerchief from me?",
 	"The same handkerchief was found at the crime scene."
 ]
