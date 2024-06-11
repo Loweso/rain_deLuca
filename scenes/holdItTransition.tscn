@@ -41,4 +41,4 @@ libraries = {
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="HoldItBubble"]
 position = Vector2(-576, -326)
 stream = ExtResource("3_ffwxu")
-volume_db = 12.733
+volume_db = 14.659

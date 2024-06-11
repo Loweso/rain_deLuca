@@ -253,17 +253,47 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 func update_sprites(sprite: int):
-	elay_sprite.visible = false
+	judge_sprite.visible = false
+	mscris_sprite.visible = false
+	rain_sprite.visible = false
+	sunny_sprite.visible = false
 	match sprite:
-		0:
-			if is_typing:
-				await start_text_update()
 		1:
-			elay_sprite.visible = true
-			elay_animation.play("talking")
+			judge_sprite.visible = true
+			judge_sprite_animation.play("Talking")
 			if is_typing:
 				await start_text_update()
-			elay_animation.play("blinking")
-		_:
+			judge_sprite_animation.play("Blinking")
+		2:
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			mscris_sprite_animation.play("Blinking")
+		3:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation.play("Blinking")
+		4:
+			sunny_sprite.visible = true
+			if current_index == 15:
+				sunny_sprite_animation.play("Table_Whip")
+				whip.play()
+				await get_tree().create_timer(0.65).timeout
+			sunny_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			sunny_sprite_animation.play("Blinking")
+		5:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Embarassed")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation.play("Embarassed_Blinking")
+		6:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Embarassed_Blinking")
 			if is_typing:
 				await start_text_update()

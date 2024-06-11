@@ -684,7 +684,7 @@ volume_db = 6.559
 
 [node name="typewrite" type="AudioStreamPlayer2D" parent="mistakeScene_1"]
 stream = ExtResource("12_atr5l")
-volume_db = 16.944
+volume_db = 15.018
 
 [node name="bang" type="AudioStreamPlayer2D" parent="mistakeScene_1"]
 stream = ExtResource("16_rjxsh")

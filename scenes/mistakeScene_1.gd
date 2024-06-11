@@ -195,7 +195,7 @@ func dialogue_button_pressed():
 			get_tree().change_scene_to_file("res://scenes/game_Over.tscn")
 		else:
 			complete_dialogue()
-			SceneTransition.load_scene("res://scenes/crossExam4.tscn")
+			SceneTransition.load_scene("res://scenes/crossExam1.tscn")
 
 func update_dialogue():
 	is_typing = true

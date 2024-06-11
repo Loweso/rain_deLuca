@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://d25safi4ji2fw"]
+[gd_scene load_steps=38 format=3 uid="uid://c1bigqe33t0tq"]
 
 [ext_resource type="Script" path="res://CrossExamination2.gd" id="1_da6m8"]
 [ext_resource type="Texture2D" uid="uid://cjirdovtydvc4" path="res://assets/backgrounds/witnessSide.jpg" id="2_6tmjq"]
@@ -315,4 +315,4 @@ volume_db = 6.559
 
 [node name="typewrite" type="AudioStreamPlayer2D" parent="CrossExamination2"]
 stream = ExtResource("13_0bv7v")
-volume_db = 5.943
+volume_db = 7.869

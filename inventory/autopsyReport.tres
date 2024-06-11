@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("1_kqtpb")
 name = "Sirina's Autopsy Report"
-description = "Time of Death: Between 3:00PM and 3:30PM                Cause of death: Drowning "
+description = "Name of Deceased: Sirina Thirsty                                       Time of Death: Between 3:00PM and 3:30PM                Cause of death: Drowning "
 texture = ExtResource("2_ajv5v")

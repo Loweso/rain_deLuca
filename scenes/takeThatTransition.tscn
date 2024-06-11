@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://xaxsfqhiqcuf"]
+[gd_scene load_steps=6 format=3 uid="uid://3onafxmengd2"]
 
 [ext_resource type="Script" path="res://scenes/takeThatTransition.gd" id="1_50ws4"]
 [ext_resource type="Texture2D" uid="uid://d2gwjt3bjp22r" path="res://assets/sprites/takeThat.webp" id="1_xb2b2"]
@@ -41,4 +41,4 @@ libraries = {
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="TakeThatBubble"]
 position = Vector2(-576, -326)
 stream = ExtResource("2_l08rh")
-volume_db = 14.126
+volume_db = 16.387

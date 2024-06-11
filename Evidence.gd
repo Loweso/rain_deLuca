@@ -7,7 +7,7 @@ var correctItems = [
 	2,
 	9,
 	9,
-	4
+	3
 ]
 
 # Same as correctItems, but checks if the evidence is presented at the correct statement.
