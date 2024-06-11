@@ -79,6 +79,7 @@ offset_bottom = 40.0
 script = ExtResource("1_ddju6")
 
 [node name="Background" type="TextureRect" parent="gameOver_scene"]
+layout_mode = 0
 offset_right = 1930.0
 offset_bottom = 1091.0
 texture = ExtResource("2_h0vjg")
@@ -97,6 +98,7 @@ libraries = {
 }
 
 [node name="prosecutor-bench" type="TextureRect" parent="gameOver_scene"]
+layout_mode = 0
 offset_left = -279.0
 offset_top = -115.0
 offset_right = 1925.0
@@ -104,6 +106,7 @@ offset_bottom = 1090.0
 texture = ExtResource("4_fexm8")
 
 [node name="defense-bench" type="TextureRect" parent="gameOver_scene"]
+layout_mode = 0
 offset_left = 6.0
 offset_top = -93.0
 offset_right = 2146.0
@@ -111,6 +114,7 @@ offset_bottom = 1090.0
 texture = ExtResource("5_kw83m")
 
 [node name="witness-stand" type="TextureRect" parent="gameOver_scene"]
+layout_mode = 0
 offset_left = -122.0
 offset_top = -83.0
 offset_right = 2055.0
@@ -118,6 +122,7 @@ offset_bottom = 1088.0
 texture = ExtResource("6_13lsb")
 
 [node name="DialogueBoxButton" type="Button" parent="gameOver_scene"]
+layout_mode = 0
 offset_left = -1932.0
 offset_top = 803.0
 offset_right = -1924.0
@@ -138,6 +143,7 @@ color = Color(0.48825, 0.315, 0.7, 0.917647)
 polygon = PackedVector2Array(-0.199969, 1.66217, 1.67047, -2.6637, 310.698, -2.6637, 365.822, 98.5553, 306.562, 188.651, 152.066, 188.651, -0.973211, 188.651, -60.1351, 90.5643)
 
 [node name="DialogueText" type="Label" parent="gameOver_scene"]
+layout_mode = 0
 offset_left = 219.0
 offset_top = 858.0
 offset_right = 667.0
@@ -148,6 +154,7 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="PersonNameText" type="Label" parent="gameOver_scene"]
+layout_mode = 0
 offset_left = 160.0
 offset_top = 780.0
 offset_right = 254.0
@@ -157,6 +164,7 @@ theme_override_fonts/font = ExtResource("7_172v3")
 metadata/_edit_use_anchors_ = true
 
 [node name="CourtRecordButton" type="Button" parent="gameOver_scene"]
+layout_mode = 0
 offset_left = 1478.0
 offset_top = -16.0
 offset_right = 1597.0
@@ -203,7 +211,7 @@ volume_db = 19.86
 [node name="gavel" type="AudioStreamPlayer2D" parent="gameOver_scene"]
 position = Vector2(0, -106)
 stream = ExtResource("13_df2x5")
-volume_db = 12.0
+volume_db = 14.889
 
 [node name="blackRect" type="ColorRect" parent="gameOver_scene"]
 layout_mode = 0
@@ -213,6 +221,7 @@ scale = Vector2(50.4143, 33.0159)
 color = Color(0, 0, 0, 1)
 
 [node name="hammer" type="VideoStreamPlayer" parent="gameOver_scene"]
+layout_mode = 0
 offset_top = -53.0
 offset_right = 2044.0
 offset_bottom = 1119.0

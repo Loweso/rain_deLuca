@@ -64,20 +64,20 @@ var text_styles = [
 # spriteToDisplay 1 = Elay, talking and then blinking
 
 var spriteToDisplay = [
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0
+	2,
+	2,
+	3,
+	2,
+	3,
+	2,
+	1,
+	2,
+	2,
+	1,
+	2,
+	2,
+	2,
+	2
 ]
 
 var text_sound = [
@@ -145,8 +145,14 @@ var current_audio
 @onready var blip = $blip
 @onready var typewrite = $typewrite
 
-@onready var elay_sprite = $Background/ElaySprite
-@onready var elay_animation = $Background/ElaySprite/AnimationPlayer
+@onready var judge_sprite = $judge_sprite
+@onready var judge_sprite_animation = $judge_sprite/judge_sprite_animation
+@onready var mscris_sprite = $mscris_sprite
+@onready var mscris_sprite_animation = $mscris_sprite/mscris_sprite_animation
+@onready var rain_sprite = $rain_sprite
+@onready var rain_sprite_animation = $rain_sprite/rain_sprite_animation
+@onready var sunny_sprite = $sunny_sprite
+@onready var sunny_sprite_animation = $sunny_sprite/sunny_sprite_animation
 
 func _ready():
 	var file = FileAccess.open("user://current_index.txt", FileAccess.WRITE)
@@ -255,17 +261,37 @@ func update_background(background_index: int):
 	background_sprite.texture = background_texture
 	
 func update_sprites(sprite: int):
-	elay_sprite.visible = false
+	judge_sprite.visible = false
+	mscris_sprite.visible = false
+	rain_sprite.visible = false
+	sunny_sprite.visible = false
 	match sprite:
-		0:
-			if is_typing:
-				await start_text_update()
 		1:
-			elay_sprite.visible = true
-			elay_animation.play("talking")
+			judge_sprite.visible = true
+			judge_sprite_animation.play("Talking")
 			if is_typing:
 				await start_text_update()
-			elay_animation.play("blinking")
-		_:
+			judge_sprite_animation.play("Blinking")
+		2:
+			mscris_sprite.visible = true
+			mscris_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			mscris_sprite_animation.play("Blinking")
+		3:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Talking")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation.play("Blinking")
+		5:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Embarassed")
+			if is_typing:
+				await start_text_update()
+			rain_sprite_animation.play("Embarassed_Blinking")
+		6:
+			rain_sprite.visible = true
+			rain_sprite_animation.play("Embarassed_Blinking")
 			if is_typing:
 				await start_text_update()

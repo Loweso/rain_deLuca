@@ -71,7 +71,7 @@ var witness_anim = [
 ]
 
 var current_index = 0
-var current_crossExam = 0
+var current_crossExam = 2
 var current_no_mistakes = 0
 var save_file_path = "user://current_index.txt"
 var no_of_mistakes_path = "user://mistakes_num.txt"
@@ -177,7 +177,7 @@ func update_dialogue():
 	is_typing = true
 	if current_index >= dialogues.size():
 		save_num(1, save_file_path)
-		get_tree().change_scene_to_file("res://scenes/convoScene1.tscn")
+		get_tree().change_scene_to_file("res://scenes/convoScene3.tscn")
 	else:
 		current_text = dialogues[current_index]
 		dialogue_label.text = ""
@@ -191,6 +191,7 @@ func update_dialogue():
 	
 func start_text_update():
 	char_index = 0
+	await get_tree().create_timer(0.3).timeout
 	while char_index < current_text.length():
 		if not is_typing:
 			return

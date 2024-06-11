@@ -141,6 +141,9 @@ var text_speed = 0.05
 var is_typing = false
 var current_audio
 
+var press_states = [false, false, false, false]
+var press_states_path = "user://press_states.txt"
+
 @onready var background_sprite = $Background as TextureRect
 @onready var dialogue_label = $DialogueText as Label
 @onready var BlackBg = $BlackBg
@@ -160,8 +163,6 @@ var current_audio
 @onready var blip = $blip
 @onready var typewrite = $typewriter
 
-
-
 func _ready():
 	mscris_sprite.visible = false
 	name_label.horizontal_alignment = 1
@@ -169,6 +170,11 @@ func _ready():
 	courtRecButton.visible = false
 	name_label.visible = false
 	await update_dialogue()
+	
+	var pressFile = FileAccess.open(press_states_path, FileAccess.WRITE)
+	if pressFile:
+		pressFile.store_var(press_states)
+		pressFile.close()
 	
 	var file = FileAccess.open("user://mistakes_num.txt", FileAccess.WRITE)
 	file.store_var(0)

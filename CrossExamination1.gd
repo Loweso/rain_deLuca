@@ -203,6 +203,7 @@ func update_dialogue():
 	
 func start_text_update():
 	char_index = 0
+	await get_tree().create_timer(0.3).timeout
 	while char_index < current_text.length():
 		if not is_typing:
 			return

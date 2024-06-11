@@ -123,6 +123,23 @@ tracks/0/keys = {
 "values": [156, 159, 158, 159]
 }
 
+[sub_resource type="Animation" id="Animation_70ggi"]
+resource_name = "Blinking_handOut"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [144, 147, 146, 147]
+}
+
 [sub_resource type="Animation" id="Animation_1ggkh"]
 resource_name = "Talking"
 length = 0.7
@@ -155,23 +172,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [144, 145, 146, 147, 148, 149, 150]
-}
-
-[sub_resource type="Animation" id="Animation_70ggi"]
-resource_name = "Blinking_handOut"
-length = 0.7
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [144, 147, 146, 147]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b43im"]

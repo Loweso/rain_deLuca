@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://c42vn22udh74l" path="res://FOT-ModeMinBLargeStd-R.otf" id="4_2dqwq"]
 [ext_resource type="Texture2D" uid="uid://cbgex0h8g788y" path="res://assets/ui/cornerButton_unpressed.png" id="5_iwbre"]
 [ext_resource type="Texture2D" uid="uid://cphiqj8mj3wud" path="res://assets/ui/presentButton.png" id="6_unlxh"]
-[ext_resource type="PackedScene" path="res://scenes/takeThatTransition.tscn" id="7_b17n5"]
+[ext_resource type="PackedScene" uid="uid://3onafxmengd2" path="res://scenes/takeThatTransition.tscn" id="7_b17n5"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dbafu"]
 texture = ExtResource("5_iwbre")
